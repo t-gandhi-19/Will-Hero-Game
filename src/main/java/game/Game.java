@@ -52,8 +52,8 @@ public class Game extends Application {
         GreenOrc greenOrc1 = new GreenOrc();
         enemies.add(greenOrc1);
         ImageView greenOrcImg = (ImageView) greenOrc1.getObsPane().getChildren().get(0);
-        greenOrcImg.setY(20);
-        greenOrcImg.setX(220);
+        greenOrcImg.setY(200);
+        greenOrcImg.setX(625);
 
         RedOrc redOrc1 = new RedOrc();
         enemies.add(greenOrc1);
@@ -67,11 +67,23 @@ public class Game extends Application {
 
         Islands island1 = new Islands();
         ImageView isl1 = (ImageView) island1.getObsPane().getChildren().get(0);
-        isl1.setX(-10);
-        isl1.setY(300);
+        //isl1.setX(-10);
+        //isl1.setY(300);
+
+        ImageView isl2 = (ImageView) island1.getObsPane().getChildren().get(1);
+        isl2.setX(575);
+        isl2.setY(325);
+
+        Chests chest = new Chests();
+        ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
+        ch1.setX(750);
+        ch1.setY(280);
 
         Group grp1 = new Group(isl1);
+        Group grp2 = new Group(isl2, greenOrcImg, ch1);
 
+        grp1.getChildren().get(0).setLayoutY(300);
+        grp1.getChildren().get(0).setLayoutX(-10);
 
         //root.getChildren().add(0, bg);
         root.getChildren().add(heroNormal);
@@ -79,8 +91,10 @@ public class Game extends Application {
         //root.getChildren().add(greenOrcImg);
         //root.getChildren().add(redOrcImg);
         root.getChildren().add(grp1);
+        root.getChildren().add(grp2);
         //root.getChildren().add(8,_p1);
-        hero.getControl().Jump(island1, isl1.getY());
+        hero.getControl().Jump(island1, grp1.getChildren().get(0).getLayoutY());
+        greenOrc1.getController().jumpOrc(island1, isl2.getY());
 
 
         stage.setResizable(false);

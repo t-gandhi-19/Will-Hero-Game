@@ -25,6 +25,9 @@ public class IslandsController {
         if(rock1.getBoundsInParent().intersects(n1.getBoundsInParent())){
             return true;
         }
+        else if(rock2.getBoundsInParent().intersects(n1.getBoundsInParent())){
+            return true;
+        }
         else{
             return false;
         }

@@ -38,11 +38,11 @@ public class HeroController implements Initializable{
                     if(obj.getControl().ifCollide(heroNormal)){
                         j = -j;
                     }
-                    if(heroNormal.getY() < yPos - 120){
+                    if(heroNormal.getY() <yPos - 120){
                         j = 3;
                     }
-                    System.out.println(heroNormal.getY());
-                    //System.out.println(img1.getLayoutY());
+                    //System.out.println(heroNormal.getY());
+                    //System.out.println(obj.getObsPane().getChildren().get(0).getLayoutY());
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
