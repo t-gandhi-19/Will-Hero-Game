@@ -22,15 +22,7 @@ public class IslandsController {
     private ImageView rock5;
 
     public boolean ifCollide(Node n1){
-        if(rock1.getBoundsInParent().intersects(n1.getBoundsInParent())){
-            return true;
-        }
-        else if(rock2.getBoundsInParent().intersects(n1.getBoundsInParent())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return rock1.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock2.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock3.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock4.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock5.getBoundsInParent().intersects(n1.getBoundsInParent());
     }
 
 }
