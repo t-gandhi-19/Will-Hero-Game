@@ -10,7 +10,7 @@ import java.io.IOException;
 public class GameOver extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Mainpage.class.getResource("GameOver.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameOver.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Game Over");
         stage.setScene(scene);
