@@ -16,11 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game extends Application {
-    private Hero hero;
-    private ArrayList<Orc> enemies;
 
     public Game(){
-        enemies = new ArrayList<Orc>();
+
     }
 
     @Override
