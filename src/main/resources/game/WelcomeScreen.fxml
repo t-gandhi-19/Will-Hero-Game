@@ -35,7 +35,7 @@
             <Image url="@image/screen-18.jpeg" />
          </image>
       </ImageView>
-      <Button defaultButton="true" layoutX="61.0" layoutY="509.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="109.0" text="Exit" textAlignment="RIGHT" textFill="#6f4516">
+      <Button defaultButton="true" layoutX="61.0" layoutY="509.0" mnemonicParsing="false" onAction="#Exit" prefHeight="49.0" prefWidth="109.0" text="Exit" textAlignment="RIGHT" textFill="#6f4516">
          <effect>
             <InnerShadow blurType="GAUSSIAN" choke="0.5" height="15.29" radius="34.645" width="125.29">
                <color>

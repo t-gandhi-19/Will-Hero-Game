@@ -9,43 +9,75 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.InGamePauseController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.InGamePauseController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="614.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="1100.0" pickOnBounds="true">
          <image>
             <Image url="@../game/images/bg2.png" />
          </image>
       </ImageView>
-      <Text layoutX="226.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score : ">
+      <Text fill="#1a1a9e" layoutX="448.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins : " wrappingWidth="245.16599655151367">
          <font>
-            <Font name="Luminari" size="18.0" />
+            <Font name="Luminari" size="33.0" />
          </font>
       </Text>
-      <Text layoutX="226.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins : ">
+      <Button layoutX="405.0" layoutY="271.0" mnemonicParsing="false" onAction="#ResumeGame" prefHeight="76.0" prefWidth="316.0" text="Resume Game" textFill="#335cb5">
          <font>
-            <Font name="Luminari" size="18.0" />
-         </font>
-      </Text>
-      <Button layoutX="226.0" layoutY="252.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Save and Exit">
-         <font>
-            <Font name="Luminari" size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="226.0" layoutY="183.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Resume Game">
-         <font>
-            <Font name="Luminari" size="18.0" />
+            <Font name="Luminari" size="33.0" />
          </font>
          <effect>
-            <InnerShadow choke="0.42" height="74.06" radius="31.372500000000002" width="53.43">
+            <InnerShadow choke="0.42" height="58.59" radius="27.505000000000003" width="53.43">
                <color>
-                  <Color red="0.37962964177131653" green="0.5864197611808777" blue="1.0" />
+                  <Color red="0.17129629850387573" green="0.5442129373550415" blue="1.0" opacity="0.6800000071525574" />
                </color>
             </InnerShadow>
          </effect>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="377.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="407.0" layoutY="391.0" mnemonicParsing="false" onAction="#ReturnToMain" prefHeight="73.0" prefWidth="314.0" text="Save and Exit" textFill="#215dc2">
+         <font>
+            <Font name="Luminari" size="33.0" />
+         </font>
+         <effect>
+            <InnerShadow choke="0.42" height="58.59" radius="27.505000000000003" width="53.43">
+               <color>
+                  <Color red="0.09259258955717087" green="0.5009258985519409" blue="1.0" opacity="0.6800000071525574" />
+               </color>
+            </InnerShadow>
+         </effect>
+      </Button>
+      <Text fill="#1a1a9e" layoutX="452.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score : ">
+         <font>
+            <Font name="Luminari" size="33.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="92.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../game/images/Hero/heroNormal.png" />
+            <Image url="@image/greenOrc1-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="316.0" fitWidth="391.0" layoutX="699.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/medRock3-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="129.0" fitWidth="159.0" layoutX="863.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/heroKnife-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="237.0" fitWidth="342.0" layoutX="35.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Islands/largeRocks/largeRock4.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="208.0" fitWidth="99.0" layoutX="99.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Hero/WeaponSword.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="138.0" layoutX="857.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Orcs/RedOrcs/redOrc2.png" />
          </image>
       </ImageView>
    </children>
