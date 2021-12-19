@@ -17,8 +17,7 @@ import java.util.ArrayList;
 
 public class Game extends Application {
 
-    public Game(){
-
+    public Game() throws IOException {
     }
 
     @Override
@@ -39,8 +38,5 @@ public class Game extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
 }
 

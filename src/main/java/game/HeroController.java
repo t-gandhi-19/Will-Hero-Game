@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,15 +22,17 @@ public class HeroController implements Initializable{
     private int j;
     private int arr[];
     private int jHT;
-    private boolean fl;
+    private int fl;
+    private GameController game;
     TranslateTransition translate = new TranslateTransition();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         j = 3;
         jHT = -1;
-        fl = false;
-        arr = new int[2];
+        fl = 0;
+        arr = new int[5];
+
 //        TranslateTransition translate = new TranslateTransition();
 //        translate.setNode(heroNormal);
 //        translate.setByY(40);
@@ -47,6 +50,15 @@ public class HeroController implements Initializable{
                     if(arr[0] == 1){
                         j = -j;
                         jHT = arr[1];
+                        fl = arr[2];
+                        System.out.println(fl);
+                        if(fl == 1){
+                            //System.out.println("yyy");
+                            System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
+                            heroNormal.setY(heroNormal.getY() - 30);
+                            //heroNormal.setX(heroNormal.getX() - 50);
+                            //game.getControl().adjust();
+                        }
                         //System.out.println("hkkk");
                     }
                     if( heroNormal.getY() <jHT - 120){
@@ -64,7 +76,7 @@ public class HeroController implements Initializable{
 //        translate.play();
     }
 
-    public void heroMove (double time){
+    public void heroMove (double time) {
         jump.pause();
         //translate.stop();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(time), (e) -> {
@@ -72,7 +84,10 @@ public class HeroController implements Initializable{
             //System.out.println("hello");
         }));
         inBtw.play();
-        inBtw.setOnFinished((e)-> {jump.play();});
+        inBtw.setOnFinished((e) -> {
+            jump.play();
+        });
+    }
 
 //        Timeline beat = new Timeline(
 //                new KeyFrame(Duration.ZERO,         event -> scale.setValue(1)),
@@ -82,7 +97,8 @@ public class HeroController implements Initializable{
         //System.out.println("hh");
         //new SequentialTransition(delay(1000)).play();
         //jump.play();
-    }
+
+
     public void pause(boolean v){
         if(v == true){
             jump.pause();
@@ -92,7 +108,7 @@ public class HeroController implements Initializable{
         }
     }
 
-    public void move() {
+    public void move() {   //not needed only dumb trial
         jump.pause();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10),
                 (e) -> {

@@ -28,7 +28,7 @@ public class OrcController implements Initializable {
     private int jHT;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        arr = new int[2];
+        arr = new int[5];
         jHT = -1;
 
 //        TranslateTransition translate = new TranslateTransition();

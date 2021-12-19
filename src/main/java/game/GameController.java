@@ -1,9 +1,6 @@
 package game;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -54,6 +52,8 @@ public class GameController implements Initializable {
     private Group grp3;
     private Group grp4;
 
+    private ImageView heroNormal;
+
 //    private Pane grp1;
 //    private Pane grp2;
 //    private Pane grp3;
@@ -69,6 +69,13 @@ public class GameController implements Initializable {
     private final double shiftLeftBy = -90;
     private final int time = 130;
     private int loc;
+
+    private Timeline jump = new Timeline();
+    private Timeline inBtw = new Timeline();
+    private int j;
+    private int arr[];
+    private int jHT;
+    private int fl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,6 +97,13 @@ public class GameController implements Initializable {
         grp3 = new Group();
         grp4 = new Group();
         loc = 0;
+
+        j = 3;
+        jHT = -1;
+        fl = 0;
+        arr = new int[5];
+
+        heroNormal = (ImageView)hero.getObsPane().getChildren().get(0);
 //        grp1 = new Pane();
 //        grp2 = new Pane();
 //        grp3 = new Pane();
@@ -125,8 +139,8 @@ public class GameController implements Initializable {
         //isl1.setY(300);
 
         ImageView isl2 = (ImageView) island1.getObsPane().getChildren().get(1);
-        isl2.setX(575);
-        isl2.setY(325);
+//        isl2.setX(575);
+//        isl2.setY(325);
 
         ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
         ch1.setX(750);
@@ -140,6 +154,8 @@ public class GameController implements Initializable {
 
         grp1.getChildren().get(0).setLayoutY(300);
         grp1.getChildren().get(0).setLayoutX(-10);
+        grp2.getChildren().get(0).setLayoutY(325);
+        grp2.getChildren().get(0).setLayoutX(575);
 
         System.out.println(grp1.getLayoutX() + " " + grp1.getLayoutY());
 
@@ -147,9 +163,43 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(grp1);
         MainBase.getChildren().add(grp2);
 
+        //Jump(island1);
         hero.getControl().Jump(island1);
-        greenOrc1.getController().jumpOrc(island1, isl2.getY());
+        greenOrc1.getController().jumpOrc(island1, 325);
 
+    }
+    public void Jump(Islands obj){
+
+        jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
+                (e) -> {heroNormal.setY(heroNormal.getY() + j);
+                    arr = obj.getControl().ifCollide(heroNormal);
+                    if(arr[0] == 1){
+                        j = -j;
+                        jHT = arr[1];
+                        fl = arr[2];
+                        System.out.println(fl);
+                        if(fl == 1){
+                            //System.out.println("yyy");
+                            System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
+                            heroNormal.setY(heroNormal.getY() - 10);
+                            //heroNormal.setX(heroNormal.getX() - 50);
+                            adjust();
+                        }
+                        //System.out.println("hkkk");
+                    }
+                    if( heroNormal.getY() <jHT - 120){
+                        j = 3;
+                    }
+                }));
+        jump.setCycleCount(Animation.INDEFINITE);
+        jump.play();
+
+//        translate.setNode(heroNormal);
+//        translate.setByY(80);
+//        translate.setAutoReverse(true);
+//        translate.setDuration(Duration.millis(500));
+//        translate.setCycleCount(TranslateTransition.INDEFINITE);
+//        translate.play();
     }
 
 
@@ -168,6 +218,7 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(0), shiftLeftBy, time);
         translateX(grp2.getChildren().get(1), shiftLeftBy, time);
         translateX(grp2.getChildren().get(2), shiftLeftBy, time);
+        //heroMove(time);
         hero.getControl().heroMove(time);
         //new SequentialTransition(delay(1000)).play();
         update();
@@ -175,8 +226,30 @@ public class GameController implements Initializable {
 
 
     }
+
+    public void heroMove (double time) {
+        jump.pause();
+        //translate.stop();
+        inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(time), (e) -> {
+
+            //System.out.println("hello");
+        }));
+        inBtw.play();
+        inBtw.setOnFinished((e) -> {
+            jump.play();
+        });
+    }
+
     public void move2(MouseEvent e){
         //hero.getControl().pause(false);
+
+    }
+    public void adjust(){
+        translateX(grp1.getChildren().get(0), 50, time);
+        translateX(grp2.getChildren().get(0), 50, time);
+        translateX(grp2.getChildren().get(1), 50, time);
+        translateX(grp2.getChildren().get(2), 50, time);
+
     }
     public void move1(MouseEvent e) {
         translateX(grp1.getChildren().get(0), shiftLeftBy, time);
@@ -184,7 +257,7 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(1), shiftLeftBy, time);
         translateX(grp2.getChildren().get(2), shiftLeftBy, time);
         update();
-        hero.getControl().move();
+        //hero.getControl().move();
     }
 
 

@@ -3,9 +3,21 @@ package game;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+
+
 
 public class IslandsController {
 
+    @FXML
+    private Pane Mrock1;
+
+    @FXML
+    private Pane Mrock2;
+
+    @FXML
+    private Rectangle b1;
     @FXML
     private ImageView rock1;
 
@@ -22,16 +34,46 @@ public class IslandsController {
     private ImageView rock5;
 
     public int[] ifCollide(Node n1){
-        int arr[] = new int[2];
+        int arr[] = new int[5];
         //return n1.getBoundsInParent().intersects(rock1.getBoundsInParent().getMinX(), rock1.getBoundsInParent().getMinY(), rock1.getBoundsInParent().getWidth(), 10) || n1.getBoundsInParent().intersects(rock2.getBoundsInParent().getMinX(), rock2.getBoundsInParent().getMinY(), rock2.getBoundsInParent().getWidth(), 10)  || rock3.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock4.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock5.getBoundsInParent().intersects(n1.getBoundsInParent());
-        if(n1.getBoundsInParent().intersects(rock1.getBoundsInParent().getMinX(), rock1.getBoundsInParent().getMinY(), rock1.getBoundsInParent().getWidth(), 1)){
+        if(rock1.getBoundsInParent().intersects(n1.getBoundsInParent())){
+//            if(n1.getBoundsInParent().intersects(b1.getBoundsInParent())){
+//                arr[0] = 1;
+//                arr[1] = 300;
+//                arr[2] = 1;
+//                return arr;
+//            }
+            if(n1.getBoundsInParent().getMaxY()>303){
+                arr[0] = 1;
+                arr[1] = 300;
+                arr[2] = 1;
+                return arr;
+            }
+            //System.out.println(n1.getBoundsInParent().getMaxY());
             arr[0] = 1;
             arr[1] = 300;
+            arr[2] = 0;
             return arr;
         }
-        else if(n1.getBoundsInParent().intersects(rock2.getBoundsInParent().getMinX(), rock2.getBoundsInParent().getMinY(), rock2.getBoundsInParent().getWidth(), 1)){
+        else if(n1.getBoundsInParent().intersects(rock2.getBoundsInParent())){
+//            if(n1.getBoundsInParent().intersects(b1.getBoundsInParent())){
+//                System.out.println("jjj");
+//                arr[0] = 1;
+//                arr[1] = 325;
+//                arr[2] = 1;
+//                return arr;
+//            }
+            if(n1.getBoundsInParent().getMaxY()>327){
+                arr[0] = 1;
+                arr[1] = 325;
+                arr[2] = 1;
+                return arr;
+            }
+            //System.out.println("hhh" + n1.getBoundsInParent().getMaxY());
+            //System.out.println(rock2.getBoundsInParent().getMinX() + " " + rock2.getBoundsInParent().getMinY());
             arr[0] = 1;
             arr[1] = 325;
+            arr[2] = 0;
             return arr;
         }
         else if(rock3.getBoundsInParent().intersects(n1.getBoundsInParent())){
