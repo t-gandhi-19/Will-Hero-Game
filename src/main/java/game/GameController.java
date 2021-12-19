@@ -163,8 +163,8 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(grp1);
         MainBase.getChildren().add(grp2);
 
-        //Jump(island1);
-        hero.getControl().Jump(island1);
+        Jump(island1);
+        //hero.getControl().Jump(island1);
         greenOrc1.getController().jumpOrc(island1, 325);
 
     }
@@ -218,8 +218,8 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(0), shiftLeftBy, time);
         translateX(grp2.getChildren().get(1), shiftLeftBy, time);
         translateX(grp2.getChildren().get(2), shiftLeftBy, time);
-        //heroMove(time);
-        hero.getControl().heroMove(time);
+        heroMove(time);
+        //hero.getControl().heroMove(time);
         //new SequentialTransition(delay(1000)).play();
         update();
         //hero.getControl().pause(false);
@@ -245,10 +245,11 @@ public class GameController implements Initializable {
 
     }
     public void adjust(){
-        translateX(grp1.getChildren().get(0), 50, time);
-        translateX(grp2.getChildren().get(0), 50, time);
-        translateX(grp2.getChildren().get(1), 50, time);
-        translateX(grp2.getChildren().get(2), 50, time);
+        translateX(grp1.getChildren().get(0), 50, 1);
+        translateX(grp2.getChildren().get(0), 50, 1);
+        translateX(grp2.getChildren().get(1), 50, 1);
+        translateX(grp2.getChildren().get(2), 50, 1);
+
 
     }
     public void move1(MouseEvent e) {
@@ -277,6 +278,10 @@ public class GameController implements Initializable {
     }
     public void update(){
         loc += 1;
+        locationText.setText("" + (loc));
+    }
+    public void degrade(){
+        loc -= 1;
         locationText.setText("" + (loc));
     }
 
