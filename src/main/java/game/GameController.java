@@ -179,6 +179,11 @@ public class GameController implements Initializable {
         //hero.getControl().pause(false);
     }
     public void move1(MouseEvent e) {
+        translateX(grp1.getChildren().get(0), shiftLeftBy, time);
+        translateX(grp2.getChildren().get(0), shiftLeftBy, time);
+        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
+        translateX(grp2.getChildren().get(2), shiftLeftBy, time);
+        update();
         hero.getControl().move();
     }
 

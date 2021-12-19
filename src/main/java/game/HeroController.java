@@ -89,7 +89,7 @@ public class HeroController implements Initializable{
         jump.pause();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10),
                 (e) -> {
-                    heroNormal.setX(heroNormal.getX() + 3);
+                    heroNormal.setX(heroNormal.getX());
                     System.out.println("hh");
 //                    if(obj.getControl().ifCollide(heroNormal)){
 //                        j = -j;
