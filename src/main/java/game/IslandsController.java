@@ -34,6 +34,11 @@ public class IslandsController {
             arr[1] = 325;
             return arr;
         }
+        else if(rock3.getBoundsInParent().intersects(n1.getBoundsInParent())){
+            arr[0] = 1;
+            arr[1] = 310;
+            return arr;
+        }
         else{
             arr[0] = 0;
             arr[1] = 0;
