@@ -19,12 +19,16 @@ public class HeroController implements Initializable{
     private Timeline jump = new Timeline();
     private Timeline inBtw = new Timeline();
     private int j;
+    private int arr[];
+    private int jHT;
     private boolean fl;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         j = 3;
+        jHT = -1;
         fl = false;
+        arr = new int[2];
 //        TranslateTransition translate = new TranslateTransition();
 //        translate.setNode(heroNormal);
 //        translate.setByY(40);
@@ -35,13 +39,16 @@ public class HeroController implements Initializable{
     }
 
     public void Jump(Islands obj, double yPos){
+
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
                 (e) -> {heroNormal.setY(heroNormal.getY() + j);
-                    if(obj.getControl().ifCollide(heroNormal)){
+                    arr = obj.getControl().ifCollide(heroNormal);
+                    if(arr[0] == 1){
                         j = -j;
+                        jHT = arr[1];
                         //System.out.println("hkkk");
                     }
-                    if(heroNormal.getY() <yPos - 120){
+                    if( heroNormal.getY() <jHT - 120){
                         j = 3;
                     }
 
@@ -83,6 +90,7 @@ public class HeroController implements Initializable{
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10),
                 (e) -> {
                     heroNormal.setX(heroNormal.getX() + 3);
+                    System.out.println("hh");
 //                    if(obj.getControl().ifCollide(heroNormal)){
 //                        j = -j;
 //                        //System.out.println("hkkk");

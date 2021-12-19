@@ -24,9 +24,12 @@ public class OrcController implements Initializable {
 
     private Timeline jump = new Timeline();
     private int j = 3;
+    private int arr[];
+    private int jHT;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        arr = new int[2];
+        jHT = -1;
 
 //        TranslateTransition translate = new TranslateTransition();
 //        translate.setNode(redOrc);
@@ -39,10 +42,12 @@ public class OrcController implements Initializable {
     public void jumpOrc(Islands obj, double yPos){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
                 (e) -> {greenOrc.setY(greenOrc.getY() + j);
-                    if(obj.getControl().ifCollide(greenOrc)){
+            arr = obj.getControl().ifCollide(greenOrc);
+                    if(arr[0]==1){
                         j = -j;
+                        jHT = arr[1];
                     }
-                    if(greenOrc.getY() < yPos - 150){
+                    if(greenOrc.getY() < jHT - 150){
                         j = -j;
                     }
                     //System.out.println(g.getY());

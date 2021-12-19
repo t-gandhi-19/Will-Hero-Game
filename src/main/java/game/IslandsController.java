@@ -21,8 +21,25 @@ public class IslandsController {
     @FXML
     private ImageView rock5;
 
-    public boolean ifCollide(Node n1){
-        return rock1.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock2.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock3.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock4.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock5.getBoundsInParent().intersects(n1.getBoundsInParent());
+    public int[] ifCollide(Node n1){
+        int arr[] = new int[2];
+        //return n1.getBoundsInParent().intersects(rock1.getBoundsInParent().getMinX(), rock1.getBoundsInParent().getMinY(), rock1.getBoundsInParent().getWidth(), 10) || n1.getBoundsInParent().intersects(rock2.getBoundsInParent().getMinX(), rock2.getBoundsInParent().getMinY(), rock2.getBoundsInParent().getWidth(), 10)  || rock3.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock4.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock5.getBoundsInParent().intersects(n1.getBoundsInParent());
+        if(rock1.getBoundsInParent().intersects(n1.getBoundsInParent())){
+            arr[0] = 1;
+            arr[1] = 300;
+            return arr;
+        }
+        else if(rock2.getBoundsInParent().intersects(n1.getBoundsInParent())){
+            arr[0] = 1;
+            arr[1] = 325;
+            return arr;
+        }
+        else{
+            arr[0] = 0;
+            arr[1] = 0;
+            return arr;
+        }
+
     }
 
 }
