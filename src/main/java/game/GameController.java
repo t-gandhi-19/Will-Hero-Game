@@ -47,9 +47,13 @@ public class GameController implements Initializable {
     @FXML
     private ImageView pauseButton;
 
+    @FXML
     private Group grp1;
+    @FXML
     private Group grp2;
+    @FXML
     private Group grp3;
+    @FXML
     private Group grp4;
 
     private ImageView heroNormal;
@@ -61,13 +65,17 @@ public class GameController implements Initializable {
 
 
     private Hero hero;
+    private GreenOrc greenOrc;
+    private RedOrc redOrc;
+    private Chests chest;
+
     private ArrayList<Orc> enemies;
     private ArrayList<Islands> platform;
     private ArrayList<Chests> chests;
     private ArrayList<Weapon> weapons;
 
     private final double shiftLeftBy = -90;
-    private final int time = 130;
+    private final int time = 120;
     private int loc;
 
     private Timeline jump = new Timeline();
@@ -77,6 +85,7 @@ public class GameController implements Initializable {
     private int jHT;
     private int fl;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {         //start
@@ -85,17 +94,19 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
 
-
-
     }
 
     public void start() throws IOException {
         enemies = new ArrayList<Orc>();
         hero = new Hero();
-        grp1 = new Group();
-        grp2 = new Group();
-        grp3 = new Group();
-        grp4 = new Group();
+        greenOrc = new GreenOrc();
+        redOrc = new RedOrc();
+        chest = new Chests();
+        //hero.getControl().st(this.);
+//        grp1 = new Group();
+//        grp2 = new Group();
+//        grp3 = new Group();
+//        grp4 = new Group();
         loc = 0;
 
         j = 3;
@@ -109,13 +120,10 @@ public class GameController implements Initializable {
 //        grp3 = new Pane();
 //        grp4 = new Pane();
 
-        GreenOrc greenOrc1 = new GreenOrc();
-        RedOrc redOrc1 = new RedOrc();
-        FallingPlatform p1 = new FallingPlatform();
-        Chests chest = new Chests();
 
 
-        ImageView heroNormal = (ImageView) hero.getObsPane().getChildren().get(0);
+
+        //ImageView heroNormal = (ImageView) hero.getObsPane().getChildren().get(0);
         heroNormal.setY(200);
         heroNormal.setX(150);
 
@@ -123,13 +131,13 @@ public class GameController implements Initializable {
         heroKnife.setY(200);
         heroKnife.setX(0);
 
-        enemies.add(greenOrc1);
-        ImageView greenOrcImg = (ImageView) greenOrc1.getObsPane().getChildren().get(0);
+        enemies.add(greenOrc);
+        ImageView greenOrcImg = (ImageView) greenOrc.getObsPane().getChildren().get(0);
         greenOrcImg.setY(200);
         greenOrcImg.setX(625);
 
-        enemies.add(greenOrc1);
-        ImageView redOrcImg = (ImageView) redOrc1.getObsPane().getChildren().get(1);
+        enemies.add(greenOrc);
+        ImageView redOrcImg = (ImageView) redOrc.getObsPane().getChildren().get(1);
         redOrcImg.setX(250);
         redOrcImg.setY(200);
 
@@ -160,12 +168,12 @@ public class GameController implements Initializable {
         System.out.println(grp1.getLayoutX() + " " + grp1.getLayoutY());
 
         MainBase.getChildren().add(heroNormal);
-        MainBase.getChildren().add(grp1);
-        MainBase.getChildren().add(grp2);
+        //MainBase.getChildren().add(grp1);
+        //MainBase.getChildren().add(grp2);
 
         Jump(island1);
         //hero.getControl().Jump(island1);
-        greenOrc1.getController().jumpOrc(island1, 325);
+        greenOrc.getController().jumpOrc(island1, 325);
 
     }
     public void Jump(Islands obj){
@@ -180,7 +188,7 @@ public class GameController implements Initializable {
                         System.out.println(fl);
                         if(fl == 1){
                             //System.out.println("yyy");
-                            System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
+                            //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
                             heroNormal.setY(heroNormal.getY() - 10);
                             //heroNormal.setX(heroNormal.getX() - 50);
                             adjust();
@@ -230,7 +238,7 @@ public class GameController implements Initializable {
     public void heroMove (double time) {
         jump.pause();
         //translate.stop();
-        inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(time), (e) -> {
+        inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
 
             //System.out.println("hello");
         }));
@@ -249,7 +257,8 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(0), 50, 1);
         translateX(grp2.getChildren().get(1), 50, 1);
         translateX(grp2.getChildren().get(2), 50, 1);
-
+        //degrade();
+        //System.out.println("ss" + loc);
 
     }
     public void move1(MouseEvent e) {
@@ -281,7 +290,7 @@ public class GameController implements Initializable {
         locationText.setText("" + (loc));
     }
     public void degrade(){
-        loc -= 1;
+        loc = loc - 1;
         locationText.setText("" + (loc));
     }
 

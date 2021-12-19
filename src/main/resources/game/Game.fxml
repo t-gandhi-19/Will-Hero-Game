@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,5 +29,9 @@
             <Font name="Luminari" size="36.0" />
          </font>
       </Text>
+      <Group fx:id="grp1" />
+      <Group fx:id="grp2" />
+      <Group fx:id="grp3" />
+      <Group fx:id="grp4" />
    </children>
 </AnchorPane>

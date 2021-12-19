@@ -23,8 +23,12 @@ public class HeroController implements Initializable{
     private int arr[];
     private int jHT;
     private int fl;
-    private GameController game;
+    private Game game;
     TranslateTransition translate = new TranslateTransition();
+
+    public void st(Game g){
+        game = g;
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
@@ -32,6 +36,7 @@ public class HeroController implements Initializable{
         jHT = -1;
         fl = 0;
         arr = new int[5];
+
 
 //        TranslateTransition translate = new TranslateTransition();
 //        translate.setNode(heroNormal);
@@ -54,8 +59,9 @@ public class HeroController implements Initializable{
                         System.out.println(fl);
                         if(fl == 1){
                             //System.out.println("yyy");
-                            System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
+                            //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
                             heroNormal.setY(heroNormal.getY() - 30);
+
                             //heroNormal.setX(heroNormal.getX() - 50);
                             //game.getControl().adjust();
                         }
