@@ -242,16 +242,13 @@ public class GameController implements Initializable {
 
             //System.out.println("hello");
         }));
+        inBtw.setCycleCount(6);
         inBtw.play();
         inBtw.setOnFinished((e) -> {
             jump.play();
         });
     }
 
-    public void move2(MouseEvent e){
-        //hero.getControl().pause(false);
-
-    }
     public void adjust(){
         translateX(grp1.getChildren().get(0), 50, 1);
         translateX(grp2.getChildren().get(0), 50, 1);
@@ -261,15 +258,6 @@ public class GameController implements Initializable {
         //System.out.println("ss" + loc);
 
     }
-    public void move1(MouseEvent e) {
-        translateX(grp1.getChildren().get(0), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(0), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(2), shiftLeftBy, time);
-        update();
-        //hero.getControl().move();
-    }
-
 
     public void translateX(Node n1, double amount, double time){
         TranslateTransition translate = new TranslateTransition();
