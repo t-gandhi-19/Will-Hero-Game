@@ -67,7 +67,7 @@ public class GameController implements Initializable {
     private ArrayList<Weapon> weapons;
 
     private final double shiftLeftBy = -90;
-    private final int time = 20;
+    private final int time = 130;
     private int loc;
 
     @Override
@@ -147,7 +147,7 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(grp1);
         MainBase.getChildren().add(grp2);
 
-        hero.getControl().Jump(island1, grp1.getChildren().get(0).getLayoutY());
+        hero.getControl().Jump(island1);
         greenOrc1.getController().jumpOrc(island1, isl2.getY());
 
     }
@@ -168,7 +168,7 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(0), shiftLeftBy, time);
         translateX(grp2.getChildren().get(1), shiftLeftBy, time);
         translateX(grp2.getChildren().get(2), shiftLeftBy, time);
-        hero.getControl().heroMove(1000);
+        hero.getControl().heroMove(time);
         //new SequentialTransition(delay(1000)).play();
         update();
         //hero.getControl().pause(false);
