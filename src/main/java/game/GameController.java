@@ -76,6 +76,7 @@ public class GameController implements Initializable {
 
     private final double shiftLeftBy = -90;
     private final int time = 120;
+    private final int orcX=120;
     private int loc;
 
     private Timeline jump = new Timeline();
@@ -239,6 +240,12 @@ public class GameController implements Initializable {
         jump.pause();
         //translate.stop();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
+            if(greenOrc.getController().collideHero(heroNormal)==1){
+                System.out.println("hl");
+                //grp2.getChildren().get(1).setLayoutX(grp2.getChildren().get(1).getLayoutX()+orcX);
+                translateX(grp2.getChildren().get(1), orcX, 120);
+
+            }
 
             //System.out.println("hello");
         }));

@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -23,6 +24,9 @@ public class OrcController implements Initializable {
     private ImageView redOrc;
 
     private Timeline jump = new Timeline();
+    private Timeline collide = new Timeline();
+    private int k = 5;
+    private int arr1[];
     private int j = 3;
     private int arr[];
     private int jHT;
@@ -39,6 +43,19 @@ public class OrcController implements Initializable {
 //        translate.setCycleCount(TranslateTransition.INDEFINITE);
 //        translate.play();
     }
+
+
+    public int collideHero(Node hero){
+        if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
+    }
+
+
     public void jumpOrc(Islands obj, double yPos){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
                 (e) -> {greenOrc.setY(greenOrc.getY() + j);
