@@ -55,9 +55,16 @@ public class GameController implements Initializable {
     private Group grp3;
     @FXML
     private Group grp4;
+    @FXML
+    private Group grp5;
 
-    //private ImageView heroNormal;
     private Pane heroAll;
+    private ImageView GOrc1;
+    private ImageView GOrc2;
+    private ImageView ROrc1;
+    private ImageView ROrc2;
+    private ImageView ROrc3;
+
 
 //    private Pane grp1;
 //    private Pane grp2;
@@ -69,6 +76,7 @@ public class GameController implements Initializable {
     private GreenOrc greenOrc;
     private RedOrc redOrc;
     private Chests chest;
+    private Islands island;
 
     private ArrayList<Orc> enemies;
     private ArrayList<Islands> platform;
@@ -105,6 +113,7 @@ public class GameController implements Initializable {
         greenOrc = new GreenOrc();
         redOrc = new RedOrc();
         chest = new Chests();
+        island = new Islands();
         //hero.getControl().st(this.);
 //        grp1 = new Group();
 //        grp2 = new Group();
@@ -118,38 +127,77 @@ public class GameController implements Initializable {
         arr = new int[5];
         arr2 = new int[5];
         heroAll = new Pane();
-
-        ImageView heroNormal = (ImageView)hero.getObsPane().getChildren().get(0);
-        heroAll.getChildren().add(heroNormal);
-//        grp1 = new Pane();
-//        grp2 = new Pane();
-//        grp3 = new Pane();
-//        grp4 = new Pane();
-
-        //ImageView heroNormal = (ImageView) hero.getObsPane().getChildren().get(0);
+//        GOrc1 = new Pane();
+//        GOrc2 = new Pane();
+//        ROrc1 = new Pane();
+//        ROrc2 = new Pane();
+//        ROrc3 = new Pane();
+        setUp();
+        heroSetUp(2);
         heroAll.setLayoutY(200);
         heroAll.setLayoutX(150);
+        MainBase.getChildren().add(heroAll);
+        Jump(island);
+
+    }
+
+//    public void addObj(int code){
+//        if()
+//    }
+
+    public void heroSetUp(int code){
+        ImageView heroNormal = (ImageView)hero.getObsPane().getChildren().get(0);
 
         ImageView heroKnife = (ImageView) hero.getObsPane().getChildren().get(1);
-        heroKnife.setY(200);
-        heroKnife.setX(0);
+//        heroKnife.setY(200);
+//        heroKnife.setX(0);
+        ImageView heroSword = (ImageView) hero.getObsPane().getChildren().get(2);
 
+        if(code == 0) {
+            while(!heroAll.getChildren().isEmpty()){
+                heroAll.getChildren().remove(0);
+            }
+            heroAll.getChildren().add(heroNormal);
+        }
+        if(code == 1) {
+            while(!heroAll.getChildren().isEmpty()){
+                heroAll.getChildren().remove(0);
+            }
+            heroAll.getChildren().add(heroKnife);
+        }
+        if(code == 2) {
+            while(!heroAll.getChildren().isEmpty()){
+                heroAll.getChildren().remove(0);
+            }
+            heroAll.getChildren().add(heroSword);
+        }
+
+    }
+
+    public void orcSetUp(){
+
+    }
+
+    public void setUp(){
+        //grp1
         enemies.add(greenOrc);
-        ImageView greenOrcImg = (ImageView) greenOrc.getObsPane().getChildren().get(0);
-        greenOrcImg.setY(200);
-        greenOrcImg.setX(625);
+        GOrc1 = (ImageView) greenOrc.getObsPane().getChildren().get(0);
+//        greenOrcImg.setY(200);
+//        greenOrcImg.setX(625);
+        GOrc1.setY(200);
+        GOrc1.setX(625);
 
         enemies.add(greenOrc);
         ImageView redOrcImg = (ImageView) redOrc.getObsPane().getChildren().get(1);
         redOrcImg.setX(250);
         redOrcImg.setY(200);
 
-        Islands island1 = new Islands();
-        ImageView isl1 = (ImageView) island1.getObsPane().getChildren().get(0);
+
+        ImageView isl1 = (ImageView) island.getObsPane().getChildren().get(0);
         //isl1.setX(-10);
         //isl1.setY(300);
 
-        ImageView isl2 = (ImageView) island1.getObsPane().getChildren().get(1);
+        ImageView isl2 = (ImageView) island.getObsPane().getChildren().get(1);
 //        isl2.setX(575);
 //        isl2.setY(325);
 
@@ -159,7 +207,7 @@ public class GameController implements Initializable {
 
 
         grp1.getChildren().addAll(isl1);
-        grp2.getChildren().addAll(isl2, greenOrcImg, ch1);
+        grp2.getChildren().addAll(isl2, GOrc1, ch1);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
 
@@ -170,15 +218,16 @@ public class GameController implements Initializable {
 
         //System.out.println(grp1.getLayoutX() + " " + grp1.getLayoutY());
 
-        MainBase.getChildren().add(heroAll);
+
         //MainBase.getChildren().add(grp1);
         //MainBase.getChildren().add(grp2);
 
-        Jump(island1);
+
         //hero.getControl().Jump(island1);
-        greenOrc.getController().jumpOrc(island1, 325);
+        greenOrc.getController().jumpOrc(island, 325);
 
     }
+
     public void Jump(Islands obj){
 
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
@@ -198,7 +247,7 @@ public class GameController implements Initializable {
                         }
                         //System.out.println("hkkk");
                     }
-                    if( heroAll.getLayoutY() <jHT - 120){
+                    if(heroAll.getLayoutY() <jHT - 120){
                         j = 3;
                     }
                 }));
@@ -245,7 +294,7 @@ public class GameController implements Initializable {
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
             arr2 = greenOrc.getController().collideHero(heroAll);
             if(arr2[0]==1){
-                System.out.println("hl");
+                //System.out.println("hl");
                 //grp2.getChildren().get(1).setLayoutX(grp2.getChildren().get(1).getLayoutX()+orcX);
                 adjust(80,120);
                 translateX(grp2.getChildren().get(1), orcX, 120);

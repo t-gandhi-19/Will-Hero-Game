@@ -3,8 +3,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.IslandsController">
    <children>
@@ -33,11 +31,5 @@
             <Image url="@images/Islands/smallRocks/shortRock1.png" />
          </image>
       </ImageView>
-      <Pane fx:id="Mrock1" prefHeight="150.0" prefWidth="450.0" />
-      <Pane fx:id="Mrock2" prefHeight="200.0" prefWidth="325.0" style="-fx-background-color: transparent;">
-         <children>
-            <Rectangle fx:id="b1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-stroke--fdash-array: 0;" width="31.0" />
-         </children>
-      </Pane>
    </children>
 </AnchorPane>

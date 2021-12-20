@@ -49,7 +49,7 @@ public class OrcController implements Initializable {
         int arr[] = new int [5];
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
             arr[0] = 1;
-
+            //if(hero.getBoundsInParent().getMaxY())
         }
         else{
             arr[0] = 0;
