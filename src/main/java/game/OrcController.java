@@ -45,14 +45,16 @@ public class OrcController implements Initializable {
     }
 
 
-    public int collideHero(Node hero){
+    public int[] collideHero(Node hero){
+        int arr[] = new int [5];
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
-            return 1;
+            arr[0] = 1;
+
         }
         else{
-            return 0;
+            arr[0] = 0;
         }
-
+        return arr;
     }
 
 

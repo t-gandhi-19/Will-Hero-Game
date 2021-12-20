@@ -56,7 +56,8 @@ public class GameController implements Initializable {
     @FXML
     private Group grp4;
 
-    private ImageView heroNormal;
+    //private ImageView heroNormal;
+    private Pane heroAll;
 
 //    private Pane grp1;
 //    private Pane grp2;
@@ -83,6 +84,7 @@ public class GameController implements Initializable {
     private Timeline inBtw = new Timeline();
     private int j;
     private int arr[];
+    private int arr2[];
     private int jHT;
     private int fl;
 
@@ -114,19 +116,19 @@ public class GameController implements Initializable {
         jHT = -1;
         fl = 0;
         arr = new int[5];
+        arr2 = new int[5];
+        heroAll = new Pane();
 
-        heroNormal = (ImageView)hero.getObsPane().getChildren().get(0);
+        ImageView heroNormal = (ImageView)hero.getObsPane().getChildren().get(0);
+        heroAll.getChildren().add(heroNormal);
 //        grp1 = new Pane();
 //        grp2 = new Pane();
 //        grp3 = new Pane();
 //        grp4 = new Pane();
 
-
-
-
         //ImageView heroNormal = (ImageView) hero.getObsPane().getChildren().get(0);
-        heroNormal.setY(200);
-        heroNormal.setX(150);
+        heroAll.setLayoutY(200);
+        heroAll.setLayoutX(150);
 
         ImageView heroKnife = (ImageView) hero.getObsPane().getChildren().get(1);
         heroKnife.setY(200);
@@ -166,9 +168,9 @@ public class GameController implements Initializable {
         grp2.getChildren().get(0).setLayoutY(325);
         grp2.getChildren().get(0).setLayoutX(575);
 
-        System.out.println(grp1.getLayoutX() + " " + grp1.getLayoutY());
+        //System.out.println(grp1.getLayoutX() + " " + grp1.getLayoutY());
 
-        MainBase.getChildren().add(heroNormal);
+        MainBase.getChildren().add(heroAll);
         //MainBase.getChildren().add(grp1);
         //MainBase.getChildren().add(grp2);
 
@@ -180,8 +182,8 @@ public class GameController implements Initializable {
     public void Jump(Islands obj){
 
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
-                (e) -> {heroNormal.setY(heroNormal.getY() + j);
-                    arr = obj.getControl().ifCollide(heroNormal);
+                (e) -> {heroAll.setLayoutY(heroAll.getLayoutY() + j);
+                    arr = obj.getControl().ifCollide(heroAll);
                     if(arr[0] == 1){
                         j = -j;
                         jHT = arr[1];
@@ -190,13 +192,13 @@ public class GameController implements Initializable {
                         if(fl == 1){
                             //System.out.println("yyy");
                             //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
-                            heroNormal.setY(heroNormal.getY() - 10);
+                            heroAll.setLayoutY(heroAll.getLayoutY() - 10);
                             //heroNormal.setX(heroNormal.getX() - 50);
-                            adjust();
+                            adjust(50,1);
                         }
                         //System.out.println("hkkk");
                     }
-                    if( heroNormal.getY() <jHT - 120){
+                    if( heroAll.getLayoutY() <jHT - 120){
                         j = 3;
                     }
                 }));
@@ -237,16 +239,19 @@ public class GameController implements Initializable {
     }
 
     public void heroMove (double time) {
+
         jump.pause();
         //translate.stop();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
-            if(greenOrc.getController().collideHero(heroNormal)==1){
+            arr2 = greenOrc.getController().collideHero(heroAll);
+            if(arr2[0]==1){
                 System.out.println("hl");
                 //grp2.getChildren().get(1).setLayoutX(grp2.getChildren().get(1).getLayoutX()+orcX);
+                adjust(80,120);
                 translateX(grp2.getChildren().get(1), orcX, 120);
 
-            }
 
+            }
             //System.out.println("hello");
         }));
         inBtw.setCycleCount(6);
@@ -256,14 +261,13 @@ public class GameController implements Initializable {
         });
     }
 
-    public void adjust(){
-        translateX(grp1.getChildren().get(0), 50, 1);
-        translateX(grp2.getChildren().get(0), 50, 1);
-        translateX(grp2.getChildren().get(1), 50, 1);
-        translateX(grp2.getChildren().get(2), 50, 1);
+    public void adjust(int amount, int time){
+        translateX(grp1.getChildren().get(0), amount, time);
+        translateX(grp2.getChildren().get(0), amount, time);
+        translateX(grp2.getChildren().get(1), amount, time);
+        translateX(grp2.getChildren().get(2), amount, time);
         //degrade();
         //System.out.println("ss" + loc);
-
     }
 
     public void translateX(Node n1, double amount, double time){
