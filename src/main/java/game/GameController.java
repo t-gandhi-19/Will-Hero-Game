@@ -59,6 +59,8 @@ public class GameController implements Initializable {
     //private ImageView heroNormal;
     private Pane heroAll;
 
+    private Pane Chests;
+
 //    private Pane grp1;
 //    private Pane grp2;
 //    private Pane grp3;
