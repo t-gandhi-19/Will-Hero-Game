@@ -113,11 +113,10 @@ public class HeroController implements Initializable{
             jump.play();
         }
     }
-    /*public void orcCollides(Orc orc){
-        if(heroNormal.getBoundsInParent().intersects(orc.)){
 
-        }
-    }*/
+    public void collectWeapon(){
+
+    }
     public void move() {   //not needed only dumb trial
         jump.pause();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10),
