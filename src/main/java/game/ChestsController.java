@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -31,8 +32,8 @@ public class ChestsController implements Initializable {
     }
 
 
-    public int chestCollide(Node hero){
-        if(hero.getBoundsInParent().intersects(weaponChest.getBoundsInParent()) || hero.getBoundsInParent().intersects(treasureChest.getBoundsInParent()) ){
+    public int chestCollide(Pane hero, Pane chest){
+        if(hero.getBoundsInParent().intersects(chest.getBoundsInParent())){
             return 1;
         }
         else{
@@ -40,19 +41,17 @@ public class ChestsController implements Initializable {
         }
 
     }
-    public void openChest(Node hero){
-        if(chestCollide(hero)==1) {
-            chestOpen.getKeyFrames().add(new KeyFrame(Duration.millis(25),
-                    (e) -> {
-                        weaponChest.setVisible(false);
-                        openChest.setVisible(true);
-
-                    }));
-            chestOpen.play();
-        }
-
-    }
-
-
+//    public void openChest(Node hero){
+//        if(chestCollide(hero)==1) {
+//            chestOpen.getKeyFrames().add(new KeyFrame(Duration.millis(25),
+//                    (e) -> {
+//                        weaponChest.setVisible(false);
+//                        openChest.setVisible(true);
+//
+//                    }));
+//            chestOpen.play();
+//        }
+//
+//    }
 
 }
