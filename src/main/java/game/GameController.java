@@ -161,8 +161,8 @@ public class GameController implements Initializable {
 
         heroAll.setLayoutY(200);
         heroAll.setLayoutX(150);
-        chestAll.setLayoutX(700);
-        chestAll.setLayoutY(200);
+        chestAll.setLayoutX(750);
+        chestAll.setLayoutY(280);
         MainBase.getChildren().add(heroAll);
         MainBase.getChildren().add(chestAll);
         Jump(island);
@@ -301,6 +301,8 @@ public class GameController implements Initializable {
         }
     }
 
+
+
     public void islandFactory(int code, int x){
         switch (code){
             case 1:
@@ -326,6 +328,8 @@ public class GameController implements Initializable {
         }
     }
 
+
+
     public void setUp(){
         //grp1
         //enemies.add(greenOrc);
@@ -335,12 +339,9 @@ public class GameController implements Initializable {
         islandFactory(1,-10);
         islandFactory(2,575);
 
-        ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
-        ch1.setX(750);
-        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1);
-        grp2.getChildren().addAll(isl2, GOrc1, GOrc2, ch1);
+        grp2.getChildren().addAll(isl2, GOrc1, GOrc2);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
 
@@ -416,6 +417,8 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(0), shiftLeftBy, time);
         translateX(grp2.getChildren().get(1), shiftLeftBy, time);
         translateX(grp2.getChildren().get(2), shiftLeftBy, time);
+        translateX(chestAll, shiftLeftBy, time);
+
         heroMove(time);
 //        if(upFlag){
 //            update();
@@ -440,6 +443,17 @@ public class GameController implements Initializable {
                 translateX(grp2.getChildren().get(1), orcX, 120);
                 //heroSetUp(1);
             }
+            Chests c= null;
+            try {
+                c = new Chests();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            if(c.getController().chestCollide(heroAll)==1){
+                ChestsSetUp(1);
+
+
+            }
 //            else{
 //                upFlag = true;
 //            }
@@ -457,6 +471,8 @@ public class GameController implements Initializable {
         translateX(grp2.getChildren().get(0), amount, time);
         translateX(grp2.getChildren().get(1), amount, time);
         translateX(grp2.getChildren().get(2), amount, time);
+        translateX(chestAll, amount, time);
+
 //        if(!degFlag){
 //            degFlag = true;
 //        }
