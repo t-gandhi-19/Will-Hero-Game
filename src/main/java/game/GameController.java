@@ -73,7 +73,8 @@ public class GameController implements Initializable {
     private ImageView isl5;
 
 
-    private Pane Chests;
+    private Pane chestAll;
+    private int chestCode;
 
 //    private Pane grp1;
 //    private Pane grp2;
@@ -135,6 +136,7 @@ public class GameController implements Initializable {
 //        grp4 = new Group();
         score = 0;
         heroCode = 0;
+        chestCode = 0;
 
         j = 3;
         jHT = -1;
@@ -144,6 +146,7 @@ public class GameController implements Initializable {
         arr = new int[5];
         arr2 = new int[5];
         heroAll = new Pane();
+        chestAll= new Pane();
 
 //        GOrc2 = new Pane();
 //        ROrc1 = new Pane();
@@ -153,10 +156,15 @@ public class GameController implements Initializable {
         islandSetUp();
         orcSetUP();
         heroSetUp(heroCode);
+        ChestsSetUp(chestCode);
         setUp();
+
         heroAll.setLayoutY(200);
         heroAll.setLayoutX(150);
+        chestAll.setLayoutX(700);
+        chestAll.setLayoutY(200);
         MainBase.getChildren().add(heroAll);
+        MainBase.getChildren().add(chestAll);
         Jump(island);
 
         //check();
@@ -211,6 +219,39 @@ public class GameController implements Initializable {
                 heroAll.getChildren().remove(0);
             }
             heroAll.getChildren().add(heroSword);
+        }
+    }
+    public void ChestsSetUp(int code){
+        Chests chest = null;
+        try {
+            chest = new Chests();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert chest != null;
+        ImageView treasureChest = (ImageView) chest.getObsPane().getChildren().get(0);
+
+        ImageView openChest = (ImageView) chest.getObsPane().getChildren().get(1);
+
+        ImageView weaponChest = (ImageView) chest.getObsPane().getChildren().get(2);
+
+        if(code == 0) {
+            while(!chestAll.getChildren().isEmpty()){
+                chestAll.getChildren().remove(0);
+            }
+            chestAll.getChildren().add(treasureChest);
+        }
+        if(code == 1) {
+            while(!chestAll.getChildren().isEmpty()){
+                chestAll.getChildren().remove(0);
+            }
+            chestAll.getChildren().add(openChest);
+        }
+        if(code == 2) {
+            while(!chestAll.getChildren().isEmpty()){
+                chestAll.getChildren().remove(0);
+            }
+            chestAll.getChildren().add(weaponChest);
         }
     }
 
