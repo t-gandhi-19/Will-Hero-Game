@@ -161,8 +161,7 @@ public class GameController implements Initializable {
 
         heroAll.setLayoutY(200);
         heroAll.setLayoutX(150);
-        chestAll.setLayoutX(700);
-        chestAll.setLayoutY(200);
+        chestFactory(750, 280);
         MainBase.getChildren().add(heroAll);
         MainBase.getChildren().add(chestAll);
         Jump(island);
@@ -326,6 +325,11 @@ public class GameController implements Initializable {
         }
     }
 
+    public void chestFactory(int x, int y){
+        chestAll.setLayoutX(x);
+        chestAll.setLayoutY(y);
+    }
+
     public void setUp(){
         //grp1
         //enemies.add(greenOrc);
@@ -335,12 +339,12 @@ public class GameController implements Initializable {
         islandFactory(1,-10);
         islandFactory(2,575);
 
-        ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
-        ch1.setX(750);
-        ch1.setY(280);
+//        ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
+//        ch1.setX(750);
+//        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1);
-        grp2.getChildren().addAll(isl2, GOrc1, GOrc2, ch1);
+        grp2.getChildren().addAll(isl2, GOrc1, GOrc2, chestAll);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
 
@@ -362,7 +366,6 @@ public class GameController implements Initializable {
         //hero.getControl().Jump(island1);
         greenOrc.getController().jumpOrc(island, 325);
         greenOrc1.getController().jumpOrc(island, 325);
-
 
     }
 
