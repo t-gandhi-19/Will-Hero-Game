@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.IslandsController">
    <children>
-      <ImageView fx:id="rock1" fitHeight="150.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rock1" fitHeight="150.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Islands/largeRocks/largeRock3.png" />
          </image>
@@ -16,19 +16,19 @@
             <Image url="@images/Islands/medRocks/medRock4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rock3" fitHeight="40.0" fitWidth="115.0" pickOnBounds="true">
+      <ImageView fx:id="rock3" fitHeight="200.0" fitWidth="375.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Islands/smallRocks/shortRock1.png" />
+            <Image url="@images/Islands/largeRocks/largeRock5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rock4" fitHeight="50.0" fitWidth="163.0" pickOnBounds="true">
+      <ImageView fx:id="rock4" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Islands/medRocks/medRock4.png" />
+            <Image url="@images/Islands/smallRocks/shortRock4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rock5" fitHeight="40.0" fitWidth="75.0" pickOnBounds="true">
+      <ImageView fx:id="rock5" fitHeight="140.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Islands/smallRocks/shortRock1.png" />
+            <Image url="@images/Islands/smallRocks/shortRock3.png" />
          </image>
       </ImageView>
    </children>

@@ -37,12 +37,6 @@ public class IslandsController {
         int arr[] = new int[5];
         //return n1.getBoundsInParent().intersects(rock1.getBoundsInParent().getMinX(), rock1.getBoundsInParent().getMinY(), rock1.getBoundsInParent().getWidth(), 10) || n1.getBoundsInParent().intersects(rock2.getBoundsInParent().getMinX(), rock2.getBoundsInParent().getMinY(), rock2.getBoundsInParent().getWidth(), 10)  || rock3.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock4.getBoundsInParent().intersects(n1.getBoundsInParent()) || rock5.getBoundsInParent().intersects(n1.getBoundsInParent());
         if(rock1.getBoundsInParent().intersects(n1.getBoundsInParent())){
-//            if(n1.getBoundsInParent().intersects(b1.getBoundsInParent())){
-//                arr[0] = 1;
-//                arr[1] = 300;
-//                arr[2] = 1;
-//                return arr;
-//            }
             if(n1.getBoundsInParent().getMaxY()>303){
                 arr[0] = 1;
                 arr[1] = 300;
@@ -56,29 +50,50 @@ public class IslandsController {
             return arr;
         }
         else if(n1.getBoundsInParent().intersects(rock2.getBoundsInParent())){
-//            if(n1.getBoundsInParent().intersects(b1.getBoundsInParent())){
-//                System.out.println("jjj");
-//                arr[0] = 1;
-//                arr[1] = 325;
-//                arr[2] = 1;
-//                return arr;
-//            }
             if(n1.getBoundsInParent().getMaxY()>327){
                 arr[0] = 1;
                 arr[1] = 325;
                 arr[2] = 1;
                 return arr;
             }
-            //System.out.println("hhh" + n1.getBoundsInParent().getMaxY());
-            //System.out.println(rock2.getBoundsInParent().getMinX() + " " + rock2.getBoundsInParent().getMinY());
             arr[0] = 1;
             arr[1] = 325;
             arr[2] = 0;
             return arr;
         }
-        else if(rock3.getBoundsInParent().intersects(n1.getBoundsInParent())){
+        else if(n1.getBoundsInParent().intersects(rock3.getBoundsInParent())){
+            if(n1.getBoundsInParent().getMaxY()>313){
+                arr[0] = 1;
+                arr[1] = 310;
+                arr[2] = 1;
+                return arr;
+            }
             arr[0] = 1;
             arr[1] = 310;
+            return arr;
+        }
+        else if(n1.getBoundsInParent().intersects(rock4.getBoundsInParent())){
+            if(n1.getBoundsInParent().getMaxY()>303){
+                arr[0] = 1;
+                arr[1] = 300;
+                arr[2] = 1;
+                return arr;
+            }
+            arr[0] = 1;
+            arr[1] = 300;
+            arr[2] = 0;
+            return arr;
+        }
+        else if(n1.getBoundsInParent().intersects(rock5.getBoundsInParent())){
+            if(n1.getBoundsInParent().getMaxY()>303){
+                arr[0] = 1;
+                arr[1] = 300;
+                arr[2] = 1;
+                return arr;
+            }
+            arr[0] = 1;
+            arr[1] = 300;
+            arr[2] = 0;
             return arr;
         }
         else{
