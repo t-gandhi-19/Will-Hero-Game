@@ -454,6 +454,7 @@ public class GameController implements Initializable {
 
 
             }
+            //
 
 //            else{
 //                upFlag = true;
