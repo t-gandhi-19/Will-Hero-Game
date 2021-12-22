@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -136,6 +137,14 @@ public class HeroController implements Initializable{
         inBtw.setCycleCount(25);
         inBtw.play();
         jump.play();
+    }
+    public void rotSword(Node n1){
+        RotateTransition rot = new RotateTransition(Duration.millis(250), n1);
+        rot.setAxis(Rotate.Z_AXIS);
+        rot.setByAngle(180);
+        rot.setInterpolator(Interpolator.LINEAR);
+        //rot.setAutoReverse(true);
+        rot.play();
     }
 
 }

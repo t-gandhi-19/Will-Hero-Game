@@ -1,9 +1,6 @@
 package game;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -155,7 +153,7 @@ public class GameController implements Initializable {
 
         islandSetUp();
         orcSetUP();
-        heroSetUp(heroCode);
+        heroSetUp(2);
         ChestsSetUp(chestCode);
         setUp();
 
@@ -164,7 +162,10 @@ public class GameController implements Initializable {
         chestFactory(750, 280);
         MainBase.getChildren().add(heroAll);
         MainBase.getChildren().add(chestAll);
+
+        //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
         Jump(island);
+
 
         //check();
 
@@ -199,7 +200,7 @@ public class GameController implements Initializable {
 
         ImageView heroKnife = (ImageView) h.getObsPane().getChildren().get(1);
 
-        ImageView heroSword = (ImageView) h.getObsPane().getChildren().get(2);
+        ImageView heroSword = (ImageView) h.getObsPane().getChildren().get(3);
 
         if(code == 0) {
             while(!heroAll.getChildren().isEmpty()){
@@ -218,6 +219,9 @@ public class GameController implements Initializable {
                 heroAll.getChildren().remove(0);
             }
             heroAll.getChildren().add(heroSword);
+            heroAll.getChildren().add(heroNormal);
+            heroAll.getChildren().get(0).setLayoutY(heroAll.getChildren().get(1).getLayoutY()+32);
+            heroAll.getChildren().get(0).setLayoutX(heroAll.getChildren().get(1).getLayoutX()-72);
         }
     }
     public void ChestsSetUp(int code){
@@ -447,6 +451,8 @@ public class GameController implements Initializable {
             }
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
                 ChestsSetUp(1);
+                chestCode = 1;
+                rotSword();
 
             }
 //            else{
@@ -497,5 +503,69 @@ public class GameController implements Initializable {
         score = score - 1;
         locationText.setText("" + (score));
     }
+    public void rotSword(){
+//        RotateTransition rot = new RotateTransition(Duration.millis(250), heroAll.getChildren().get(0));
+//        rot.setAxis(Rotate.Z_AXIS);
+//        rot.setByAngle(180);
+//        rot.setInterpolator(Interpolator.LINEAR);
+//        //rot.setAutoReverse(true);
+//        rot.play();
+        Rotate rotate1 = new Rotate();
+        rotate1.setAngle(60);
+//        rotate.setPivotX(heroAll.getChildren().get(0).getLayoutX());
+//        rotate.setPivotY(heroAll.getChildren().get(0).getLayoutY());
+        rotate1.setPivotX(80);
+        rotate1.setPivotY(20);
 
+        Rotate rotate2 = new Rotate();
+        rotate2.setAngle(60);
+        rotate2.setPivotX(80);
+        rotate2.setPivotY(20);
+        Rotate rotate3 = new Rotate();
+        rotate3.setAngle(60);
+        rotate3.setPivotX(80);
+        rotate3.setPivotY(20);
+        Rotate rotate4 = new Rotate();
+        rotate4.setAngle(-60);
+        rotate4.setPivotX(80);
+        rotate4.setPivotY(20);
+        Rotate rotate5 = new Rotate();
+        rotate5.setAngle(-60);
+        rotate5.setPivotX(80);
+        rotate5.setPivotY(20);
+
+
+        heroAll.getChildren().get(0).getTransforms().addAll(rotate1);
+        //rotate1.setOnTransformChanged((e)->{ heroAll.getChildren().get(0).getTransforms().addAll(rotate2);});
+        Timeline rot = new Timeline(
+                new KeyFrame(Duration.millis(50), (e) -> {
+            heroAll.getChildren().get(0).getTransforms().addAll(rotate1);
+        }),
+            new KeyFrame(Duration.millis(50), (e) -> {
+            heroAll.getChildren().get(0).getTransforms().addAll(rotate1);})
+//                new KeyFrame(Duration.millis(50), (e) -> {
+//                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);}),
+//                new KeyFrame(Duration.millis(50), (e) -> {
+//                    heroAll.getChildren().get(0).getTransforms().addAll(rotate5);})
+        );
+
+//        rot.setDelay(Duration.millis(150));
+//        rot.setAutoReverse(true);
+
+        Timeline rotBack = new Timeline(
+                new KeyFrame(Duration.millis(50), (e) -> {
+                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);
+                }),
+                new KeyFrame(Duration.millis(50), (e) -> {
+                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);}),
+
+                new KeyFrame(Duration.millis(50), (e) -> {
+                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);})
+//                new KeyFrame(Duration.millis(50), (e) -> {
+//                    heroAll.getChildren().get(0).getTransforms().addAll(rotate5);})
+        );
+        rot.play();
+        rot.setOnFinished((e)->{rotBack.play();});
+
+    }
 }
