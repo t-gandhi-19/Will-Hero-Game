@@ -570,6 +570,7 @@ public class GameController implements Initializable {
     public void throwKnife(){
         //heroAll.getChildren().get(1).setVisible(true);
         knife.setVisible(true);
+
         heroSetUp(0);
         TranslateTransition tran = new TranslateTransition(Duration.millis(100));
         tran.setNode(knife);
