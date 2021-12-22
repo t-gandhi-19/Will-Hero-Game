@@ -462,7 +462,7 @@ public class GameController implements Initializable {
 //        translateX(grp2.getChildren().get(2), shiftLeftBy, time);
         //translateX(grp2.getChildren().get(3), shiftLeftBy, time);
         translateX(chestAll,shiftLeftBy,time);
-        heroMove(time);
+        heroMOVE(time);
 //        if(upFlag){
 //            update();
 //            upFlag = false;
@@ -505,6 +505,54 @@ public class GameController implements Initializable {
             jump.play();
         });
     }
+    public void heroMOVE (double time) {
+
+        jump.pause();
+        //translate.stop();
+        inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
+            arr2 = greenOrc.getController().collideeHero(heroAll);
+
+            if(arr2[0]==12){
+                //System.out.println("hl");
+                //grp2.getChildren().get(1).setLayoutX(grp2.getChildren().get(1).getLayoutX()+orcX);
+                adjust(80,120);
+                translateX(grp2.getChildren().get(1), orcX, 120);
+                //heroSetUp(1);
+            }
+            if(arr2[0]==10){
+                //System.out.println("hl");
+                //grp2.getChildren().get(1).setLayoutX(grp2.getChildren().get(1).getLayoutX()+orcX);
+                //adjust(80,120);
+                FallAndDie(heroAll, 10000, 5000);
+                //heroSetUp(1);
+            }
+            if(arr2[0]==11){
+                //System.out.println("hl");
+                //grp2.getChildren().get(1).setLayoutX(grp2.getChildren().get(1).getLayoutX()+orcX);
+                //adjust(80,120);
+                FallAndDie(grp2.getChildren().get(1), 10000, 5000);
+                //heroSetUp(1);
+            }
+
+
+            if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
+                ChestsSetUp(1);
+                chestCode = 1;
+                rotSword();
+
+            }
+//            else{
+//                upFlag = true;
+//            }
+            //System.out.println("hello");
+        }));
+        inBtw.setCycleCount(12);
+        inBtw.play();
+        inBtw.setOnFinished((e) -> {
+            jump.play();
+        });
+    }
+
 
     public void adjust(int amount, int time){
         translateX(grp1.getChildren().get(0), amount, time);
@@ -529,6 +577,18 @@ public class GameController implements Initializable {
         //translate.setCycleCount(TranslateTransition.INDEFINITE);
         translate.play();
     }
+
+    public void FallAndDie(Node n1, double amount, double time){
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(n1);
+        translate.setByY(amount);
+        translate.setDuration(Duration.millis(time));
+        //translate.setAutoReverse(rev);
+        //translate.setCycleCount(TranslateTransition.INDEFINITE);
+        translate.play();
+
+    }
+
 
     public static Timeline delay(double time)
     {
