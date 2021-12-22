@@ -153,7 +153,7 @@ public class GameController implements Initializable {
 
         islandSetUp();
         orcSetUP();
-        heroSetUp(2);
+        heroSetUp(heroCode);
         ChestsSetUp(chestCode);
         setUp();
 
@@ -165,6 +165,7 @@ public class GameController implements Initializable {
 
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
         Jump(island);
+        System.out.println(heroAll.getLayoutX()+ " "+ heroAll.getLayoutY());
 
 
         //check();
@@ -218,10 +219,10 @@ public class GameController implements Initializable {
             while(!heroAll.getChildren().isEmpty()){
                 heroAll.getChildren().remove(0);
             }
-            heroAll.getChildren().add(heroSword);
             heroAll.getChildren().add(heroNormal);
-            heroAll.getChildren().get(0).setLayoutY(heroAll.getChildren().get(1).getLayoutY()+32);
-            heroAll.getChildren().get(0).setLayoutX(heroAll.getChildren().get(1).getLayoutX()-72);
+            heroAll.getChildren().add(heroSword);
+            heroAll.getChildren().get(1).setLayoutY(heroAll.getChildren().get(1).getLayoutY()+32);
+            heroAll.getChildren().get(1).setLayoutX(heroAll.getChildren().get(1).getLayoutX()-72);
         }
     }
     public void ChestsSetUp(int code){
@@ -348,7 +349,7 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1);
-        grp2.getChildren().addAll(isl2, GOrc1, GOrc2);
+        grp2.getChildren().addAll(isl2);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
 
@@ -376,24 +377,32 @@ public class GameController implements Initializable {
     public void Jump(Islands obj){
 
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
-                (e) -> {heroAll.setLayoutY(heroAll.getLayoutY() + j);
+                (e) -> {
+                    heroAll.setLayoutY(heroAll.getLayoutY() + j);
                     arr = obj.getControl().ifCollide(heroAll);
-                    if(arr[0] == 1){
+                    if (arr[0] == 1) {
                         j = -j;
                         jHT = arr[1];
                         fl = arr[2];
                         System.out.println(fl);
-                        if(fl == 1){
+                        if (fl == 1) {
                             //System.out.println("yyy");
                             //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
                             heroAll.setLayoutY(heroAll.getLayoutY() - 10);
                             //heroNormal.setX(heroNormal.getX() - 50);
-                            adjust(50,1);
+                            adjust(50, 1);
                         }
                         //System.out.println("hkkk");
                     }
-                    if(heroAll.getLayoutY() <jHT - 120){
+                    if (heroAll.getLayoutY() < jHT - 120) {
                         j = 3;
+                    }
+                    if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
+                        ChestsSetUp(1);
+                        chestCode = 1;
+                        heroSetUp(2);
+                        heroCode = 2;
+                        //rotSword();
                     }
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
@@ -421,8 +430,8 @@ public class GameController implements Initializable {
         //hero.getControl().pause(true);
         translateX(grp1.getChildren().get(0), shiftLeftBy, time);
         translateX(grp2.getChildren().get(0), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(2), shiftLeftBy, time);
+//        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
+//        translateX(grp2.getChildren().get(2), shiftLeftBy, time);
         //translateX(grp2.getChildren().get(3), shiftLeftBy, time);
         translateX(chestAll,shiftLeftBy,time);
         heroMove(time);
@@ -452,7 +461,9 @@ public class GameController implements Initializable {
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
                 ChestsSetUp(1);
                 chestCode = 1;
-                rotSword();
+                heroSetUp(2);
+                heroCode = 2;
+                //rotSword();
 
             }
 //            else{
@@ -470,8 +481,8 @@ public class GameController implements Initializable {
     public void adjust(int amount, int time){
         translateX(grp1.getChildren().get(0), amount, time);
         translateX(grp2.getChildren().get(0), amount, time);
-        translateX(grp2.getChildren().get(1), amount, time);
-        translateX(grp2.getChildren().get(2), amount, time);
+//        translateX(grp2.getChildren().get(1), amount, time);
+//        translateX(grp2.getChildren().get(2), amount, time);
         //translateX(grp2.getChildren().get(3), amount, time);
         translateX(chestAll,amount,time);
 //        if(!degFlag){
@@ -510,59 +521,27 @@ public class GameController implements Initializable {
 //        rot.setInterpolator(Interpolator.LINEAR);
 //        //rot.setAutoReverse(true);
 //        rot.play();
-        Rotate rotate1 = new Rotate();
-        rotate1.setAngle(60);
-//        rotate.setPivotX(heroAll.getChildren().get(0).getLayoutX());
-//        rotate.setPivotY(heroAll.getChildren().get(0).getLayoutY());
-        rotate1.setPivotX(80);
-        rotate1.setPivotY(20);
+        Rotate rotate1 = new Rotate(60, 80,20);
+        Rotate rotate2 = new Rotate(-60, 80, 20);
 
-        Rotate rotate2 = new Rotate();
-        rotate2.setAngle(60);
-        rotate2.setPivotX(80);
-        rotate2.setPivotY(20);
-        Rotate rotate3 = new Rotate();
-        rotate3.setAngle(60);
-        rotate3.setPivotX(80);
-        rotate3.setPivotY(20);
-        Rotate rotate4 = new Rotate();
-        rotate4.setAngle(-60);
-        rotate4.setPivotX(80);
-        rotate4.setPivotY(20);
-        Rotate rotate5 = new Rotate();
-        rotate5.setAngle(-60);
-        rotate5.setPivotX(80);
-        rotate5.setPivotY(20);
-
-
-        heroAll.getChildren().get(0).getTransforms().addAll(rotate1);
-        //rotate1.setOnTransformChanged((e)->{ heroAll.getChildren().get(0).getTransforms().addAll(rotate2);});
+        heroAll.getChildren().get(1).getTransforms().addAll(rotate1);
         Timeline rot = new Timeline(
                 new KeyFrame(Duration.millis(50), (e) -> {
-            heroAll.getChildren().get(0).getTransforms().addAll(rotate1);
+            heroAll.getChildren().get(1).getTransforms().addAll(rotate1);
         }),
             new KeyFrame(Duration.millis(50), (e) -> {
-            heroAll.getChildren().get(0).getTransforms().addAll(rotate1);})
-//                new KeyFrame(Duration.millis(50), (e) -> {
-//                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);}),
-//                new KeyFrame(Duration.millis(50), (e) -> {
-//                    heroAll.getChildren().get(0).getTransforms().addAll(rotate5);})
+            heroAll.getChildren().get(1).getTransforms().addAll(rotate1);})
         );
-
-//        rot.setDelay(Duration.millis(150));
-//        rot.setAutoReverse(true);
 
         Timeline rotBack = new Timeline(
                 new KeyFrame(Duration.millis(50), (e) -> {
-                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);
+                    heroAll.getChildren().get(1).getTransforms().addAll(rotate2);
                 }),
                 new KeyFrame(Duration.millis(50), (e) -> {
-                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);}),
+                    heroAll.getChildren().get(1).getTransforms().addAll(rotate2);}),
 
                 new KeyFrame(Duration.millis(50), (e) -> {
-                    heroAll.getChildren().get(0).getTransforms().addAll(rotate4);})
-//                new KeyFrame(Duration.millis(50), (e) -> {
-//                    heroAll.getChildren().get(0).getTransforms().addAll(rotate5);})
+                    heroAll.getChildren().get(1).getTransforms().addAll(rotate2);})
         );
         rot.play();
         rot.setOnFinished((e)->{rotBack.play();});

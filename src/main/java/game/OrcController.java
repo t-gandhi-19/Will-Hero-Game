@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -45,7 +46,7 @@ public class OrcController implements Initializable {
     }
 
 
-    public int[] collideHero(Node hero){
+    public int[] collideHero(Pane hero ){
         int arr[] = new int [5];
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
             arr[0] = 1;
