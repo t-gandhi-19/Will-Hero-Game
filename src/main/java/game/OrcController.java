@@ -43,6 +43,28 @@ public class OrcController implements Initializable {
 //        translate.setCycleCount(TranslateTransition.INDEFINITE);
 //        translate.play();
     }
+    public int[] collideeHero(Node hero){
+        int arr[] = new int [5];
+        if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
+            System.out.println(hero.getBoundsInParent().getMaxY()+" "+greenOrc.getY());
+            if ((hero.getBoundsInParent().getMaxY() > greenOrc.getY()) || (hero.getBoundsInParent().getMaxX() > greenOrc.getX())) {
+
+                arr[0] = 10;
+
+            } else if (hero.getBoundsInParent().getMinY() > greenOrc.getY() || (hero.getBoundsInParent().getMaxX() > greenOrc.getX())) {
+                arr[0] = 11;
+
+            } else {
+                arr[0] = 12;
+                //if(hero.getBoundsInParent().getMaxY())
+            }
+        }
+        else{
+            arr[0] = 0;
+        }
+        return arr;
+    }
+
 
 
     public int[] collideHero(Node hero){
