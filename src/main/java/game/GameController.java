@@ -377,6 +377,7 @@ public class GameController implements Initializable {
         grp1.getChildren().addAll(isl1);
         grp2.getChildren().addAll(isl2, GOrc1);
         Pane i = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
+        i.setLayoutY(300);
         grp3.getChildren().add(i);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
