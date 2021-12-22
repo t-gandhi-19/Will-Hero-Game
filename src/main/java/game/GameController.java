@@ -88,6 +88,7 @@ public class GameController implements Initializable {
     private RedOrc redOrc;
     private Chests chest;
     private Islands island;
+    private FallingPlatform fallingPlatform;
 
     private ArrayList<Orc> enemies;
     private ArrayList<Islands> platform;
@@ -130,6 +131,7 @@ public class GameController implements Initializable {
         redOrc = new RedOrc();
         chest = new Chests();
         island = new Islands();
+        fallingPlatform = new FallingPlatform();
         //hero.getControl().st(this.);
 //        grp1 = new Group();
 //        grp2 = new Group();
@@ -157,7 +159,7 @@ public class GameController implements Initializable {
         knife = (ImageView) hero.getObsPane().getChildren().get(4);
         islandSetUp();
         orcSetUP();
-        heroSetUp(1);
+        heroSetUp(0);
         ChestsSetUp(chestCode);
         setUp();
 
@@ -175,14 +177,14 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(knife);
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
         Jump(island);
-        System.out.println(heroAll.getLayoutX()+ " "+ heroAll.getLayoutY());
+        //System.out.println(heroAll.getLayoutX()+ " "+ heroAll.getLayoutY());
         //System.out.println(heroAll.getChildren().get(0).getLayoutX()+ " "+ heroAll.getChildren().get(0).getLayoutY());
         //System.out.println(heroAll.getChildren().get(1).getLayoutX()+ " "+ heroAll.getChildren().get(1).getLayoutY());
         //System.out.println(chestAll.getLayoutX()+ " "+ chestAll.getLayoutY());
         //System.out.println(chestAll.getChildren().get(0).getLayoutX()+ " "+ chestAll.getChildren().get(0).getLayoutY());
         //System.out.println(chestAll.getBoundsInParent().getMinX()+ " "+ chestAll.getBoundsInParent().getMinY());
-        System.out.println(heroAll.getBoundsInParent().getMaxX()+ " "+ heroAll.getBoundsInParent().getMaxY());
-        System.out.println(heroAll.getBoundsInParent().getMinX()+ " "+ heroAll.getBoundsInParent().getMinY());
+        //System.out.println(heroAll.getBoundsInParent().getMaxX()+ " "+ heroAll.getBoundsInParent().getMaxY());
+        //System.out.println(heroAll.getBoundsInParent().getMinX()+ " "+ heroAll.getBoundsInParent().getMinY());
         //check();
 
     }
@@ -373,7 +375,9 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1);
-        grp2.getChildren().addAll(isl2);
+        grp2.getChildren().addAll(isl2, GOrc1);
+        Pane i = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
+        grp3.getChildren().add(i);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
 
@@ -409,7 +413,7 @@ public class GameController implements Initializable {
                         j = -j;
                         jHT = arr[1];
                         fl = arr[2];
-                        System.out.println(fl);
+                        //System.out.println(fl);
                         if (fl == 1) {
                             //System.out.println("yyy");
                             //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
@@ -420,8 +424,8 @@ public class GameController implements Initializable {
                         //System.out.println("hkkk");
                     }
                     if (heroAll.getLayoutY() < jHT - 120) {
-                        System.out.println(heroAll.getLayoutX()+" "+heroAll.getLayoutY());
-                        throwKnife();
+                        System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
+                        //throwKnife();
                         j = 3;
                     }
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
@@ -458,8 +462,8 @@ public class GameController implements Initializable {
         //hero.getControl().pause(true);
         translateX(grp1.getChildren().get(0), shiftLeftBy, time);
         translateX(grp2.getChildren().get(0), shiftLeftBy, time);
-//        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
-//        translateX(grp2.getChildren().get(2), shiftLeftBy, time);
+        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
+        //translateX(grp2.getChildren().get(2), shiftLeftBy, time);
         //translateX(grp2.getChildren().get(3), shiftLeftBy, time);
         translateX(chestAll,shiftLeftBy,time);
         heroMOVE(time);
@@ -506,7 +510,7 @@ public class GameController implements Initializable {
         });
     }
     public void heroMOVE (double time) {
-
+        //throwKnife();
         jump.pause();
         //translate.stop();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
@@ -538,7 +542,7 @@ public class GameController implements Initializable {
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
                 ChestsSetUp(1);
                 chestCode = 1;
-                rotSword();
+                //rotSword();
 
             }
 //            else{
@@ -557,8 +561,8 @@ public class GameController implements Initializable {
     public void adjust(int amount, int time){
         translateX(grp1.getChildren().get(0), amount, time);
         translateX(grp2.getChildren().get(0), amount, time);
-//        translateX(grp2.getChildren().get(1), amount, time);
-//        translateX(grp2.getChildren().get(2), amount, time);
+        translateX(grp2.getChildren().get(1), amount, time);
+        //translateX(grp2.getChildren().get(2), amount, time);
         //translateX(grp2.getChildren().get(3), amount, time);
         translateX(chestAll,amount,time);
 //        if(!degFlag){

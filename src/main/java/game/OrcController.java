@@ -47,7 +47,7 @@ public class OrcController implements Initializable {
     public int[] collideeHero(Node hero){
         int arr[] = new int [5];
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
-            System.out.println(hero.getBoundsInParent().getMaxY()+" "+greenOrc.getY());
+            System.out.println(greenOrc.getX()+" "+greenOrc.getY());
             if ((hero.getBoundsInParent().getMaxY() > greenOrc.getY()) || (hero.getBoundsInParent().getMaxX() > greenOrc.getX())) {
 
                 arr[0] = 10;
