@@ -82,6 +82,8 @@ public class OrcController implements Initializable {
                 arr = 13;
             }
             else{
+
+
                 arr = 11;
             }
         }
