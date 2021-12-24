@@ -68,15 +68,25 @@ public class OrcController implements Initializable {
 
 
 
-    public int[] collideHero(Node hero){
-        int arr[] = new int [5];
-        System.out.println(greenOrc.getTranslateX() + " " + greenOrc.getY());
+    public int collide(Node hero){
+        int arr;
+
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
-            arr[0] = 1;
-            //if(hero.getBoundsInParent().getMaxY())
+//        System.out.println(greenOrc.getBoundsInParent().getMaxY()+" " +greenOrc.getBoundsInParent().getMinY());
+//        System.out.println(" max " +hero.getBoundsInParent().getMaxY());
+//        System.out.println(" min " +hero.getBoundsInParent().getMinY());
+            if(hero.getBoundsInParent().getMaxY()<=greenOrc.getBoundsInParent().getMinY()+3 && hero.getBoundsInParent().getMinY()<greenOrc.getBoundsInParent().getMinY() ){
+                arr = 12;
+            }
+            else if(hero.getBoundsInParent().getMinY()>=greenOrc.getBoundsInParent().getMaxY()-3 && hero.getBoundsInParent().getMaxY()>greenOrc.getBoundsInParent().getMaxY()){
+                arr = 13;
+            }
+            else{
+                arr = 11;
+            }
         }
         else{
-            arr[0] = 0;
+            arr = 0;
         }
         return arr;
     }
@@ -87,11 +97,12 @@ public class OrcController implements Initializable {
                 (e) -> {greenOrc.setY(greenOrc.getY() + j);
             arr = obj.getControl().ifCollide(greenOrc);
                     if(arr[0]==1){
-                        j = -j;
-                        jHT = arr[1];
+                        j = -3;
+                        jHT = 325;
                     }
-                    if(greenOrc.getY() < jHT - 150){
-                        j = -j;
+                    if(greenOrc.getY() < jHT - 190){
+                        //System.out.println("jht" +jHT);
+                        j = 3;
                     }
                     //System.out.println(g.getY());
                 }));
