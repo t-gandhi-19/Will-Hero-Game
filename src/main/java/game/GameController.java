@@ -220,23 +220,23 @@ public class GameController implements Initializable {
 //            System.out.println(isl5.getTranslateX());
             if(isl1.getTranslateX()<-600){
                 isl1.setTranslateX(isl5.getTranslateX()+2400);
-                System.out.println("1");
+                //System.out.println("1");
             }
             if(isl2.getTranslateX()<-1000){
                 isl2.setTranslateX(isl5.getTranslateX()+2400);
-                System.out.println("2");
+                //System.out.println("2");
             }
             if(isl3.getTranslateX()<-1400){
                 isl3.setTranslateX(isl5.getTranslateX()+2400);
-                System.out.println("2");
+
             }
             if(isl4.getTranslateX()<-1800){
                 isl4.setTranslateX(isl5.getTranslateX()+2400);
-                System.out.println("2");
+
             }
             if(isl5.getTranslateX()<-2300){
                 isl5.setTranslateX(isl5.getTranslateX()+2400);
-                System.out.println("2");
+
             }
 
             //islandFactory(1, 10);
