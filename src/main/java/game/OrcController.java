@@ -68,8 +68,9 @@ public class OrcController implements Initializable {
 
 
 
-    public int[] collideHero(Pane hero ){
+    public int[] collideHero(Node hero){
         int arr[] = new int [5];
+        System.out.println(greenOrc.getTranslateX() + " " + greenOrc.getY());
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
             arr[0] = 1;
             //if(hero.getBoundsInParent().getMaxY())

@@ -54,7 +54,7 @@ public class GameController implements Initializable {
     @FXML
     private Group grp5;
 
-    private Pane heroAll;
+    private ImageView heroAll;
     private int heroCode;
     private ImageView sword;
     private ImageView knife;
@@ -138,7 +138,7 @@ public class GameController implements Initializable {
 //        grp3 = new Group();
 //        grp4 = new Group();
         score = 0;
-        heroCode = 0;
+
         chestCode = 0;
 
         j = 3;
@@ -148,8 +148,12 @@ public class GameController implements Initializable {
 
         arr = new int[5];
         arr2 = new int[5];
-        heroAll = new Pane();
         chestAll= new Pane();
+
+        heroCode = 0;
+        heroAll = (ImageView) hero.getObsPane().getChildren().get(0);
+        heroAll.setLayoutY(200);
+        heroAll.setLayoutX(150);
 
 //        GOrc2 = new Pane();
 //        ROrc1 = new Pane();
@@ -157,24 +161,29 @@ public class GameController implements Initializable {
 //        ROrc3 = new Pane();
 
         knife = (ImageView) hero.getObsPane().getChildren().get(4);
+        sword = (ImageView) hero.getObsPane().getChildren().get(3);
         islandSetUp();
         orcSetUP();
-        heroSetUp(0);
         ChestsSetUp(chestCode);
         setUp();
 
-        heroAll.setLayoutY(200);
-        heroAll.setLayoutX(150);
-//        knife.setY(0);
-//        knife.setX(0);
-
-        knife.setY(heroAll.getLayoutY()+30);
+        knife.setY(heroAll.getLayoutY()+42);
         knife.setX(heroAll.getLayoutX()+17);
-        knife.setVisible(false);
+        if(heroCode != 1) {
+            knife.setVisible(false);
+        }
+
+        sword.setY(heroAll.getLayoutY()+32);
+        sword.setX(heroAll.getLayoutX()-72);
+        if(heroCode != 2) {
+            sword.setVisible(false);
+        }
+
         chestFactory(750, 280);
         MainBase.getChildren().add(heroAll);
         MainBase.getChildren().add(chestAll);
         MainBase.getChildren().add(knife);
+        MainBase.getChildren().add(sword);
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
         Jump(island);
         //System.out.println(heroAll.getLayoutX()+ " "+ heroAll.getLayoutY());
@@ -206,51 +215,7 @@ public class GameController implements Initializable {
 //        timeline.play();
 //    }
 
-    public void heroSetUp(int code){
-        Hero h = null;
-        try {
-            h = new Hero();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert h != null;
-        ImageView heroNormal = (ImageView) h.getObsPane().getChildren().get(0);
 
-        ImageView heroKnife = (ImageView) h.getObsPane().getChildren().get(1);
-
-        ImageView heroSword = (ImageView) h.getObsPane().getChildren().get(3);
-
-        //ImageView knife = (ImageView) h.getObsPane().getChildren().get(4);
-
-        if(code == 0) {
-            while(!heroAll.getChildren().isEmpty()){
-                heroAll.getChildren().remove(0);
-            }
-            heroAll.getChildren().add(heroNormal);
-        }
-        if(code == 1) {
-            while(!heroAll.getChildren().isEmpty()){
-                heroAll.getChildren().remove(0);
-            }
-//            heroAll.getChildren().add(heroKnife);
-//            heroAll.getChildren().add(knife);
-//            heroAll.getChildren().get(1).setLayoutY(heroAll.getChildren().get(0).getLayoutY()+42);
-//            heroAll.getChildren().get(1).setLayoutX(heroAll.getChildren().get(0).getLayoutX()+17);
-            heroAll.getChildren().add(heroKnife);
-            //knife.setVisible(false);
-            //heroAll.getChildren().get(1).setVisible(false);
-        }
-        if(code == 2) {
-            while(!heroAll.getChildren().isEmpty()){
-                heroAll.getChildren().remove(0);
-            }
-
-            heroAll.getChildren().add(heroNormal);
-            heroAll.getChildren().add(heroSword);
-            heroAll.getChildren().get(1).setLayoutY(heroAll.getChildren().get(0).getLayoutY()+32);
-            heroAll.getChildren().get(1).setLayoutX(heroAll.getChildren().get(0).getLayoutX()-72);
-        }
-    }
     public void ChestsSetUp(int code){
         Chests chest1 = null;
         try {
@@ -367,7 +332,7 @@ public class GameController implements Initializable {
         orcFactory(1,625,200);
         orcFactory(2,670,200);
 
-        islandFactory(1,-10);
+        //islandFactory(1,-10);
         islandFactory(2,575);
 
 //        ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
@@ -375,15 +340,15 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1);
-        grp2.getChildren().addAll(isl2, GOrc1);
+        grp2.getChildren().addAll(isl2,GOrc1);
         Pane i = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
         i.setLayoutY(300);
-        grp3.getChildren().add(i);
+        //grp3.getChildren().add(i);
 //        grp1.setLayoutX(0);
 //        grp1.setLayoutY(300);
 
-//        grp1.getChildren().get(0).setLayoutY(300);
-//        grp1.getChildren().get(0).setLayoutX(-10);
+        grp1.getChildren().get(0).setLayoutY(300);
+        grp1.getChildren().get(0).setLayoutX(-10);
 
 //        grp2.getChildren().get(0).setLayoutY(325);
 //        grp2.getChildren().get(0).setLayoutX(575);
@@ -399,15 +364,16 @@ public class GameController implements Initializable {
 
         //hero.getControl().Jump(island1);
         greenOrc.getController().jumpOrc(island, 325);
-        greenOrc1.getController().jumpOrc(island, 325);
+        //greenOrc1.getController().jumpOrc(island, 325);
 
     }
 
     public void Jump(Islands obj){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
                 (e) -> {
-                    //throwKnife();
                     heroAll.setLayoutY(heroAll.getLayoutY() + j);
+                    sword.setLayoutY(sword.getLayoutY() + j);
+                    knife.setLayoutY(knife.getLayoutY() + j);
                     arr = obj.getControl().ifCollide(heroAll);
                     if (arr[0] == 1) {
 
@@ -419,23 +385,21 @@ public class GameController implements Initializable {
                             //System.out.println("yyy");
                             //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
                             heroAll.setLayoutY(heroAll.getLayoutY() - 10);
+                            sword.setLayoutY(sword.getLayoutY() - 10);
+                            knife.setLayoutY(knife.getLayoutY() - 10);
                             //heroNormal.setX(heroNormal.getX() - 50);
                             adjust(50, 1);
                         }
                         //System.out.println("hkkk");
                     }
                     if (heroAll.getLayoutY() < jHT - 120) {
-                        System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
+                        //System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
                         //throwKnife();
                         j = 3;
                     }
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
                         ChestsSetUp(1);
                         chestCode = 1;
-//                        heroSetUp(1);
-//                        heroCode = 1;
-                        //rotSword();
-                        //throwKnife();
                     }
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
@@ -461,13 +425,19 @@ public class GameController implements Initializable {
     }
     public void move(MouseEvent e){
         //hero.getControl().pause(true);
-        translateX(grp1.getChildren().get(0), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(0), shiftLeftBy, time);
-        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
+        for (int i = 0; i < grp1.getChildren().size(); i++) {
+            translateX(grp1.getChildren().get(i), shiftLeftBy, time);
+        }
+        for (int i = 0; i < grp2.getChildren().size(); i++) {
+            translateX(grp2.getChildren().get(i), shiftLeftBy, time);
+        }
+//        translateX(grp2.getChildren().get(0), shiftLeftBy, time);
+//        translateX(grp2.getChildren().get(1), shiftLeftBy, time);
+        //System.out.println("kl" + isl1.getTranslateX());
         //translateX(grp2.getChildren().get(2), shiftLeftBy, time);
         //translateX(grp2.getChildren().get(3), shiftLeftBy, time);
         translateX(chestAll,shiftLeftBy,time);
-        heroMOVE(time);
+        heroMove(time);
 //        if(upFlag){
 //            update();
 //            upFlag = false;
@@ -481,7 +451,9 @@ public class GameController implements Initializable {
     public void heroMove (double time) {
 
         jump.pause();
-        //translate.stop();
+        if(heroCode == 1)
+            throwKnife();
+        //rotSword();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
             arr2 = greenOrc.getController().collideHero(heroAll);
             if(arr2[0]==1){
@@ -494,10 +466,6 @@ public class GameController implements Initializable {
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
                 ChestsSetUp(1);
                 chestCode = 1;
-                heroSetUp(2);
-                heroCode = 2;
-                //rotSword();
-
             }
 //            else{
 //                upFlag = true;
@@ -560,9 +528,15 @@ public class GameController implements Initializable {
 
 
     public void adjust(int amount, int time){
-        translateX(grp1.getChildren().get(0), amount, time);
-        translateX(grp2.getChildren().get(0), amount, time);
-        translateX(grp2.getChildren().get(1), amount, time);
+        for (int i = 0; i < grp1.getChildren().size(); i++) {
+            translateX(grp1.getChildren().get(i), amount, time);
+        }
+        for (int i = 0; i < grp2.getChildren().size(); i++) {
+            translateX(grp2.getChildren().get(i), amount, time);
+        }
+//        translateX(grp1.getChildren().get(0), amount, time);
+//        translateX(grp2.getChildren().get(0), amount, time);
+//        translateX(grp2.getChildren().get(1), amount, time);
         //translateX(grp2.getChildren().get(2), amount, time);
         //translateX(grp2.getChildren().get(3), amount, time);
         translateX(chestAll,amount,time);
@@ -608,46 +582,47 @@ public class GameController implements Initializable {
         locationText.setText("" + (score));
     }
     public void rotSword(){
-        Rotate rotate1 = new Rotate(60, 80,20);
-        Rotate rotate2 = new Rotate(-60, 80, 20);
-        heroAll.getChildren().get(1).getTransforms().addAll(rotate1);
+        Rotate rotate1 = new Rotate(60, 160,245);
+        Rotate rotate2 = new Rotate(-60, 160, 245);
+        sword.getTransforms().addAll(rotate1);
         Timeline rot = new Timeline(
                 new KeyFrame(Duration.millis(50), (e) -> {
-            heroAll.getChildren().get(1).getTransforms().addAll(rotate1);
+            sword.getTransforms().addAll(rotate1);
         }),
             new KeyFrame(Duration.millis(50), (e) -> {
-            heroAll.getChildren().get(1).getTransforms().addAll(rotate1);})
+            sword.getTransforms().addAll(rotate1);})
         );
 
         Timeline rotBack = new Timeline(
                 new KeyFrame(Duration.millis(50), (e) -> {
-                    heroAll.getChildren().get(1).getTransforms().addAll(rotate2);
+                    sword.getTransforms().addAll(rotate2);
                 }),
                 new KeyFrame(Duration.millis(50), (e) -> {
-                    heroAll.getChildren().get(1).getTransforms().addAll(rotate2);}),
+                    sword.getTransforms().addAll(rotate2);}),
 
                 new KeyFrame(Duration.millis(50), (e) -> {
-                    heroAll.getChildren().get(1).getTransforms().addAll(rotate2);})
+                    sword.getTransforms().addAll(rotate2);})
         );
         rot.play();
         rot.setOnFinished((e)->{rotBack.play();});
     }
     public void throwKnife(){
         //heroAll.getChildren().get(1).setVisible(true);
-        knife.setVisible(true);
-
-        heroSetUp(0);
+//        knife.setVisible(true);
+//
+//        heroSetUp(0);
+        TranslateTransition tran1 = new TranslateTransition();
         TranslateTransition tran = new TranslateTransition(Duration.millis(100));
         tran.setNode(knife);
         tran.setByX(250f);
         tran.play();
         tran.setOnFinished((e)->{
-            heroSetUp(1);
             knife.setVisible(false);
-            TranslateTransition tran1 = new TranslateTransition();
             tran1.setNode(knife);
             tran1.setByX(-250f);
+            tran1.setDuration(Duration.millis(1));
             tran1.play();
         });
+        tran1.setOnFinished((e)->{knife.setVisible(true);});
     }
 }

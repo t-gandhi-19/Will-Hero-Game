@@ -32,7 +32,7 @@ public class ChestsController implements Initializable {
     }
 
 
-    public int chestCollide(Pane hero, Pane chest){
+    public int chestCollide(Node hero, Pane chest){
         if(hero.getBoundsInParent().intersects(chest.getBoundsInParent())){
             return 1;
         }

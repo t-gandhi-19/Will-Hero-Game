@@ -49,4 +49,5 @@ public class FallingPlatformController implements Initializable {
 //        }
         startFalling();
     }
+
 }
