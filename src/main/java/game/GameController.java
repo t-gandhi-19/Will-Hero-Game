@@ -377,8 +377,10 @@ public class GameController implements Initializable {
             heroAll.setLayoutY(heroAll.getLayoutY() + j);
             sword.setLayoutY(sword.getLayoutY() + j);
             knife.setLayoutY(knife.getLayoutY() + j);
+
             if (heroAll.getLayoutY() < jHT - 230) {
                 //System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
+                System.out.println("hhhh");
                 j = 3;
             }
             arr4 = greenOrc1.getController().collide(heroAll);
@@ -386,6 +388,25 @@ public class GameController implements Initializable {
                 System.out.println(j);
                 System.out.println("jump22");
                 j = -3;
+            }
+            arr = obj.getControl().ifCollide(heroAll);
+            if (arr[0] == 1) {
+                System.out.println("islandcoll");
+                j = -j;
+//                        jHT = 300;
+                jHT = arr[1];
+//                        fl = arr[2];
+//                        //System.out.println(fl);
+                if (arr[2] == 1) {
+                    //System.out.println("yyy");
+                    //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
+                    heroAll.setLayoutY(heroAll.getLayoutY() - 10);
+                    sword.setLayoutY(sword.getLayoutY() - 10);
+                    knife.setLayoutY(knife.getLayoutY() - 10);
+                    //heroNormal.setX(heroNormal.getX() - 50);
+                    adjust(50, 1);
+                }
+                //System.out.println("hkkk");
             }
         }));
         jumpOnOrc.setCycleCount(Animation.INDEFINITE);
@@ -412,10 +433,10 @@ public class GameController implements Initializable {
                             //heroNormal.setX(heroNormal.getX() - 50);
                             adjust(50, 1);
                         }
-                        System.out.println("hkkk");
+                        //System.out.println("hkkk");
                     }
                     if (heroAll.getLayoutY() < jHT - 150) {
-                        System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
+                        //System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
                         //throwKnife();
                         System.out.println("cc  " + j);
                         j = 3;
@@ -434,7 +455,7 @@ public class GameController implements Initializable {
                         System.out.println(j);
                         System.out.println("jump");
                         j = -3;
-                        //jHT = jHT -45;
+                        jHT = jHT -45;
                         jumpOnOrc.play();
                         jump.pause();
                         System.out.println("ffuu");

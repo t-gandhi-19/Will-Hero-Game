@@ -131,17 +131,17 @@ public int [] ifCollide(Node n1){
         }
         return arr;
     }
-    else if(rock3.getBoundsInParent().intersects(n1.getBoundsInParent())){
-        arr[0] = 1;
-        arr[1] = 300;
-        if(n1.getBoundsInParent().getMaxY()>303){
-            arr[2] = 1;
-        }
-        else{
-            arr[2] = 0;
-        }
-        return arr;
-    }
+//    else if(rock3.getBoundsInParent().intersects(n1.getBoundsInParent())){
+//        arr[0] = 1;
+//        arr[1] = 300;
+//        if(n1.getBoundsInParent().getMaxY()>303){
+//            arr[2] = 1;
+//        }
+//        else{
+//            arr[2] = 0;
+//        }
+//        return arr;
+//    }
 //    else if(rock4.getBoundsInParent().intersects(n1.getBoundsInParent())){
 //        arr[0] = 1;
 //        arr[1] = 300;
