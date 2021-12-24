@@ -107,14 +107,14 @@ public class OrcController implements Initializable {
                         //System.out.println("jht" +jHT);
                         j = 3;
                     }
-                    if(arr1[0]==1){
-                        j = -3;
-                        jHT = 325;
-                    }
-                    if(redOrc.getY() < jHT - 190){
-                        //System.out.println("jht" +jHT);
-                        j = 3;
-                    }
+//                    if(arr1[0]==1){
+//                        j = -3;
+//                        jHT = 325;
+//                    }
+//                    if(redOrc.getY() < jHT - 190){
+//                        //System.out.println("jht" +jHT);
+//                        j = 3;
+//                    }
                     //System.out.println(g.getY());
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
