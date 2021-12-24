@@ -33,5 +33,6 @@
       <Group fx:id="grp2" />
       <Group fx:id="grp3" />
       <Group fx:id="grp4" />
+      <Group fx:id="grp5" layoutX="10.0" layoutY="10.0" />
    </children>
 </AnchorPane>

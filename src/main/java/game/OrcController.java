@@ -96,13 +96,22 @@ public class OrcController implements Initializable {
 
     public void jumpOrc(Islands obj, double yPos){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
-                (e) -> {greenOrc.setY(greenOrc.getY() + j);
+                (e) -> {greenOrc.setY(greenOrc.getY() + j);redOrc.setY(redOrc.getY() + j);
             arr = obj.getControl().ifCollide(greenOrc);
+            arr1 = obj.getControl().ifCollide(redOrc);
                     if(arr[0]==1){
                         j = -3;
                         jHT = 325;
                     }
                     if(greenOrc.getY() < jHT - 190){
+                        //System.out.println("jht" +jHT);
+                        j = 3;
+                    }
+                    if(arr1[0]==1){
+                        j = -3;
+                        jHT = 325;
+                    }
+                    if(redOrc.getY() < jHT - 190){
                         //System.out.println("jht" +jHT);
                         j = 3;
                     }
