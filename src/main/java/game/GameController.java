@@ -17,6 +17,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.xml.crypto.dsig.keyinfo.PGPData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -77,7 +78,8 @@ public class GameController implements Initializable {
 
     private Pane chestAll;
     private int chestCode;
-    private Pane fallPlat;
+    private Group fallPlat;
+    private Group buf;
 
 //    private Pane grp1;
 //    private Pane grp2;
@@ -189,14 +191,20 @@ public class GameController implements Initializable {
         if(heroCode != 2) {
             sword.setVisible(false);
         }
-
-        fallPlat = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
-//        fallPlat.setLayoutY(300);
-//        fallPlat.setLayoutX(300);
-//        MainBase.getChildren().add(fallPlat);
+        //System.out.println("init");
+        fallPlat = (Group) fallingPlatform.getObsPane().getChildren().get(0);
+        buf = (Group) fallingPlatform.getObsPane().getChildren().get(2);
         fallPlat.setLayoutY(300);
+        //fallPlat.setLayoutX(2225);
         fallPlat.setLayoutX(2850);
+        buf.setLayoutY(300);
+        //buf.setLayoutX(2225);
+        buf.setLayoutX(2850);
         MainBase.getChildren().add(fallPlat);
+        MainBase.getChildren().add(buf);
+
+//        fallPlat.setLayoutY(300);
+//        fallPlat.setLayoutX(2850);
 
         //chestFactory(750, 280);
 
@@ -217,7 +225,6 @@ public class GameController implements Initializable {
         //System.out.println(heroAll.getBoundsInParent().getMaxX()+ " "+ heroAll.getBoundsInParent().getMaxY());
         //System.out.println(heroAll.getBoundsInParent().getMinX()+ " "+ heroAll.getBoundsInParent().getMinY());
         gameFlow();
-
     }
 
 //    public void addObj(int code){
@@ -279,6 +286,8 @@ public class GameController implements Initializable {
         islandFactory(3,1005);
         islandFactory(4,1500);
         islandFactory(5,1900);
+//        fallPlat.setLayoutX(2225);
+//        fallPlat.setLayoutY(325);
 
 //        ImageView ch1 = (ImageView) chest.getObsPane().getChildren().get(0);
 //        ch1.setX(750);
@@ -442,13 +451,15 @@ public class GameController implements Initializable {
                     if (heroAll.getLayoutY() < jHT - 130) {
                         //System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
                         //throwKnife();
-                        //System.out.println("cc  " + j);
+                        System.out.println("cc  " + j);
                         j = 3;
                     }
 
                     if(fallingPlatform.getController().ifCollide(heroAll)==1){
+                        System.out.println(heroAll.getBoundsInParent().getMaxX() + " " +heroAll.getBoundsInParent().getMinX());
+                        System.out.println(fallPlat.getTranslateX() + " fl "+ fallPlat.getLayoutX());
                         j = -3;
-                        jHT = 300;
+                        jHT = 325;
 
 
                     }
@@ -485,7 +496,8 @@ public class GameController implements Initializable {
         //System.out.println("jump on orc stopped");
         if(heroCode == 1)
             throwKnife();
-        rotSword();
+        if(heroCode == 2)
+            rotSword();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
             //arr2 = greenOrc1.getController().collide(heroAll);
             //actAfterCollIsland(island.getControl().ifCollide(heroAll));
@@ -495,7 +507,6 @@ public class GameController implements Initializable {
                 ChestsSetUp(1);
                 chestCode = 1;
             }
-
         }));
         inBtw.setCycleCount(12);
         inBtw.play();
@@ -541,15 +552,15 @@ public class GameController implements Initializable {
 
     public void actAfterCollIsland(int[] arr){
         if (arr[0] == 1) {
-            //System.out.println("islandcoll");
+            System.out.println("islandcoll");
             j = -j;
             jHT = arr[1];
             if (arr[2] == 1) {
                 //System.out.println("yyy");
                 //System.out.println("jj" + " " + heroNormal.getBoundsInParent().getMaxY());
                 heroAll.setLayoutY(heroAll.getLayoutY() - 40);
-                sword.setLayoutY(sword.getLayoutY() - 10);
-                knife.setLayoutY(knife.getLayoutY() - 10);
+                sword.setLayoutY(sword.getLayoutY() - 40);
+                knife.setLayoutY(knife.getLayoutY() - 40);
                 //heroNormal.setX(heroNormal.getX() - 50);
                 //upFlag = 1;
                 adjust(90, 10);
@@ -577,6 +588,7 @@ public class GameController implements Initializable {
         }
         translateX(chestAll,shiftLeftBy,time);
         translateX(fallPlat,shiftLeftBy,time);
+        translateX(buf,shiftLeftBy,time);
         heroMove(time);
         //rotSword();
         if(upFlag == 0) {
@@ -610,6 +622,7 @@ public class GameController implements Initializable {
         }
         translateX(chestAll,amount,time);
         translateX(fallPlat,amount,time);
+        translateX(buf,amount,time);
     }
 
     public void FallAndDie(Node n1, double amount, double time){
@@ -631,8 +644,8 @@ public class GameController implements Initializable {
         locationText.setText("" + (score));
     }
     public void rotSword(){
-        Rotate rotate1 = new Rotate(30, 160,235);
-        Rotate rotate2 = new Rotate(-30, 160, 235);
+        Rotate rotate1 = new Rotate(60, 160,235);
+        Rotate rotate2 = new Rotate(-60, 160, 235);
         sword.getTransforms().addAll(rotate1);
         Timeline rot = new Timeline(
                 new KeyFrame(Duration.millis(50), (e) -> {

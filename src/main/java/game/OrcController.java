@@ -14,7 +14,6 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class OrcController implements Initializable {
     @FXML
     private ImageView bossOrc;
@@ -33,7 +32,6 @@ public class OrcController implements Initializable {
     private int arr[];
     private int jHT;
     private  int bossJumpHt =70;
-    //private Boss BossOrc;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +45,6 @@ public class OrcController implements Initializable {
 //        translate.setDuration(Duration.millis(500));
 //        translate.setCycleCount(TranslateTransition.INDEFINITE);
 //        translate.play();
-
     }
     public int[] collideeHero(Node hero){
         int arr[] = new int [5];
@@ -124,6 +121,7 @@ public class OrcController implements Initializable {
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
     }
+
     public void moveForward(Boss boss){
         //boss.getObsPane().
         //boss.getObsPane().setLayoutY(180);
@@ -144,6 +142,7 @@ public class OrcController implements Initializable {
         translateYy.setDelay(Duration.millis(240));
         translateYy.play();
 
+
     }
     public void land(Boss boss){
         System.out.println("k");
@@ -153,11 +152,6 @@ public class OrcController implements Initializable {
         translateYy.setNode(bossOrc);
         translateYy.play();
 
-
-
-
     }
-
-
 
 }
