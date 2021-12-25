@@ -83,7 +83,7 @@ public class GameController implements Initializable {
 //    private Pane grp3;
 //    private Pane grp4;
 
-    private Hero1 hero;
+    private Hero hero;
     private Orc greenOrc;
     private Orc greenOrc1;
     private GreenOrc greenOrc2;
@@ -130,7 +130,7 @@ public class GameController implements Initializable {
 
     public void start() throws IOException {
         enemies = new ArrayList<Orc>();
-        hero = new Hero1();
+        hero = new Hero();
         greenOrc = new Orc();
         greenOrc1 = new Orc();
         greenOrc3 = new GreenOrc();
@@ -192,6 +192,7 @@ public class GameController implements Initializable {
         //MainBase.getChildren().add(chestAll);
         MainBase.getChildren().add(knife);
         MainBase.getChildren().add(sword);
+        //MainBase.getChildren().add(fallingPlatform.getObsPane());
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
         Jump();
         //System.out.println(heroAll.getLayoutX()+ " "+ heroAll.getLayoutY());
@@ -273,19 +274,21 @@ public class GameController implements Initializable {
         grp1.getChildren().addAll(isl1);
 //        grp2.getChildren().addAll(isl2, GOrc2);
 //        grp3.getChildren().addAll(isl3);
+        Pane i = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
         grp1.getChildren().addAll(isl2,GOrc1);
         grp1.getChildren().addAll(isl3);
-        grp1.getChildren().addAll(isl4);
+        grp1.getChildren().addAll(isl4, i);
         grp1.getChildren().addAll(isl5);
-
-        //grp3.getChildren().addAll(isl4);
-        Pane i = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
         i.setLayoutY(300);
+        i.setLayoutX(300);
+        //grp3.getChildren().addAll(isl4);
 
-        greenOrc.getController().jumpOrc(island, 325);
-        greenOrc1.getController().jumpOrc(island, 325);
-        greenOrc2.getController().jumpOrc(island, 325);
-        greenOrc3.getController().jumpOrc(island, 300);
+//        i.setLayoutY(600);
+
+        greenOrc.getController().jumpOrc(island);
+        greenOrc1.getController().jumpOrc(island);
+        greenOrc2.getController().jumpOrc(island);
+        greenOrc3.getController().jumpOrc(island);
     }
 
     public void ChestsSetUp(int code){
@@ -419,6 +422,7 @@ public class GameController implements Initializable {
                 //System.out.println("hhhh");
                 j = 3;
             }
+            fallingPlatform.getController().startFalling(heroAll);
             actAfterColl3(greenOrc1.getController().collide(heroAll));
             actAfterCollIsland(island.getControl().ifCollide(heroAll));
         }));
@@ -446,6 +450,7 @@ public class GameController implements Initializable {
         jump.play();
     }
     public void heroMove (double time) {
+
         jump.pause();
         jumpOnOrc.stop();
         //System.out.println("jump on orc stopped");
@@ -460,6 +465,7 @@ public class GameController implements Initializable {
                 ChestsSetUp(1);
                 chestCode = 1;
             }
+
         }));
         inBtw.setCycleCount(12);
         inBtw.play();
@@ -623,6 +629,12 @@ public class GameController implements Initializable {
             tran1.play();
         });
         tran1.setOnFinished((e)->{knife.setVisible(true);});
+        for(int i=0; i<greenOrc.getObsPane().getChildren().size(); i++){
+            if(knife.intersects(greenOrc.getObsPane().getChildren().get(i).getBoundsInParent())) {
+                FallAndDie(greenOrc.getObsPane().getChildren().get(i), 1000, 500);
+            }
+
+        }
     }
     public void DisplayPauseMenu(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("InGamePause.fxml"));

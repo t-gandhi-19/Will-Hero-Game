@@ -94,7 +94,7 @@ public class OrcController implements Initializable {
     }
 
 
-    public void jumpOrc(Islands obj, double yPos){
+    public void jumpOrc(Islands obj){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
                 (e) -> {greenOrc.setY(greenOrc.getY() + j);redOrc.setY(redOrc.getY() + j);
             arr = obj.getControl().ifCollide(greenOrc);
@@ -120,4 +120,7 @@ public class OrcController implements Initializable {
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
     }
+//    public void knifeAttack(){
+//        greenOrc.set
+//    }
 }

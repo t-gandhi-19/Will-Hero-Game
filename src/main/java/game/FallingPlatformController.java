@@ -19,20 +19,22 @@ public class FallingPlatformController implements Initializable {
     private int i;
     private int noOfBlocks;
 
-    public void startFalling(){
-        Timeline falling = new Timeline();
-        i = 0;
-        falling.getKeyFrames().add(new KeyFrame(Duration.millis(750), (e) -> {
-            fall(fallPlatform.getChildren().get(i));
+    public void startFalling(Node HeroAll) {
+        if (HeroAll.intersects(fallPlatform.getBoundsInParent())) {
+            System.out.println("l");
+            Timeline falling = new Timeline();
+            i = 0;
+            falling.getKeyFrames().add(new KeyFrame(Duration.millis(750), (e) -> {
+                fall(fallPlatform.getChildren().get(i));
 
-            //fallPlatform.getChildren().get(i-1).setVisible(false);
-            i++;
+                //fallPlatform.getChildren().get(i-1).setVisible(false);
+                i++;
 
-        }));
-        falling.setCycleCount(12);
-        falling.play();
+            }));
+            falling.setCycleCount(12);
+            falling.play();
+        }
     }
-
     public void fall(Node block){
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(block);
@@ -47,7 +49,7 @@ public class FallingPlatformController implements Initializable {
 //        for (int j = 0; j < 12; j++) {
 //            fallPlatform.getChildren().get(j).setVisible(false);
 //        }
-        startFalling();
+        //startFalling(HeroAll);
     }
 
 }
