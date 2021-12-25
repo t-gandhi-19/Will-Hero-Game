@@ -49,8 +49,8 @@ public int [] ifCollide(Node n1){
     }
     else if(rock2.getBoundsInParent().intersects(n1.getBoundsInParent())){
         arr[0] = 1;
-        arr[1] = 300;
-        if(n1.getBoundsInParent().getMaxY()>303){
+        arr[1] = 310;
+        if(n1.getBoundsInParent().getMaxY()>313){
             arr[2] = 1;
         }
         else{

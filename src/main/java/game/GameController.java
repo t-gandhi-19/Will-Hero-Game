@@ -189,13 +189,15 @@ public class GameController implements Initializable {
         }
 
         fallPlat = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
-        fallPlat.setLayoutY(300);
-        fallPlat.setLayoutX(300);
-        MainBase.getChildren().add(fallPlat);
+//        fallPlat.setLayoutY(300);
+//        fallPlat.setLayoutX(300);
+//        MainBase.getChildren().add(fallPlat);
 
-        chestFactory(750, 280);
-        MainBase.getChildren().add(heroAll);
+        //chestFactory(750, 280);
+
         //MainBase.getChildren().add(chestAll);
+        MainBase.getChildren().add(heroAll);
+
         MainBase.getChildren().add(knife);
         MainBase.getChildren().add(sword);
         //MainBase.getChildren().add(fallingPlatform.getObsPane());
@@ -336,10 +338,10 @@ public class GameController implements Initializable {
 
     public void islandSetUp(){
         isl1 = (ImageView) island.getObsPane().getChildren().get(0);
-        isl5 = (ImageView) island.getObsPane().getChildren().get(1);
+        isl2 = (ImageView) island.getObsPane().getChildren().get(1);
         isl3 = (ImageView) island.getObsPane().getChildren().get(2);
         isl4 = (ImageView) island.getObsPane().getChildren().get(3);
-        isl2 = (ImageView) island.getObsPane().getChildren().get(4);
+        isl5 = (ImageView) island.getObsPane().getChildren().get(4);
     }
 
     public void orcFactory(int code, int x, int y){
@@ -387,7 +389,7 @@ public class GameController implements Initializable {
                 break;
             case 2:
                 isl2.setX(x);
-                isl2.setY(325);
+                isl2.setY(310);
                 break;
             case 3:
                 isl3.setX(x);
@@ -399,7 +401,7 @@ public class GameController implements Initializable {
                 break;
             case 5:
                 isl5.setX(x);
-                isl5.setY(300);
+                isl5.setY(325);
                 break;
         }
     }

@@ -11,9 +11,9 @@
             <Image url="@images/Islands/largeRocks/largeRock3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rock2" fitHeight="200.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rock2" fitHeight="140.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Islands/medRocks/medRock4.png" />
+            <Image url="@images/Islands/smallRocks/shortRock3.png" />
          </image>
       </ImageView>
       <ImageView fx:id="rock3" fitHeight="200.0" fitWidth="375.0" pickOnBounds="true" preserveRatio="true">
@@ -26,9 +26,9 @@
             <Image url="@images/Islands/smallRocks/shortRock4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rock5" fitHeight="140.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rock5" fitHeight="200.0" fitWidth="325.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Islands/smallRocks/shortRock3.png" />
+            <Image url="@images/Islands/medRocks/medRock4.png" />
          </image>
       </ImageView>
    </children>
