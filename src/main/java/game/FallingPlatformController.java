@@ -13,15 +13,15 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FallingPlatformController implements Initializable {
+public class FallingPlatformController implements Initializable{
     @FXML
     private Pane fallPlatform;
     private int i;
     private int noOfBlocks;
+    private boolean falling;
 
-    public void startFalling(Node HeroAll) {
-        if (HeroAll.intersects(fallPlatform.getBoundsInParent())) {
-            System.out.println("l");
+    public void startFalling() {
+            falling = true;
             Timeline falling = new Timeline();
             i = 0;
             falling.getKeyFrames().add(new KeyFrame(Duration.millis(750), (e) -> {
@@ -33,8 +33,9 @@ public class FallingPlatformController implements Initializable {
             }));
             falling.setCycleCount(12);
             falling.play();
-        }
+
     }
+
     public void fall(Node block){
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(block);
@@ -43,9 +44,21 @@ public class FallingPlatformController implements Initializable {
         translate.play();
     }
 
+    public int ifCollide(Node hero){
+        if (hero.getBoundsInParent().intersects(fallPlatform.getBoundsInParent())) {
+            if(!falling)
+                startFalling();
+            return 1;
+        }
+        else
+            return 0;
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         noOfBlocks = 10;
+        falling = false;
 //        for (int j = 0; j < 12; j++) {
 //            fallPlatform.getChildren().get(j).setVisible(false);
 //        }

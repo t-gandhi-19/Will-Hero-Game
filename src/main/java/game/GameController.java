@@ -77,6 +77,7 @@ public class GameController implements Initializable {
 
     private Pane chestAll;
     private int chestCode;
+    private Pane fallPlat;
 
 //    private Pane grp1;
 //    private Pane grp2;
@@ -187,6 +188,11 @@ public class GameController implements Initializable {
             sword.setVisible(false);
         }
 
+        fallPlat = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
+        fallPlat.setLayoutY(300);
+        fallPlat.setLayoutX(300);
+        MainBase.getChildren().add(fallPlat);
+
         chestFactory(750, 280);
         MainBase.getChildren().add(heroAll);
         //MainBase.getChildren().add(chestAll);
@@ -274,13 +280,12 @@ public class GameController implements Initializable {
         grp1.getChildren().addAll(isl1);
 //        grp2.getChildren().addAll(isl2, GOrc2);
 //        grp3.getChildren().addAll(isl3);
-        Pane i = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
+
         grp1.getChildren().addAll(isl2,GOrc1);
         grp1.getChildren().addAll(isl3);
-        grp1.getChildren().addAll(isl4, i);
+        grp1.getChildren().addAll(isl4);
         grp1.getChildren().addAll(isl5);
-        i.setLayoutY(300);
-        i.setLayoutX(300);
+
         //grp3.getChildren().addAll(isl4);
 
 //        i.setLayoutY(600);
@@ -422,7 +427,6 @@ public class GameController implements Initializable {
                 //System.out.println("hhhh");
                 j = 3;
             }
-            fallingPlatform.getController().startFalling(heroAll);
             actAfterColl3(greenOrc1.getController().collide(heroAll));
             actAfterCollIsland(island.getControl().ifCollide(heroAll));
         }));
@@ -439,6 +443,10 @@ public class GameController implements Initializable {
                         //throwKnife();
                         //System.out.println("cc  " + j);
                         j = 3;
+                    }
+                    if(fallingPlatform.getController().ifCollide(heroAll)==1){
+                        j = -3;
+                        jHT = 300;
                     }
                     actAfterColl2(greenOrc1.getController().collide(heroAll));
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
@@ -544,6 +552,7 @@ public class GameController implements Initializable {
             translateX(grp5.getChildren().get(i), shiftLeftBy, time);
         }
         translateX(chestAll,shiftLeftBy,time);
+        translateX(fallPlat,shiftLeftBy,time);
         heroMove(time);
         update();
     }
@@ -566,6 +575,7 @@ public class GameController implements Initializable {
             translateX(grp5.getChildren().get(i), amount, time);
         }
         translateX(chestAll,amount,time);
+        translateX(fallPlat,amount,time);
     }
 
     public void FallAndDie(Node n1, double amount, double time){

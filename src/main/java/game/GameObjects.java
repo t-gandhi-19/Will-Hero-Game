@@ -3,7 +3,7 @@ package game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public abstract class GameObjects<T> {
+public abstract class GameObjects {
     private FXMLLoader fxmlLoader;
     //private T controller;
 

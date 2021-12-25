@@ -120,7 +120,4 @@ public class OrcController implements Initializable {
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
     }
-//    public void knifeAttack(){
-//        greenOrc.set
-//    }
 }
