@@ -12,6 +12,7 @@ public class Hero{
     private FXMLLoader fxmlLoader;
     HeroController controller;
     private int id;
+    private int coins;
 
     public Hero () throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Hero.fxml"));
@@ -25,7 +26,12 @@ public class Hero{
 //        obsPane.getChildren().add(0,heroNormal);
 //        obsPane.getChildren().add(1,heroKnife);
     }
-
+    public int getCoins(){
+        return coins;
+    }
+    public void addCoins(int coin){
+        coins+=coin;
+    }
     public AnchorPane getObsPane() {
         return obsPane;
     }

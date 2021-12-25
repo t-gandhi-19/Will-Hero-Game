@@ -10,6 +10,7 @@ public class Chests {
     private FXMLLoader fxmlLoader;
     ChestsController controller;
     private int id;
+    private String type;
 
     public Chests() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Chests.fxml"));
@@ -17,7 +18,12 @@ public class Chests {
         id = 10;
         controller = fxmlLoader.<ChestsController>getController();
     }
-
+    public String getType(){
+        return type;
+    }
+    public void setType(String ChestType){
+        type=ChestType;
+    }
     public AnchorPane getObsPane() {
         return obsPane;
     }
