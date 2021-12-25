@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.HeroController">
    <children>
-      <ImageView fx:id="heroNormal" fitHeight="57.0" fitWidth="40.0" pickOnBounds="true">
+      <ImageView fx:id="heroNormal" fitHeight="40.0" fitWidth="40.0" layoutX="100.0" layoutY="100.0" pickOnBounds="true">
          <image>
             <Image url="@images/Hero/heroNormal.png" />
          </image>

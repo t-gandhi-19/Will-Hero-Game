@@ -86,8 +86,7 @@ public class OrcController implements Initializable {
                 arr = 13;
             }
             else{
-
-
+                //System.out.println("hello2");
                 arr = 11;
             }
         }
