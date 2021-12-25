@@ -31,6 +31,9 @@ public class OrcController implements Initializable {
     private int j = 3;
     private int arr[];
     private int jHT;
+    private  int bossJumpHt =70;
+    //private Boss BossOrc;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         arr = new int[5];
@@ -120,4 +123,41 @@ public class OrcController implements Initializable {
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
     }
+    public void moveForward(Boss boss){
+        //boss.getObsPane().
+        //boss.getObsPane().setLayoutY(180);
+        TranslateTransition translateY= new TranslateTransition(Duration.millis(120));
+        translateY.setByY(-bossJumpHt);;
+        translateY.setNode(bossOrc);
+        translateY.play();
+
+        TranslateTransition translate= new TranslateTransition(Duration.millis(120));
+        translate.setByX(-boss.getForwardBossDistance());
+        translate.setNode(bossOrc);
+        translate.setDelay(Duration.millis(120));
+        translate.play();
+        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
+        translateYy.setByY(0.01);
+
+        translateYy.setNode(bossOrc);
+        translateYy.setDelay(Duration.millis(240));
+        translateYy.play();
+
+
+    }
+    public void land(Boss boss){
+        System.out.println("k");
+        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
+        translateYy.setToY(200);
+
+        translateYy.setNode(bossOrc);
+        translateYy.play();
+
+
+
+
+    }
+
+
+
 }

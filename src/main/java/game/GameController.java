@@ -90,6 +90,7 @@ public class GameController implements Initializable {
     private GreenOrc greenOrc2;
     private GreenOrc greenOrc3;
     private RedOrc redOrc;
+    private Boss BossMain;
     private Chests chest;
     private Islands island;
     private FallingPlatform fallingPlatform;
@@ -137,6 +138,7 @@ public class GameController implements Initializable {
         greenOrc3 = new GreenOrc();
         greenOrc2 = new GreenOrc();
         redOrc = new RedOrc();
+        BossMain = new Boss();
         chest = new Chests();
         island = new Islands();
         fallingPlatform = new FallingPlatform();
@@ -189,9 +191,9 @@ public class GameController implements Initializable {
         }
 
         fallPlat = (Pane) fallingPlatform.getObsPane().getChildren().get(0);
-//        fallPlat.setLayoutY(300);
-//        fallPlat.setLayoutX(300);
-//        MainBase.getChildren().add(fallPlat);
+        fallPlat.setLayoutY(300);
+        fallPlat.setLayoutX(2850);
+        MainBase.getChildren().add(fallPlat);
 
         //chestFactory(750, 280);
 
@@ -259,15 +261,16 @@ public class GameController implements Initializable {
     public void setUp(){
         //grp1
         //enemies.add(greenOrc);
-        orcFactory(1,625,200);
+//        orcFactory(1,625,200);
 //        orcFactory(2,670,200);
-//        orcFactory(1,625,300);
-//        orcFactory(2,1100,200);
-//        orcFactory(3,1200,200);
-//        orcFactory(4,1700,250);
-//        orcFactory(5,1800,250);
-//        orcFactory(6,2150,200);
-//        orcFactory(7,2250,40);
+        orcFactory(1,625,300);
+        orcFactory(2,1100,200);
+        orcFactory(3,1200,200);
+        orcFactory(4,1700,250);
+        orcFactory(5,1800,250);
+        orcFactory(6,2150,200);
+        orcFactory(7,2250,40);
+        orcFactory(8,3150,-20);
 
         islandFactory(1,-10);
         islandFactory(2,575);
@@ -280,6 +283,8 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
+        grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4, Boss);
+
 
         //grp3.getChildren().addAll(isl4);
 
@@ -333,7 +338,7 @@ public class GameController implements Initializable {
         ROrc1 = (ImageView) greenOrc.getObsPane().getChildren().get(1);
         ROrc2 = (ImageView) greenOrc1.getObsPane().getChildren().get(1);
         ROrc3 = (ImageView) greenOrc2.getObsPane().getChildren().get(1);
-        Boss = (ImageView) greenOrc.getObsPane().getChildren().get(2);
+        Boss = (ImageView) BossMain.getObsPane().getChildren().get(2);
     }
 
     public void islandSetUp(){
@@ -439,9 +444,26 @@ public class GameController implements Initializable {
                         //System.out.println("cc  " + j);
                         j = 3;
                     }
-                    if(fallingPlatform.getController().ifCollide(heroAll)==1){
+                    if(score==28){
+
+                        BossMain.getController().land(BossMain);
+                    }
+                    if(fallingPlatform.getController().ifCollide(heroAll)==1 ){
+                        System.out.println(BossMain.getForwardBossDistance());
+                        BossMain.getController().moveForward(BossMain);
+//
+                        //translateX(Boss, -500, 10000);
                         j = -3;
                         jHT = 300;
+                    }
+                    if(Boss.getBoundsInParent().intersects(heroAll.getBoundsInParent())){
+                        System.out.println("HH");
+                        adjust(80, 120);
+
+
+//                        translateX(heroAll, 20, 50);
+//                        translateX(sword, 20, 50);
+
                     }
                     actAfterColl2(greenOrc1.getController().collide(heroAll));
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
