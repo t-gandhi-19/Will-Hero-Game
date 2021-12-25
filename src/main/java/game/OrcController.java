@@ -75,15 +75,14 @@ public class OrcController implements Initializable {
 //        System.out.println(greenOrc.getBoundsInParent().getMaxY()+" " +greenOrc.getBoundsInParent().getMinY());
 //        System.out.println(" max " +hero.getBoundsInParent().getMaxY());
 //        System.out.println(" min " +hero.getBoundsInParent().getMinY());
-            if(hero.getBoundsInParent().getMaxY()<=greenOrc.getBoundsInParent().getMinY()+3 && hero.getBoundsInParent().getMinY()<greenOrc.getBoundsInParent().getMinY() ){
+            if(hero.getBoundsInParent().getMaxY()<=greenOrc.getBoundsInParent().getMinY()+6 && hero.getBoundsInParent().getMinY()<greenOrc.getBoundsInParent().getMinY() ){
                 arr = 12;
             }
-            else if(hero.getBoundsInParent().getMinY()>=greenOrc.getBoundsInParent().getMaxY()-3 && hero.getBoundsInParent().getMaxY()>greenOrc.getBoundsInParent().getMaxY()){
+            else if(hero.getBoundsInParent().getMinY()>=greenOrc.getBoundsInParent().getMaxY()-6 && hero.getBoundsInParent().getMaxY()>greenOrc.getBoundsInParent().getMaxY()){
                 arr = 13;
             }
             else{
-
-
+                //System.out.println("hello2");
                 arr = 11;
             }
         }
