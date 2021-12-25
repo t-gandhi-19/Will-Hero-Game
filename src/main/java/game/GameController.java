@@ -450,6 +450,7 @@ public class GameController implements Initializable {
                         j = -3;
                         jHT = 300;
 
+
                     }
                     if(score==28) {
 

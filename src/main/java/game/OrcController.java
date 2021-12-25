@@ -144,7 +144,6 @@ public class OrcController implements Initializable {
         translateYy.setDelay(Duration.millis(240));
         translateYy.play();
 
-
     }
     public void land(Boss boss){
         System.out.println("k");
