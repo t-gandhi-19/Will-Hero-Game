@@ -46,6 +46,7 @@ public class OrcController implements Initializable {
 //        translate.setDuration(Duration.millis(500));
 //        translate.setCycleCount(TranslateTransition.INDEFINITE);
 //        translate.play();
+
     }
     public int[] collideeHero(Node hero){
         int arr[] = new int [5];
