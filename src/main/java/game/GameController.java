@@ -194,12 +194,12 @@ public class GameController implements Initializable {
         //System.out.println("init");
         fallPlat = (Group) fallingPlatform.getObsPane().getChildren().get(0);
         buf = (Group) fallingPlatform.getObsPane().getChildren().get(2);
-        fallPlat.setLayoutY(300);
+        fallPlat.setLayoutY(325);
         //fallPlat.setLayoutX(2225);
-        fallPlat.setLayoutX(2850);
-        buf.setLayoutY(300);
+        fallPlat.setLayoutX(2225);
+        buf.setLayoutY(325);
         //buf.setLayoutX(2225);
-        buf.setLayoutX(2850);
+        buf.setLayoutX(2225);
         MainBase.getChildren().add(fallPlat);
         MainBase.getChildren().add(buf);
 
@@ -216,14 +216,6 @@ public class GameController implements Initializable {
         //MainBase.getChildren().add(fallingPlatform.getObsPane());
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
         Jump();
-        //System.out.println(heroAll.getLayoutX()+ " "+ heroAll.getLayoutY());
-        //System.out.println(heroAll.getChildren().get(0).getLayoutX()+ " "+ heroAll.getChildren().get(0).getLayoutY());
-        //System.out.println(heroAll.getChildren().get(1).getLayoutX()+ " "+ heroAll.getChildren().get(1).getLayoutY());
-        //System.out.println(chestAll.getLayoutX()+ " "+ chestAll.getLayoutY());
-        //System.out.println(chestAll.getChildren().get(0).getLayoutX()+ " "+ chestAll.getChildren().get(0).getLayoutY());
-        //System.out.println(chestAll.getBoundsInParent().getMinX()+ " "+ chestAll.getBoundsInParent().getMinY());
-        //System.out.println(heroAll.getBoundsInParent().getMaxX()+ " "+ heroAll.getBoundsInParent().getMaxY());
-        //System.out.println(heroAll.getBoundsInParent().getMinX()+ " "+ heroAll.getBoundsInParent().getMinY());
         gameFlow();
     }
 
@@ -238,25 +230,25 @@ public class GameController implements Initializable {
 //            System.out.println(isl2.getTranslateX());
 //            System.out.println(isl3.getTranslateX());
 //            System.out.println(isl4.getTranslateX());
-//            System.out.println(isl5.getTranslateX());
+            System.out.println(isl5.getTranslateX());
             if(isl1.getTranslateX()<-600){
-                isl1.setTranslateX(isl5.getTranslateX()+2400);
+                isl1.setTranslateX(isl5.getTranslateX()+2950);
                 //System.out.println("1");
             }
             if(isl2.getTranslateX()<-1000){
-                isl2.setTranslateX(isl5.getTranslateX()+2400);
+                isl2.setTranslateX(isl5.getTranslateX()+3000);
                 //System.out.println("2");
             }
             if(isl3.getTranslateX()<-1400){
-                isl3.setTranslateX(isl5.getTranslateX()+2400);
+                isl3.setTranslateX(isl5.getTranslateX()+3000);
 
             }
             if(isl4.getTranslateX()<-1800){
-                isl4.setTranslateX(isl5.getTranslateX()+2400);
+                isl4.setTranslateX(isl5.getTranslateX()+3000);
 
             }
             if(isl5.getTranslateX()<-2300){
-                isl5.setTranslateX(isl5.getTranslateX()+2400);
+                isl5.setTranslateX(isl5.getTranslateX()+3000);
 
             }
 
@@ -264,22 +256,21 @@ public class GameController implements Initializable {
         });
         timeline = new Timeline(kf);
         timeline.setCycleCount(Timeline.INDEFINITE);
-
         timeline.play();
     }
 
     public void setUp(){
         //grp1
         //enemies.add(greenOrc);
-        orcFactory(1,625,200);
-        orcFactory(1,625,300);
-        orcFactory(2,1100,200);
-        orcFactory(3,1200,200);
-        orcFactory(4,1700,250);
-        orcFactory(5,1800,250);
-        orcFactory(6,2150,200);
-        orcFactory(7,2250,40);
-        orcFactory(8,3150,-20);
+//        orcFactory(1,625,200);
+//        orcFactory(1,625,300);
+//        orcFactory(2,1100,200);
+//        orcFactory(3,1200,200);
+//        orcFactory(4,1700,250);
+//        orcFactory(5,1800,250);
+//        orcFactory(6,2150,200);
+//        orcFactory(7,2250,40);
+//        orcFactory(8,3150,-20);
 
         islandFactory(1,-10);
         islandFactory(2,575);
@@ -294,7 +285,7 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
-        grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4, Boss);
+        grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4);
 
         //grp3.getChildren().addAll(isl4);
 
@@ -456,8 +447,8 @@ public class GameController implements Initializable {
                     }
 
                     if(fallingPlatform.getController().ifCollide(heroAll)==1){
-                        System.out.println(heroAll.getBoundsInParent().getMaxX() + " " +heroAll.getBoundsInParent().getMinX());
-                        System.out.println(fallPlat.getTranslateX() + " fl "+ fallPlat.getLayoutX());
+                        //System.out.println(heroAll.getBoundsInParent().getMaxX() + " " +heroAll.getBoundsInParent().getMinX());
+                        //System.out.println(fallPlat.getTranslateX() + " fl "+ fallPlat.getLayoutX());
                         j = -3;
                         jHT = 325;
 
@@ -468,11 +459,11 @@ public class GameController implements Initializable {
                         BossMain.getController().land(BossMain);
                     }
                     if(fallingPlatform.getController().ifCollide(heroAll)==1 ) {
-                        System.out.println(BossMain.getForwardBossDistance());
+                        //System.out.println(BossMain.getForwardBossDistance());
                         BossMain.getController().moveForward(BossMain);
                     }
                     if(Boss.getBoundsInParent().intersects(heroAll.getBoundsInParent())){
-                        System.out.println("HH");
+                        //System.out.println("HH");
                         adjust(80, 120);
 
 
@@ -519,7 +510,7 @@ public class GameController implements Initializable {
     public void actAfterColl1(int a){
         if(a==11){
             //upFlag = 1;
-            System.out.println("hello");
+            System.out.println("orcColl");
             adjust(90,120);
             translateX(grp2.getChildren().get(0), orcX, 120);
             //heroSetUp(1);
@@ -595,7 +586,7 @@ public class GameController implements Initializable {
             update();
         }
         if(upFlag == 1){
-            System.out.println("deflag");
+            //System.out.println("deflag");
             score--;
             update();
         }
