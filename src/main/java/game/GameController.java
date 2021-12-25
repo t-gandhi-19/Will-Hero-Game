@@ -277,14 +277,7 @@ public class GameController implements Initializable {
 //        ch1.setX(750);
 //        ch1.setY(280);
 
-        grp1.getChildren().addAll(isl1);
-//        grp2.getChildren().addAll(isl2, GOrc2);
-//        grp3.getChildren().addAll(isl3);
-
-        grp1.getChildren().addAll(isl2,GOrc1);
-        grp1.getChildren().addAll(isl3);
-        grp1.getChildren().addAll(isl4);
-        grp1.getChildren().addAll(isl5);
+        grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
 
         //grp3.getChildren().addAll(isl4);
 
