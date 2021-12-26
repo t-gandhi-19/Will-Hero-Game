@@ -53,7 +53,7 @@ public class FallingPlatformController implements Initializable {
     private ImageView block110;
 
     @FXML
-    private Pane fallPlatform1;
+    private Group fallPlatform1;
     @FXML
     private ImageView block21;
     @FXML
@@ -243,7 +243,7 @@ public class FallingPlatformController implements Initializable {
     public int ifCollide1(Node hero) {
         if (hero.getBoundsInParent().intersects(fallPlatform1.getBoundsInParent())) {
             if (!fallin1) {
-                System.out.println("start");
+                System.out.println("start1");
                 fallin1 = true;
                 startFalling1();
             }
@@ -264,6 +264,7 @@ public class FallingPlatformController implements Initializable {
 
 
     public void startFalling1() {
+        System.out.println("st");
         Timeline falling = new Timeline();
         falling.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(750), (e) -> {

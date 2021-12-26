@@ -99,7 +99,7 @@ public class GameController implements Initializable {
     private Boss BossMain;
     private Chests chest;
     private Islands island;
-    //private FallingPlatform fallingPlatform;
+    private FallingPlatform finalPlat;
 
     private ArrayList<Orc> enemies;
     private ArrayList<Islands> platform;
@@ -149,6 +149,7 @@ public class GameController implements Initializable {
         BossMain = new Boss();
         chest = new Chests();
         island = new Islands();
+        finalPlat = new FallingPlatform();
         //tform = new FallingPlatform();
         //hero.getControl().st(this.);
 //        grp1 = new Group();
@@ -163,6 +164,7 @@ public class GameController implements Initializable {
         jHT = -1;
         fl = 0;
         upFlag = 0;
+        falling = false;
 
         arr = new int[5];
 //        arr2 = new int[5];
@@ -227,8 +229,6 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
         fallingPlatforms.add(f);
-        bufMain = false;
-        falling = false;
         Group fallPlat = (Group) f.getObsPane().getChildren().get(0);
         Group buf = (Group) f.getObsPane().getChildren().get(2);
         fallPlat.setLayoutY(y);
@@ -245,6 +245,29 @@ public class GameController implements Initializable {
         //MainBase.getChildren().add(buf);
     }
 
+    public void fallPlatSetUp1(double x, double y){
+//        FallingPlatform f = null;
+//        try {
+//            f = new FallingPlatform();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        //fallingPlatforms.add(f);
+        System.out.println("size " + finalPlat.getObsPane().getChildren().size());
+        Group fallPlat = (Group) finalPlat.getObsPane().getChildren().get(1);
+        Group buf = (Group) finalPlat.getObsPane().getChildren().get(3);
+        fallPlat.setLayoutY(y);
+        fallPlat.setLayoutX(x);
+        buf.setLayoutY(y);
+        buf.setLayoutX(x);
+        while(!grp4.getChildren().isEmpty()){
+            grp4.getChildren().remove(0);
+        }
+        grp4.getChildren().addAll(fallPlat,buf);
+        //MainBase.getChildren().add(fallPlat);
+        //MainBase.getChildren().add(buf);
+    }
+
     public void gameFlow(){
         KeyFrame kf = new KeyFrame(Duration.millis(100), e -> {
 //            System.out.println("check");
@@ -255,7 +278,7 @@ public class GameController implements Initializable {
 //            System.out.println(fallPlat.getTranslateX() + " " + buf.getTranslateX());
 //            System.out.println(fallPlat.getTranslateY() + " Y " + buf.getTranslateY());
             System.out.println(isl5.getTranslateX());
-            if(score<80) {
+            if(score<78) {
                 if (isl1.getTranslateX() < -600) {
                     isl1.setTranslateX(isl5.getTranslateX() + 2950);
                     //fallPlatSetUp();
@@ -281,8 +304,12 @@ public class GameController implements Initializable {
                     fallPlatSetUp(isl5.getBoundsInParent().getMaxX()-50, 325);
                 }
             }
-            else{
-                //fallPlatSetUp(isl2.getBoundsInParent().getMaxX()-60,310);
+            if(score==90){
+                if(!falling) {
+                    falling = true;
+
+                    fallPlatSetUp1(isl1.getBoundsInParent().getMaxX(), 310);
+                }
             }
 
 
@@ -488,26 +515,19 @@ public class GameController implements Initializable {
                     }
                     for (int i = 0; i < fallingPlatforms.size(); i++) {
                         if (fallingPlatforms.get(i).getController().ifCollide(heroAll) == 1) {
-//                        if(!falling ){
-//                            System.out.println("startFalling");
-//                            falling = true;
-//                            if(!bufMain){
-//                                bufMain = true;
-//                                fallingPlatform.getController().startFalling1();
-//                            }
-//                            else {
-//                                bufMain = false;
-//                                fallingPlatform.getController().startFalling2();
-//                            }
-//                        }
                             j = -3;
                             jHT = 325;
 
                         }
                     }
-                    if(score==28) {
-                        BossMain.getController().land(BossMain);
+                    if (finalPlat.getController().ifCollide1(heroAll) == 1) {
+                        System.out.println("here");
+                        j = -3;
+                        jHT = 310;
                     }
+//                    if(score==28) {
+//                        BossMain.getController().land(BossMain);
+//                    }
 //                    if(fallingPlatform.getController().ifCollide(heroAll)==1 ) {
 //                        //System.out.println(BossMain.getForwardBossDistance());
 //                        BossMain.getController().moveForward(BossMain);
@@ -622,6 +642,7 @@ public class GameController implements Initializable {
             translateX(grp3.getChildren().get(i), shiftLeftBy, time);
         }
         for (int i = 0; i < grp4.getChildren().size(); i++) {
+            System.out.println("shift4");
             translateX(grp4.getChildren().get(i), shiftLeftBy, time);
         }
         for (int i = 0; i < grp5.getChildren().size(); i++) {
@@ -636,7 +657,6 @@ public class GameController implements Initializable {
             update();
         }
         if(upFlag == 1){
-            //System.out.println("deflag");
             score--;
             update();
         }
@@ -656,6 +676,7 @@ public class GameController implements Initializable {
             translateX(grp3.getChildren().get(i), amount, time);
         }
         for (int i = 0; i < grp4.getChildren().size(); i++) {
+            System.out.println("adjust4");
             translateX(grp4.getChildren().get(i), amount, time);
         }
         for (int i = 0; i < grp5.getChildren().size(); i++) {
