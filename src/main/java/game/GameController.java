@@ -126,7 +126,6 @@ public class GameController implements Initializable {
     private int upFlag;
     private int arr4;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {         //start
