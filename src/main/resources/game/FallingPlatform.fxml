@@ -4,7 +4,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
 <AnchorPane fx:id="base" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.FallingPlatformController">
     <children>
@@ -67,100 +66,101 @@
             </ImageView>
          </children>
       </Group>
-      <Pane fx:id="fallPlatform1" layoutY="58.0" prefHeight="15.0" prefWidth="810.0">
+      <Group fx:id="fallPlatform1">
          <children>
-            <ImageView fx:id="block112" fitHeight="15.0" fitWidth="45.0" pickOnBounds="true">
+            <ImageView fx:id="block21" fitHeight="15.0" fitWidth="45.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block111" fitHeight="15.0" fitWidth="45.0" layoutX="45.0" pickOnBounds="true">
+            <ImageView fx:id="block22" fitHeight="15.0" fitWidth="45.0" layoutX="45.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block121" fitHeight="15.0" fitWidth="45.0" layoutX="90.0" pickOnBounds="true">
+            <ImageView fx:id="block23" fitHeight="15.0" fitWidth="45.0" layoutX="90.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block131" fitHeight="15.0" fitWidth="45.0" layoutX="135.0" pickOnBounds="true">
+            <ImageView fx:id="block24" fitHeight="15.0" fitWidth="45.0" layoutX="135.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block141" fitHeight="15.0" fitWidth="45.0" layoutX="180.0" pickOnBounds="true">
+            <ImageView fx:id="block25" fitHeight="15.0" fitWidth="45.0" layoutX="180.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block151" fitHeight="15.0" fitWidth="45.0" layoutX="225.0" pickOnBounds="true">
+            <ImageView fx:id="block26" fitHeight="15.0" fitWidth="45.0" layoutX="225.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block161" fitHeight="15.0" fitWidth="45.0" layoutX="270.0" pickOnBounds="true">
+            <ImageView fx:id="block27" fitHeight="15.0" fitWidth="45.0" layoutX="270.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block181" fitHeight="15.0" fitWidth="45.0" layoutX="315.0" pickOnBounds="true">
+            <ImageView fx:id="block28" fitHeight="15.0" fitWidth="45.0" layoutX="315.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block171" fitHeight="15.0" fitWidth="45.0" layoutX="360.0" pickOnBounds="true">
+            <ImageView fx:id="block29" fitHeight="15.0" fitWidth="45.0" layoutX="360.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block191" fitHeight="15.0" fitWidth="45.0" layoutX="405.0" pickOnBounds="true">
+            <ImageView fx:id="block210" fitHeight="15.0" fitWidth="45.0" layoutX="405.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block1101" fitHeight="15.0" fitWidth="45.0" layoutX="450.0" pickOnBounds="true">
+            <ImageView fx:id="block211" fitHeight="15.0" fitWidth="45.0" layoutX="450.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block1111" fitHeight="15.0" fitWidth="45.0" layoutX="495.0" pickOnBounds="true">
+            <ImageView fx:id="block212" fitHeight="15.0" fitWidth="45.0" layoutX="495.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block11111" fitHeight="15.0" fitWidth="45.0" layoutX="540.0" pickOnBounds="true">
+            <ImageView fx:id="block213" fitHeight="15.0" fitWidth="45.0" layoutX="540.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block11112" fitHeight="15.0" fitWidth="45.0" layoutX="585.0" pickOnBounds="true">
+            <ImageView fx:id="block214" fitHeight="15.0" fitWidth="45.0" layoutX="585.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block11113" fitHeight="15.0" fitWidth="45.0" layoutX="630.0" pickOnBounds="true">
+            <ImageView fx:id="block215" fitHeight="15.0" fitWidth="45.0" layoutX="630.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block11114" fitHeight="15.0" fitWidth="45.0" layoutX="675.0" pickOnBounds="true">
+            <ImageView fx:id="block216" fitHeight="15.0" fitWidth="45.0" layoutX="675.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block11115" fitHeight="15.0" fitWidth="45.0" layoutX="720.0" pickOnBounds="true">
+            <ImageView fx:id="block217" fitHeight="15.0" fitWidth="45.0" layoutX="720.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block11116" fitHeight="15.0" fitWidth="45.0" layoutX="765.0" pickOnBounds="true">
+            <ImageView fx:id="block218" fitHeight="15.0" fitWidth="45.0" layoutX="765.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
          </children>
-      </Pane>
+      </Group>
       <Group fx:id="buffer" />
+      <Group fx:id="buffer1" />
     </children>
 </AnchorPane>

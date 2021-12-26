@@ -15,7 +15,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FallingPlatformController implements Initializable{
+public class FallingPlatformController implements Initializable {
     @FXML
     private Group fallPlatform;
 
@@ -53,7 +53,44 @@ public class FallingPlatformController implements Initializable{
     private ImageView block110;
 
     @FXML
-    private Pane fallPlatform1;
+    private Group fallPlatform1;
+    @FXML
+    private ImageView block21;
+    @FXML
+    private ImageView block22;
+    @FXML
+    private ImageView block23;
+    @FXML
+    private ImageView block24;
+    @FXML
+    private ImageView block25;
+    @FXML
+    private ImageView block26;
+    @FXML
+    private ImageView block27;
+    @FXML
+    private ImageView block28;
+    @FXML
+    private ImageView block29;
+    @FXML
+    private ImageView block210;
+    @FXML
+    private ImageView block211;
+    @FXML
+    private ImageView block212;
+    @FXML
+    private ImageView block213;
+    @FXML
+    private ImageView block214;
+    @FXML
+    private ImageView block215;
+    @FXML
+    private ImageView block216;
+    @FXML
+    private ImageView block217;
+    @FXML
+    private ImageView block218;
+
 
     @FXML
     private AnchorPane base;
@@ -62,52 +99,55 @@ public class FallingPlatformController implements Initializable{
 
     @FXML
     private Group buffer;
+    @FXML
+    private Group buffer1;
 
     private int i;
     private int noOfBlocks;
-    private boolean falling;
+    private boolean fallin;
+    private boolean fallin1;
     private boolean bufferMain;
     private int i1;
 
 
-    public void startFalling1() {
-            Timeline falling = new Timeline();
-            falling.getKeyFrames().addAll(
+    public void startFalling() {
+        Timeline falling = new Timeline();
+        falling.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(750), (e) -> {
                     fall(block1);
-                    }),
-                    new KeyFrame(Duration.millis(1500), (e) -> {
-                        fall(block11);
-                    }),
-                    new KeyFrame(Duration.millis(2250), (e) -> {
-                        fall(block12);
-                    }),
-                    new KeyFrame(Duration.millis(3000), (e) -> {
-                        fall(block13);
-                    }),
-                    new KeyFrame(Duration.millis(3750), (e) -> {
-                        fall(block14);
-                    }),
-                    new KeyFrame(Duration.millis(4500), (e) -> {
-                        fall(block15);
-                    }),
-                    new KeyFrame(Duration.millis(5250), (e) -> {
-                        fall(block16);
-                    }),
-                    new KeyFrame(Duration.millis(6000), (e) -> {
-                        fall(block17);
-                    }),
-                    new KeyFrame(Duration.millis(6750), (e) -> {
-                        fall(block18);
-                    }),
-                    new KeyFrame(Duration.millis(7500), (e) -> {
-                        fall(block19);
-                    }),
-                    new KeyFrame(Duration.millis(8250), (e) -> {
-                        fall(block110);
-                    })
-            );
-            falling.play();
+                }),
+                new KeyFrame(Duration.millis(1500), (e) -> {
+                    fall(block11);
+                }),
+                new KeyFrame(Duration.millis(2250), (e) -> {
+                    fall(block12);
+                }),
+                new KeyFrame(Duration.millis(3000), (e) -> {
+                    fall(block13);
+                }),
+                new KeyFrame(Duration.millis(3750), (e) -> {
+                    fall(block14);
+                }),
+                new KeyFrame(Duration.millis(4500), (e) -> {
+                    fall(block15);
+                }),
+                new KeyFrame(Duration.millis(5250), (e) -> {
+                    fall(block16);
+                }),
+                new KeyFrame(Duration.millis(6000), (e) -> {
+                    fall(block17);
+                }),
+                new KeyFrame(Duration.millis(6750), (e) -> {
+                    fall(block18);
+                }),
+                new KeyFrame(Duration.millis(7500), (e) -> {
+                    fall(block19);
+                }),
+                new KeyFrame(Duration.millis(8250), (e) -> {
+                    fall(block110);
+                })
+        );
+        falling.play();
         Timeline falling1 = new Timeline();
         falling1.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(750), (e) -> {
@@ -156,13 +196,17 @@ public class FallingPlatformController implements Initializable{
                     fallPlatform.getChildren().remove(block110);
                 })
         );
-            //falling.setCycleCount(11);
-            falling1.play();
+        //falling.setCycleCount(11);
+        falling1.play();
+        falling1.setOnFinished((e) -> {
+            System.out.println("stopFalling1");
+            fallin = false;
+        });
 
 
     }
 
-    public void fall(Node block){
+    public void fall(Node block) {
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(block);
         translate.setByY(300);
@@ -170,22 +214,13 @@ public class FallingPlatformController implements Initializable{
         translate.play();
     }
 
-    public int ifCollide(Node hero){
+    public int ifCollide(Node hero) {
         if (hero.getBoundsInParent().intersects(fallPlatform.getBoundsInParent())) {
-            System.out.println("start");
-            if(!falling) {
-                falling = true;
-                if(!bufferMain) {
-                    bufferMain = true;
-                    startFalling1();
-                }
-                else{
-                    bufferMain = false;
-                    startFalling2();
-                }
+            if (!fallin) {
+                System.out.println("start");
+                fallin = true;
+                startFalling();
             }
-            //System.out.println(fallPlatform.getTranslateX() + " fl2 " + fallPlatform.getLayoutX());
-            //System.out.println(block1.getX() + " bl "+ block1.getTranslateX());
             return 1;
         }
 //        for (int j = 0; j < 11; j++) {
@@ -205,104 +240,169 @@ public class FallingPlatformController implements Initializable{
         return 0;
     }
 
+    public int ifCollide1(Node hero) {
+        if (hero.getBoundsInParent().intersects(fallPlatform1.getBoundsInParent())) {
+            if (!fallin1) {
+                System.out.println("start1");
+                fallin1 = true;
+                startFalling1();
+            }
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         noOfBlocks = 10;
-        falling = false;
+        fallin = false;
+        fallin1 = false;
         fallPlatform2 = new Group();
         bufferMain = false;
         //fallPlatform2.getChildren().add(0,block1);
     }
 
 
-    public void startFalling2() {
+    public void startFalling1() {
+        System.out.println("st");
         Timeline falling = new Timeline();
         falling.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(750), (e) -> {
-                    fall(block1);
+                    fall(block21);
                 }),
                 new KeyFrame(Duration.millis(1500), (e) -> {
-                    fall(block11);
+                    fall(block22);
                 }),
                 new KeyFrame(Duration.millis(2250), (e) -> {
-                    fall(block12);
+                    fall(block23);
                 }),
                 new KeyFrame(Duration.millis(3000), (e) -> {
-                    fall(block13);
+                    fall(block24);
                 }),
                 new KeyFrame(Duration.millis(3750), (e) -> {
-                    fall(block14);
+                    fall(block25);
                 }),
                 new KeyFrame(Duration.millis(4500), (e) -> {
-                    fall(block15);
+                    fall(block26);
                 }),
                 new KeyFrame(Duration.millis(5250), (e) -> {
-                    fall(block16);
+                    fall(block27);
                 }),
                 new KeyFrame(Duration.millis(6000), (e) -> {
-                    fall(block17);
+                    fall(block28);
                 }),
                 new KeyFrame(Duration.millis(6750), (e) -> {
-                    fall(block18);
+                    fall(block29);
                 }),
                 new KeyFrame(Duration.millis(7500), (e) -> {
-                    fall(block19);
+                    fall(block210);
                 }),
                 new KeyFrame(Duration.millis(8250), (e) -> {
-                    fall(block110);
+                    fall(block211);
+                }),
+                new KeyFrame(Duration.millis(9000), (e) -> {
+                    fall(block212);
+                }),
+                new KeyFrame(Duration.millis(9750), (e) -> {
+                    fall(block213);
+                }),
+                new KeyFrame(Duration.millis(10500), (e) -> {
+                    fall(block214);
+                }),
+                new KeyFrame(Duration.millis(11250), (e) -> {
+                    fall(block215);
+                }),
+                new KeyFrame(Duration.millis(12000), (e) -> {
+                    fall(block216);
+                }),
+                new KeyFrame(Duration.millis(12750), (e) -> {
+                    fall(block217);
+                }),
+                new KeyFrame(Duration.millis(13500), (e) -> {
+                    fall(block218);
                 })
         );
         falling.play();
         Timeline falling1 = new Timeline();
         falling1.getKeyFrames().addAll(
                 new KeyFrame(Duration.millis(750), (e) -> {
-                    fallPlatform.getChildren().add(block1);
-                    buffer.getChildren().remove(block1);
-
+                    buffer1.getChildren().add(block21);
+                    fallPlatform1.getChildren().remove(block21);
                 }),
                 new KeyFrame(Duration.millis(1500), (e) -> {
-                    fallPlatform.getChildren().add(block11);
-                    buffer.getChildren().remove(block11);
+                    buffer1.getChildren().add(block22);
+                    fallPlatform1.getChildren().remove(block22);
                 }),
                 new KeyFrame(Duration.millis(2250), (e) -> {
-                    fallPlatform.getChildren().add(block12);
-                    buffer.getChildren().remove(block12);
+                    buffer1.getChildren().add(block23);
+                    fallPlatform1.getChildren().remove(block23);
                 }),
                 new KeyFrame(Duration.millis(3000), (e) -> {
-                    fallPlatform.getChildren().add(block13);
-                    buffer.getChildren().remove(block13);
+                    buffer1.getChildren().add(block24);
+                    fallPlatform1.getChildren().remove(block24);
                 }),
                 new KeyFrame(Duration.millis(3750), (e) -> {
-                    fallPlatform.getChildren().add(block14);
-                    buffer.getChildren().remove(block14);
+                    buffer1.getChildren().add(block25);
+                    fallPlatform1.getChildren().remove(block25);
                 }),
                 new KeyFrame(Duration.millis(4500), (e) -> {
-                    fallPlatform.getChildren().add(block15);
-                    buffer.getChildren().remove(block15);
+                    buffer1.getChildren().add(block26);
+                    fallPlatform1.getChildren().remove(block26);
                 }),
                 new KeyFrame(Duration.millis(5250), (e) -> {
-                    fallPlatform.getChildren().add(block16);
-                    buffer.getChildren().remove(block16);
+                    buffer1.getChildren().add(block27);
+                    fallPlatform1.getChildren().remove(block27);
                 }),
                 new KeyFrame(Duration.millis(6000), (e) -> {
-                    fallPlatform.getChildren().add(block17);
-                    buffer.getChildren().remove(block17);
+                    buffer1.getChildren().add(block28);
+                    fallPlatform1.getChildren().remove(block28);
                 }),
                 new KeyFrame(Duration.millis(6750), (e) -> {
-                    fallPlatform.getChildren().add(block18);
-                    buffer.getChildren().remove(block18);
+                    buffer1.getChildren().add(block29);
+                    fallPlatform1.getChildren().remove(block29);
                 }),
                 new KeyFrame(Duration.millis(7500), (e) -> {
-                    fallPlatform.getChildren().add(block19);
-                    buffer.getChildren().remove(block19);
+                    buffer1.getChildren().add(block210);
+                    fallPlatform1.getChildren().remove(block210);
                 }),
                 new KeyFrame(Duration.millis(8250), (e) -> {
-                    fallPlatform.getChildren().add(block110);
-                    buffer.getChildren().remove(block110);
+                    buffer1.getChildren().add(block211);
+                    fallPlatform1.getChildren().remove(block211);
+                }),
+                new KeyFrame(Duration.millis(9000), (e) -> {
+                    buffer1.getChildren().add(block212);
+                    fallPlatform1.getChildren().remove(block212);
+                }),
+                new KeyFrame(Duration.millis(9750), (e) -> {
+                    buffer1.getChildren().add(block213);
+                    fallPlatform1.getChildren().remove(block213);
+                }),
+                new KeyFrame(Duration.millis(10500), (e) -> {
+                    buffer1.getChildren().add(block214);
+                    fallPlatform1.getChildren().remove(block214);
+                }),
+                new KeyFrame(Duration.millis(11250), (e) -> {
+                    buffer1.getChildren().add(block215);
+                    fallPlatform1.getChildren().remove(block215);
+                }),
+                new KeyFrame(Duration.millis(12000), (e) -> {
+                    buffer1.getChildren().add(block216);
+                    fallPlatform1.getChildren().remove(block216);
+                }),
+                new KeyFrame(Duration.millis(12750), (e) -> {
+                    buffer1.getChildren().add(block217);
+                    fallPlatform1.getChildren().remove(block217);
+                }),
+                new KeyFrame(Duration.millis(13500), (e) -> {
+                    buffer1.getChildren().add(block218);
+                    fallPlatform1.getChildren().remove(block218);
                 })
         );
         //falling.setCycleCount(11);
         falling1.play();
+        falling1.setOnFinished((e) -> {
+            System.out.println("stopFalling1");
+            fallin1 = false;
+        });
     }
-
 }

@@ -78,8 +78,12 @@ public class GameController implements Initializable {
 
     private Pane chestAll;
     private int chestCode;
-    private Group fallPlat;
-    private Group buf;
+
+    //private Group fallPlat;
+    //private Group buf;
+    private boolean bufMain;
+    private boolean falling;
+
 
 //    private Pane grp1;
 //    private Pane grp2;
@@ -89,18 +93,19 @@ public class GameController implements Initializable {
     private Hero hero;
     private Orc greenOrc;
     private Orc greenOrc1;
-    private GreenOrc greenOrc2;
-    private GreenOrc greenOrc3;
-    private RedOrc redOrc;
+    private Orc greenOrc2;
+    private Orc greenOrc3;
+    private Orc redOrc;
     private Boss BossMain;
     private Chests chest;
     private Islands island;
-    private FallingPlatform fallingPlatform;
+    private FallingPlatform finalPlat;
 
     private ArrayList<Orc> enemies;
     private ArrayList<Islands> platform;
     private ArrayList<Chests> chests;
     private ArrayList<Weapon> weapons;
+    private ArrayList<FallingPlatform> fallingPlatforms;
 
     private final double shiftLeftBy = -90;
     private final int time = 120;
@@ -134,16 +139,18 @@ public class GameController implements Initializable {
 
     public void start() throws IOException, BelowBoundaryException {
         enemies = new ArrayList<Orc>();
+        fallingPlatforms = new ArrayList<FallingPlatform>();
         hero = new Hero();
         greenOrc = new Orc();
         greenOrc1 = new Orc();
-        greenOrc3 = new GreenOrc();
-        greenOrc2 = new GreenOrc();
-        redOrc = new RedOrc();
+        greenOrc3 = new Orc();
+        greenOrc2 = new Orc();
+        redOrc = new Orc();
         BossMain = new Boss();
         chest = new Chests();
         island = new Islands();
-        fallingPlatform = new FallingPlatform();
+        finalPlat = new FallingPlatform();
+        //tform = new FallingPlatform();
         //hero.getControl().st(this.);
 //        grp1 = new Group();
 //        grp2 = new Group();
@@ -157,6 +164,7 @@ public class GameController implements Initializable {
         jHT = -1;
         fl = 0;
         upFlag = 0;
+        falling = false;
 
         arr = new int[5];
 //        arr2 = new int[5];
@@ -192,16 +200,7 @@ public class GameController implements Initializable {
             sword.setVisible(false);
         }
         //System.out.println("init");
-        fallPlat = (Group) fallingPlatform.getObsPane().getChildren().get(0);
-        buf = (Group) fallingPlatform.getObsPane().getChildren().get(2);
-        fallPlat.setLayoutY(325);
-        //fallPlat.setLayoutX(2225);
-        fallPlat.setLayoutX(2225);
-        buf.setLayoutY(325);
-        //buf.setLayoutX(2225);
-        buf.setLayoutX(2225);
-        MainBase.getChildren().add(fallPlat);
-        MainBase.getChildren().add(buf);
+        fallPlatSetUp(2225,325);
 
 //        fallPlat.setLayoutY(300);
 //        fallPlat.setLayoutX(2850);
@@ -227,6 +226,52 @@ public class GameController implements Initializable {
 //    public void addObj(int code){
 //        if()
 //    }
+    public void fallPlatSetUp(double x, double y){
+        FallingPlatform f = null;
+        try {
+            f = new FallingPlatform();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fallingPlatforms.add(f);
+        Group fallPlat = (Group) f.getObsPane().getChildren().get(0);
+        Group buf = (Group) f.getObsPane().getChildren().get(2);
+        fallPlat.setLayoutY(y);
+        //fallPlat.setLayoutX(2225);
+        fallPlat.setLayoutX(x);
+        buf.setLayoutY(y);
+        //buf.setLayoutX(2225);
+        buf.setLayoutX(x);
+        while(!grp5.getChildren().isEmpty()){
+            grp5.getChildren().remove(0);
+        }
+        grp5.getChildren().addAll(fallPlat,buf);
+        //MainBase.getChildren().add(fallPlat);
+        //MainBase.getChildren().add(buf);
+    }
+
+    public void fallPlatSetUp1(double x, double y){
+//        FallingPlatform f = null;
+//        try {
+//            f = new FallingPlatform();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        //fallingPlatforms.add(f);
+        System.out.println("size " + finalPlat.getObsPane().getChildren().size());
+        Group fallPlat = (Group) finalPlat.getObsPane().getChildren().get(1);
+        Group buf = (Group) finalPlat.getObsPane().getChildren().get(3);
+        fallPlat.setLayoutY(y);
+        fallPlat.setLayoutX(x);
+        buf.setLayoutY(y);
+        buf.setLayoutX(x);
+        while(!grp4.getChildren().isEmpty()){
+            grp4.getChildren().remove(0);
+        }
+        grp4.getChildren().addAll(fallPlat,buf);
+        //MainBase.getChildren().add(fallPlat);
+        //MainBase.getChildren().add(buf);
+    }
 
     public void gameFlow(){
         KeyFrame kf = new KeyFrame(Duration.millis(100), e -> {
@@ -235,27 +280,50 @@ public class GameController implements Initializable {
 //            System.out.println(isl2.getTranslateX());
 //            System.out.println(isl3.getTranslateX());
 //            System.out.println(isl4.getTranslateX());
+//            System.out.println(fallPlat.getTranslateX() + " " + buf.getTranslateX());
+//            System.out.println(fallPlat.getTranslateY() + " Y " + buf.getTranslateY());
             System.out.println(isl5.getTranslateX());
-            if(isl1.getTranslateX()<-600){
-                isl1.setTranslateX(isl5.getTranslateX()+2950);
-                //System.out.println("1");
-            }
-            if(isl2.getTranslateX()<-1000){
-                isl2.setTranslateX(isl5.getTranslateX()+3000);
-                //System.out.println("2");
-            }
-            if(isl3.getTranslateX()<-1400){
-                isl3.setTranslateX(isl5.getTranslateX()+3000);
+            if(score<78) {
+                if (isl1.getTranslateX() < -600) {
+                    isl1.setTranslateX(isl5.getTranslateX() + 2950);
+                    //fallPlatSetUp();
+                    //System.out.println("1");
+                }
+                if (isl2.getTranslateX() < -1000) {
+                    isl2.setTranslateX(isl5.getTranslateX() + 3000);
+                    //System.out.println("2");
+                }
+                if (isl3.getTranslateX() < -1400) {
+                    isl3.setTranslateX(isl5.getTranslateX() + 3000);
 
-            }
-            if(isl4.getTranslateX()<-1800){
-                isl4.setTranslateX(isl5.getTranslateX()+3000);
+                }
+                if (isl4.getTranslateX() < -1800) {
+                    isl4.setTranslateX(isl5.getTranslateX() + 3000);
 
+                }
+                if (isl5.getTranslateX() < -2300) {
+                    isl5.setTranslateX(isl5.getTranslateX() + 3000);
+                }
+                if(isl5.getTranslateX()>0 && isl5.getTranslateX()<125){
+                    System.out.println("ddddd "+isl5.getBoundsInParent().getMaxX());
+                    fallPlatSetUp(isl5.getBoundsInParent().getMaxX()-50, 325);
+                }
             }
-            if(isl5.getTranslateX()<-2300){
-                isl5.setTranslateX(isl5.getTranslateX()+3000);
+            if(score==90){
+                if(!falling) {
+                    falling = true;
 
+                    fallPlatSetUp1(isl1.getBoundsInParent().getMaxX(), 310);
+                }
             }
+
+
+//            if(fallPlat.getTranslateX()<-2700){
+//                fallPlat.setTranslateX(fallPlat.getTranslateX()+3000);
+//                buf.setTranslateX(buf.getTranslateX()+3000);
+//                buf.setTranslateY(-300);
+//                fallPlat.setTranslateY(-300);
+//            }
 
             //islandFactory(1, 10);
         });
@@ -452,23 +520,25 @@ public class GameController implements Initializable {
                         System.out.println("cc  " + j);
                         j = 3;
                     }
+                    for (int i = 0; i < fallingPlatforms.size(); i++) {
+                        if (fallingPlatforms.get(i).getController().ifCollide(heroAll) == 1) {
+                            j = -3;
+                            jHT = 325;
 
-                    if(fallingPlatform.getController().ifCollide(heroAll)==1){
-                        //System.out.println(heroAll.getBoundsInParent().getMaxX() + " " +heroAll.getBoundsInParent().getMinX());
-                        //System.out.println(fallPlat.getTranslateX() + " fl "+ fallPlat.getLayoutX());
+                        }
+                    }
+                    if (finalPlat.getController().ifCollide1(heroAll) == 1) {
+                        System.out.println("here");
                         j = -3;
-                        jHT = 325;
-
-
+                        jHT = 310;
                     }
-                    if(score==28) {
-
-                        BossMain.getController().land(BossMain);
-                    }
-                    if(fallingPlatform.getController().ifCollide(heroAll)==1 ) {
-                        //System.out.println(BossMain.getForwardBossDistance());
-                        BossMain.getController().moveForward(BossMain);
-                    }
+//                    if(score==28) {
+//                        BossMain.getController().land(BossMain);
+//                    }
+//                    if(fallingPlatform.getController().ifCollide(heroAll)==1 ) {
+//                        //System.out.println(BossMain.getForwardBossDistance());
+//                        BossMain.getController().moveForward(BossMain);
+//                    }
                     if(Boss.getBoundsInParent().intersects(heroAll.getBoundsInParent())){
                         //System.out.println("HH");
                         adjust(80, 120);
@@ -583,21 +653,21 @@ public class GameController implements Initializable {
             translateX(grp3.getChildren().get(i), shiftLeftBy, time);
         }
         for (int i = 0; i < grp4.getChildren().size(); i++) {
+            System.out.println("shift4");
             translateX(grp4.getChildren().get(i), shiftLeftBy, time);
         }
         for (int i = 0; i < grp5.getChildren().size(); i++) {
             translateX(grp5.getChildren().get(i), shiftLeftBy, time);
         }
         translateX(chestAll,shiftLeftBy,time);
-        translateX(fallPlat,shiftLeftBy,time);
-        translateX(buf,shiftLeftBy,time);
+//        translateX(fallPlat,shiftLeftBy,time);
+//        translateX(buf,shiftLeftBy,time);
         heroMove(time);
         //rotSword();
         if(upFlag == 0) {
             update();
         }
         if(upFlag == 1){
-            //System.out.println("deflag");
             score--;
             update();
         }
@@ -617,14 +687,15 @@ public class GameController implements Initializable {
             translateX(grp3.getChildren().get(i), amount, time);
         }
         for (int i = 0; i < grp4.getChildren().size(); i++) {
+            System.out.println("adjust4");
             translateX(grp4.getChildren().get(i), amount, time);
         }
         for (int i = 0; i < grp5.getChildren().size(); i++) {
             translateX(grp5.getChildren().get(i), amount, time);
         }
         translateX(chestAll,amount,time);
-        translateX(fallPlat,amount,time);
-        translateX(buf,amount,time);
+//        translateX(fallPlat,amount,time);
+//        translateX(buf,amount,time);
     }
 
     public void FallAndDie(Node n1, double amount, double time){
