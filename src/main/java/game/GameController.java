@@ -93,9 +93,9 @@ public class GameController implements Initializable {
     private Hero hero;
     private Orc greenOrc;
     private Orc greenOrc1;
-    private GreenOrc greenOrc2;
-    private GreenOrc greenOrc3;
-    private RedOrc redOrc;
+    private Orc greenOrc2;
+    private Orc greenOrc3;
+    private Orc redOrc;
     private Boss BossMain;
     private Chests chest;
     private Islands island;
@@ -143,9 +143,9 @@ public class GameController implements Initializable {
         hero = new Hero();
         greenOrc = new Orc();
         greenOrc1 = new Orc();
-        greenOrc3 = new GreenOrc();
-        greenOrc2 = new GreenOrc();
-        redOrc = new RedOrc();
+        greenOrc3 = new Orc();
+        greenOrc2 = new Orc();
+        redOrc = new Orc();
         BossMain = new Boss();
         chest = new Chests();
         island = new Islands();
