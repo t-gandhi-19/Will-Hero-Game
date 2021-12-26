@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class Hero{
+
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
     HeroController controller;

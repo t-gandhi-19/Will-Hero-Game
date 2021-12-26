@@ -549,7 +549,11 @@ public class GameController implements Initializable {
 
                     }
 //
-                    actAfterColl2(greenOrc.getController().collide(heroAll));
+                    try {
+                        actAfterColl2(greenOrc.getController().collide(heroAll));
+                    } catch (GameLoseException ex) {
+                        ex.getMessage();
+                    }
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
                         ChestsSetUp(1);
                         chestCode = 1;
@@ -561,6 +565,7 @@ public class GameController implements Initializable {
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
     }
+
     public void heroMove (double time) {
         jump.stop();
         jumpOnOrc.stop();
@@ -572,7 +577,11 @@ public class GameController implements Initializable {
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
             //arr2 = greenOrc1.getController().collide(heroAll);
             //actAfterCollIsland(island.getControl().ifCollide(heroAll));
-            actAfterColl1(greenOrc.getController().collide(heroAll));
+            try {
+                actAfterColl1(greenOrc.getController().collide(heroAll));
+            } catch (GameLoseException ex) {
+                ex.getMessage();
+            }
             //System.out.println("gg");
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
                 ChestsSetUp(1);
