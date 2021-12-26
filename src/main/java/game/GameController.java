@@ -131,7 +131,7 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {         //start
             start();
-        } catch (IOException e) {
+        } catch (IOException | BelowBoundaryException e) {
             e.printStackTrace();
         }
 
@@ -559,7 +559,11 @@ public class GameController implements Initializable {
                         chestCode = 1;
                     }
                     if(heroAll.getLayoutY()>350) {
-                        throw new BelowBoundaryException("Below Boundary");
+                        try {
+                            throw new BelowBoundaryException("Below Boundary");
+                        } catch (BelowBoundaryException ex) {
+                            ex.getMessage();
+                        }
                     }
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
