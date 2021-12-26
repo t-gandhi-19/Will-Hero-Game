@@ -132,7 +132,7 @@ public class GameController implements Initializable {
 
     }
 
-    public void start() throws IOException {
+    public void start() throws IOException, BelowBoundaryException {
         enemies = new ArrayList<Orc>();
         hero = new Hero();
         greenOrc = new Orc();
@@ -215,7 +215,12 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(sword);
         //MainBase.getChildren().add(fallingPlatform.getObsPane());
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
-        Jump();
+        try{
+            Jump();
+        } catch (BelowBoundaryException e) {
+
+            System.out.println(e.getMessage());
+        }
         gameFlow();
     }
 
@@ -417,7 +422,8 @@ public class GameController implements Initializable {
         chestAll.setLayoutY(y);
     }
 
-    public void Jump(){
+    public void Jump() throws BelowBoundaryException {
+
         jumpOnOrc.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e)->{
             heroAll.setLayoutY(heroAll.getLayoutY() + j);
             sword.setLayoutY(sword.getLayoutY() + j);
@@ -434,6 +440,7 @@ public class GameController implements Initializable {
         jumpOnOrc.setCycleCount(Animation.INDEFINITE);
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
                 (e) -> {
+
                     //System.out.println(j);
                     heroAll.setLayoutY(heroAll.getLayoutY() + j);
                     sword.setLayoutY(sword.getLayoutY() + j);
@@ -477,6 +484,9 @@ public class GameController implements Initializable {
                         ChestsSetUp(1);
                         chestCode = 1;
                     }
+                    if(heroAll.getLayoutY()>350) {
+                        throw new BelowBoundaryException("Below Boundary");
+                    }
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
@@ -507,7 +517,7 @@ public class GameController implements Initializable {
         });
     }
 
-    public void actAfterColl1(int a){
+    public void actAfterColl1(int a) throws GameLoseException{
         if(a==11){
             //upFlag = 1;
             System.out.println("orcColl");
@@ -516,11 +526,12 @@ public class GameController implements Initializable {
             //heroSetUp(1);
         }
         else if(a == 13){
-            System.out.println("die");
+
+            throw new GameLoseException("Hero Dies");
         }
     }
 
-    public void actAfterColl2(int a){
+    public void actAfterColl2(int a) throws GameLoseException{
         if(a == 12){
             //System.out.println(j);
             System.out.println("jump");
@@ -531,7 +542,7 @@ public class GameController implements Initializable {
             //System.out.println("ffuu");
         }
         else if(a == 13){
-            System.out.println("die");
+            throw new GameLoseException("Hero Dies");
         }
     }
 

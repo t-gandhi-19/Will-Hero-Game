@@ -13,6 +13,7 @@ public class Hero{
     HeroController controller;
     private int id;
     private int coins;
+    private int yCoordinate;
 
     public Hero () throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Hero.fxml"));
@@ -31,6 +32,23 @@ public class Hero{
     }
     public void addCoins(int coin){
         coins+=coin;
+    }
+    public int getyCoordinate(){
+        return  this.yCoordinate;
+    }
+    public void setyCoordinate(int y){
+        this.yCoordinate=y;
+    }
+
+    public void useCoins() throws InsufficientCoinsException{
+        if(this.coins < 10){
+                throw new InsufficientCoinsException("You don't have enough Coins");
+
+        }
+        else{
+            this.addCoins(-10);
+            //add resurrect method
+        }
     }
     public AnchorPane getObsPane() {
         return obsPane;
