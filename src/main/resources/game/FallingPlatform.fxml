@@ -69,22 +69,22 @@
       </Group>
       <Pane fx:id="fallPlatform1" layoutY="58.0" prefHeight="15.0" prefWidth="810.0">
          <children>
-            <ImageView fx:id="block112" fitHeight="15.0" fitWidth="45.0" pickOnBounds="true">
+            <ImageView fx:id="block21" fitHeight="15.0" fitWidth="45.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block111" fitHeight="15.0" fitWidth="45.0" layoutX="45.0" pickOnBounds="true">
+            <ImageView fx:id="block22" fitHeight="15.0" fitWidth="45.0" layoutX="45.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block121" fitHeight="15.0" fitWidth="45.0" layoutX="90.0" pickOnBounds="true">
+            <ImageView fx:id="block23" fitHeight="15.0" fitWidth="45.0" layoutX="90.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="block131" fitHeight="15.0" fitWidth="45.0" layoutX="135.0" pickOnBounds="true">
+            <ImageView fx:id="block24" fitHeight="15.0" fitWidth="45.0" layoutX="135.0" pickOnBounds="true">
                <image>
                   <Image url="@images/FallingPlatform/fallingBlock.png" />
                </image>
@@ -162,5 +162,6 @@
          </children>
       </Pane>
       <Group fx:id="buffer" />
+      <Group fx:id="buffer1" layoutX="10.0" layoutY="10.0" />
     </children>
 </AnchorPane>
