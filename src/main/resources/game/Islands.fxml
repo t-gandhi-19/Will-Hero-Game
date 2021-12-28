@@ -4,7 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.IslandsController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.PlatformController">
    <children>
       <ImageView fx:id="rock1" fitHeight="150.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true">
          <image>

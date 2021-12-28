@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,7 +47,7 @@ public class HeroController implements Initializable{
 //        translate.play();
     }
 
-    public void Jump(Islands obj){
+    public void Jump(Platform obj){
 
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
                 (e) -> {heroNormal.setY(heroNormal.getY() + j);

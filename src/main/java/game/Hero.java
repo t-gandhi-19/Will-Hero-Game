@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Hero{
+public class Hero extends GameObjects{
 
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
@@ -28,6 +28,8 @@ public class Hero{
 //        obsPane.getChildren().add(0,heroNormal);
 //        obsPane.getChildren().add(1,heroKnife);
     }
+
+
     public int getCoins(){
         return coins;
     }

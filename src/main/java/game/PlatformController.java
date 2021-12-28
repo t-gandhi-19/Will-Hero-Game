@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 
 
-public class IslandsController {
+public class PlatformController {
 
     @FXML
     private Pane Mrock1;

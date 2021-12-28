@@ -17,7 +17,6 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.xml.crypto.dsig.keyinfo.PGPData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -98,11 +97,11 @@ public class GameController implements Initializable {
     private Orc redOrc;
     private Boss BossMain;
     private Chests chest;
-    private Islands island;
+    private Platform island;
     private FallingPlatform finalPlat;
 
     private ArrayList<Orc> enemies;
-    private ArrayList<Islands> platform;
+    private ArrayList<Platform> platform;
     private ArrayList<Chests> chests;
     private ArrayList<Weapon> weapons;
     private ArrayList<FallingPlatform> fallingPlatforms;
@@ -139,6 +138,7 @@ public class GameController implements Initializable {
     public void start() throws IOException, BelowBoundaryException {
         enemies = new ArrayList<Orc>();
         fallingPlatforms = new ArrayList<FallingPlatform>();
+        
         hero = new Hero();
         greenOrc = new Orc();
         greenOrc1 = new Orc();
@@ -147,7 +147,7 @@ public class GameController implements Initializable {
         redOrc = new Orc();
         BossMain = new Boss();
         chest = new Chests();
-        island = new Islands();
+        island = new Platform();
         finalPlat = new FallingPlatform();
         //tform = new FallingPlatform();
         //hero.getControl().st(this.);
@@ -257,7 +257,7 @@ public class GameController implements Initializable {
 //            e.printStackTrace();
 //        }
         //fallingPlatforms.add(f);
-        System.out.println("size " + finalPlat.getObsPane().getChildren().size());
+        //System.out.println("size " + finalPlat.getObsPane().getChildren().size());
         Group fallPlat = (Group) finalPlat.getObsPane().getChildren().get(1);
         Group buf = (Group) finalPlat.getObsPane().getChildren().get(3);
         fallPlat.setLayoutY(y);
@@ -281,7 +281,7 @@ public class GameController implements Initializable {
 //            System.out.println(isl4.getTranslateX());
 //            System.out.println(fallPlat.getTranslateX() + " " + buf.getTranslateX());
 //            System.out.println(fallPlat.getTranslateY() + " Y " + buf.getTranslateY());
-            System.out.println(isl5.getTranslateX());
+            //System.out.println(isl5.getTranslateX());
             if(score<78) {
                 if (isl1.getTranslateX() < -600) {
                     isl1.setTranslateX(isl5.getTranslateX() + 2950);
@@ -304,7 +304,7 @@ public class GameController implements Initializable {
                     isl5.setTranslateX(isl5.getTranslateX() + 3000);
                 }
                 if(isl5.getTranslateX()>0 && isl5.getTranslateX()<125){
-                    System.out.println("ddddd "+isl5.getBoundsInParent().getMaxX());
+                    //System.out.println("ddddd "+isl5.getBoundsInParent().getMaxX());
                     fallPlatSetUp(isl5.getBoundsInParent().getMaxX()-50, 325);
                 }
             }
@@ -334,7 +334,7 @@ public class GameController implements Initializable {
     public void setUp(){
         //grp1
         //enemies.add(greenOrc);
-//        orcFactory(1,625,200);
+        orcFactory(1,675,200);
 //        orcFactory(1,625,300);
 //        orcFactory(2,1100,200);
 //        orcFactory(3,1200,200);
@@ -551,7 +551,7 @@ public class GameController implements Initializable {
                     try {
                         actAfterColl2(greenOrc.getController().collide(heroAll));
                     } catch (GameLoseException ex) {
-                        ex.getMessage();
+                        System.out.println(ex.getMessage());
                     }
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
                         ChestsSetUp(1);
@@ -561,7 +561,7 @@ public class GameController implements Initializable {
                         try {
                             throw new BelowBoundaryException("Below Boundary");
                         } catch (BelowBoundaryException ex) {
-                            ex.getMessage();
+                            System.out.println(ex.getMessage());
                         }
                     }
                 }));
@@ -583,7 +583,7 @@ public class GameController implements Initializable {
             try {
                 actAfterColl1(greenOrc.getController().collide(heroAll));
             } catch (GameLoseException ex) {
-                ex.getMessage();
+                System.out.println(ex.getMessage());
             }
             //System.out.println("gg");
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
@@ -608,7 +608,7 @@ public class GameController implements Initializable {
             //heroSetUp(1);
         }
         else if(a == 13){
-
+            System.out.println("die");
             throw new GameLoseException("Hero Dies");
         }
     }
@@ -624,6 +624,7 @@ public class GameController implements Initializable {
             //System.out.println("ffuu");
         }
         else if(a == 13){
+            System.out.println("die");
             throw new GameLoseException("Hero Dies");
         }
     }

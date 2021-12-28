@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -95,7 +94,7 @@ public class OrcController implements Initializable {
     }
 
 
-    public void jumpOrc(Islands obj){
+    public void jumpOrc(Platform obj){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
                 (e) -> {greenOrc.setY(greenOrc.getY() + j);redOrc.setY(redOrc.getY() + j);
             arr = obj.getControl().ifCollide(greenOrc);

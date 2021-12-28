@@ -1,30 +1,28 @@
 package game;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Islands{
+public class Platform {
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
-    IslandsController controller;
+    PlatformController controller;
     private int id;
 
-    public Islands() throws IOException {
+    public Platform() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Islands.fxml"));
         obsPane = fxmlLoader.load();
         id = 30;
-        controller = fxmlLoader.<IslandsController>getController();
+        controller = fxmlLoader.<PlatformController>getController();
     }
 
     public AnchorPane getObsPane() {
         return obsPane;
     }
 
-    public IslandsController getControl() {
+    public PlatformController getControl() {
         return controller;
     }
 
