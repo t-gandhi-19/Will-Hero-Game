@@ -404,7 +404,6 @@ public class GameController implements Initializable {
         Chests W4 = new WeaponChest(weapons.get(1));
         chests.add(W4);
 
-
     }
 //        Tchest = null;
 //        Wchest = null;

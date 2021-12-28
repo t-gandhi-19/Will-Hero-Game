@@ -8,7 +8,6 @@ public class WeaponChest extends Chests{
         super("Weapon", false);
         this.weapon= weapon;
     }
-
     @Override
     public void collectChest(Hero hero) {
 

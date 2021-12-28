@@ -21,7 +21,6 @@ public abstract class Chests {
     }
 
 
-
     public String getType(){
         return type;
     }
