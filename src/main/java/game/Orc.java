@@ -11,11 +11,18 @@ public class Orc {
     OrcController controller;
     private int id;
 
-    public Orc() throws IOException {
+    private int health;
+    private int coinsAwarded;
+    private String colour;
+
+    public Orc(int h, int c, String d) throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Orc.fxml"));
         obsPane = fxmlLoader.load();
         id = 6;
         controller = fxmlLoader.<OrcController>getController();
+        health = h;
+        coinsAwarded = c;
+        colour = d;
     }
 
     public AnchorPane getObsPane() {

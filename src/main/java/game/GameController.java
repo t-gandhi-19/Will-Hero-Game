@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -90,17 +91,18 @@ public class GameController implements Initializable {
 //    private Pane grp4;
 
     private Hero hero;
-    private Orc greenOrc;
-    private Orc greenOrc1;
-    private Orc greenOrc2;
-    private Orc greenOrc3;
-    private Orc redOrc;
-    private Boss BossMain;
+//    private Orc greenOrc;
+//    private Orc greenOrc1;
+//    private Orc greenOrc2;
+//    private Orc greenOrc3;
+//    private Orc redOrc;
+//    private Boss BossMain;
     private Chests chest;
     private Platform island;
     private FallingPlatform finalPlat;
 
     private ArrayList<Orc> enemies;
+    private ArrayList<Node> enemiesImage;
     private ArrayList<Platform> platform;
     private ArrayList<Chests> chests;
     private ArrayList<Weapon> weapons;
@@ -137,15 +139,16 @@ public class GameController implements Initializable {
 
     public void start() throws IOException, BelowBoundaryException {
         enemies = new ArrayList<Orc>();
+        enemiesImage = new ArrayList<Node>();
         fallingPlatforms = new ArrayList<FallingPlatform>();
         
         hero = new Hero();
-        greenOrc = new Orc();
-        greenOrc1 = new Orc();
-        greenOrc3 = new Orc();
-        greenOrc2 = new Orc();
-        redOrc = new Orc();
-        BossMain = new Boss();
+//        greenOrc = new Orc();
+//        greenOrc1 = new Orc();
+//        greenOrc3 = new Orc();
+//        greenOrc2 = new Orc();
+//        redOrc = new Orc();
+//        BossMain = new Boss();
         chest = new Chests();
         island = new Platform();
         finalPlat = new FallingPlatform();
@@ -335,14 +338,13 @@ public class GameController implements Initializable {
         //grp1
         //enemies.add(greenOrc);
         orcFactory(1,675,200);
-//        orcFactory(1,625,300);
-//        orcFactory(2,1100,200);
-//        orcFactory(3,1200,200);
-//        orcFactory(4,1700,250);
-//        orcFactory(5,1800,250);
-//        orcFactory(6,2150,200);
-//        orcFactory(7,2250,40);
-//        orcFactory(8,3150,-20);
+        orcFactory(2,1100,200);
+        orcFactory(3,1200,200);
+        orcFactory(4,1700,250);
+        orcFactory(5,1200,250);
+        orcFactory(6,2150,200);
+        orcFactory(7,2250,40);
+        orcFactory(8,3150,-20);
 
         islandFactory(1,-10);
         islandFactory(2,575);
@@ -362,11 +364,17 @@ public class GameController implements Initializable {
         //grp3.getChildren().addAll(isl4);
 
 //        i.setLayoutY(600);
+        for (int i = 0; i < 4; i++) {
+            enemies.get(i).getController().jumpOrcGreen(island);
+        }
+        for (int i = 4; i < 7; i++) {
+            enemies.get(i).getController().jumpOrcRed(island);
+        }
 
-        greenOrc.getController().jumpOrc(island);
-        greenOrc1.getController().jumpOrc(island);
-        greenOrc2.getController().jumpOrc(island);
-        greenOrc3.getController().jumpOrc(island);
+//        greenOrc.getController().jumpOrc(island);
+//        greenOrc1.getController().jumpOrc(island);
+//        greenOrc2.getController().jumpOrc(island);
+//        greenOrc3.getController().jumpOrc(island);
     }
 
     public void ChestsSetUp(int code){
@@ -404,14 +412,38 @@ public class GameController implements Initializable {
     }
 
     public void orcSetUP() throws IOException {
+        Orc greenOrc = new Orc(50,3,"green");
+        enemies.add(greenOrc);
+        Orc greenOrc1 = new Orc(50,3,"green");
+        enemies.add(greenOrc1);
+        Orc greenOrc2 = new Orc(50,3,"green");
+        enemies.add(greenOrc2);
+        Orc greenOrc3 = new Orc(50,3,"green");
+        enemies.add(greenOrc3);
+        Orc redOrc = new Orc(100,5,"red");
+        enemies.add(redOrc);
+        Orc redOrc1 = new Orc(100,5,"red");
+        enemies.add(redOrc1);
+        Orc redOrc2 = new Orc(100,5,"red");
+        enemies.add(redOrc2);
+        Orc BossMain = new Boss(350,20,"Boss");
+        enemies.add(BossMain);
         GOrc1 = (ImageView) greenOrc.getObsPane().getChildren().get(0);
         GOrc2 = (ImageView) greenOrc1.getObsPane().getChildren().get(0);
         GOrc3 = (ImageView) greenOrc2.getObsPane().getChildren().get(0);
         GOrc4 = (ImageView) greenOrc3.getObsPane().getChildren().get(0);
-        ROrc1 = (ImageView) greenOrc.getObsPane().getChildren().get(1);
-        ROrc2 = (ImageView) greenOrc1.getObsPane().getChildren().get(1);
-        ROrc3 = (ImageView) greenOrc2.getObsPane().getChildren().get(1);
+        ROrc1 = (ImageView) redOrc.getObsPane().getChildren().get(1);
+        ROrc2 = (ImageView) redOrc1.getObsPane().getChildren().get(1);
+        ROrc3 = (ImageView) redOrc2.getObsPane().getChildren().get(1);
         Boss = (ImageView) BossMain.getObsPane().getChildren().get(2);
+        enemiesImage.add(GOrc1);
+        enemiesImage.add(GOrc2);
+        enemiesImage.add(GOrc3);
+        enemiesImage.add(GOrc4);
+        enemiesImage.add(ROrc1);
+        enemiesImage.add(ROrc2);
+        enemiesImage.add(ROrc3);
+        enemiesImage.add(Boss);
     }
 
     public void islandSetUp(){
@@ -489,7 +521,7 @@ public class GameController implements Initializable {
         chestAll.setLayoutY(y);
     }
 
-    public void Jump() throws BelowBoundaryException {
+    public void Jump() throws BelowBoundaryException{
 
         jumpOnOrc.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e)->{
             heroAll.setLayoutY(heroAll.getLayoutY() + j);
@@ -501,7 +533,13 @@ public class GameController implements Initializable {
                 //System.out.println("hhhh");
                 j = 3;
             }
-            actAfterColl3(greenOrc.getController().collide(heroAll));
+            //actAfterColl3(greenOrc.getController().collide(heroAll));
+            for (int i = 0; i < 4; i++) {
+                actAfterColl3(enemies.get(i).getController().collideGreen(heroAll));
+            }
+            for (int i = 4; i < 7; i++) {
+                actAfterColl3(enemies.get(i).getController().collideRed(heroAll));
+            }
             actAfterCollIsland(island.getControl().ifCollide(heroAll));
         }));
         jumpOnOrc.setCycleCount(Animation.INDEFINITE);
@@ -548,10 +586,16 @@ public class GameController implements Initializable {
 
                     }
 //
-                    try {
-                        actAfterColl2(greenOrc.getController().collide(heroAll));
-                    } catch (GameLoseException ex) {
-                        System.out.println(ex.getMessage());
+//                    try {
+//                        actAfterColl2(greenOrc.getController().collide(heroAll));
+//                    } catch (GameLoseException ex) {
+//                        System.out.println(ex.getMessage());
+//                    }
+                    for (int i = 0; i < 4; i++) {
+                        actAfterColl2(enemies.get(i).getController().collideGreen(heroAll));
+                    }
+                    for (int i = 4; i < 7; i++) {
+                        actAfterColl2(enemies.get(i).getController().collideRed(heroAll));
                     }
                     if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
                         ChestsSetUp(1);
@@ -580,10 +624,38 @@ public class GameController implements Initializable {
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
             //arr2 = greenOrc1.getController().collide(heroAll);
             //actAfterCollIsland(island.getControl().ifCollide(heroAll));
-            try {
-                actAfterColl1(greenOrc.getController().collide(heroAll));
-            } catch (GameLoseException ex) {
-                System.out.println(ex.getMessage());
+//            try {
+//                actAfterColl1(greenOrc.getController().collide(heroAll));
+//            } catch (GameLoseException ex) {
+//                System.out.println(ex.getMessage());
+//            }
+            for (int i = 0; i < 4; i++) {
+                arr3 = enemies.get(i).getController().collideGreen(heroAll);
+                if(arr3==11){
+                    //upFlag = 1;
+                    System.out.println("orcColl");
+                    adjust(90,120);
+                    translateX(enemiesImage.get(i), orcX, 120);
+                    //heroSetUp(1);
+                }
+                else if(arr3 == 13){
+                    System.out.println("die");
+                    //throw new GameLoseException("Hero Dies");
+                }
+            }
+            for (int i = 4; i < 7; i++) {
+                arr3 = enemies.get(i).getController().collideRed(heroAll);
+                if(arr3==11){
+                    //upFlag = 1;
+                    System.out.println("orcColl");
+                    adjust(90,120);
+                    translateX(enemiesImage.get(i), orcX, 120);
+                    //heroSetUp(1);
+                }
+                else if(arr3 == 13){
+                    System.out.println("die");
+                    //throw new GameLoseException("Hero Dies");
+                }
             }
             //System.out.println("gg");
             if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
@@ -599,21 +671,21 @@ public class GameController implements Initializable {
         });
     }
 
-    public void actAfterColl1(int a) throws GameLoseException{
+    public void actAfterColl1(int a){
         if(a==11){
             //upFlag = 1;
             System.out.println("orcColl");
             adjust(90,120);
-            translateX(grp2.getChildren().get(0), orcX, 120);
+            translateX(grp2.getChildren().get(3), orcX, 120);
             //heroSetUp(1);
         }
         else if(a == 13){
             System.out.println("die");
-            throw new GameLoseException("Hero Dies");
+            //throw new GameLoseException("Hero Dies");
         }
     }
 
-    public void actAfterColl2(int a) throws GameLoseException{
+    public void actAfterColl2(int a) {
         if(a == 12){
             //System.out.println(j);
             System.out.println("jump");
@@ -625,7 +697,7 @@ public class GameController implements Initializable {
         }
         else if(a == 13){
             System.out.println("die");
-            throw new GameLoseException("Hero Dies");
+            //throw new GameLoseException("Hero Dies");
         }
     }
 

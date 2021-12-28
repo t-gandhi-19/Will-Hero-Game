@@ -69,13 +69,10 @@ public class OrcController implements Initializable {
 
 
 
-    public int collide(Node hero){
+    public int collideGreen(Node hero){
         int arr;
 
         if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
-//        System.out.println(greenOrc.getBoundsInParent().getMaxY()+" " +greenOrc.getBoundsInParent().getMinY());
-//        System.out.println(" max " +hero.getBoundsInParent().getMaxY());
-//        System.out.println(" min " +hero.getBoundsInParent().getMinY());
             if(hero.getBoundsInParent().getMaxY()<=greenOrc.getBoundsInParent().getMinY()+6 && hero.getBoundsInParent().getMinY()<greenOrc.getBoundsInParent().getMinY() ){
                 arr = 12;
             }
@@ -93,29 +90,57 @@ public class OrcController implements Initializable {
         return arr;
     }
 
+    public int collideRed(Node hero){
+        int arr;
 
-    public void jumpOrc(Platform obj){
-        jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
-                (e) -> {greenOrc.setY(greenOrc.getY() + j);redOrc.setY(redOrc.getY() + j);
+        if(hero.getBoundsInParent().intersects(redOrc.getBoundsInParent())){
+            if(hero.getBoundsInParent().getMaxY()<=redOrc.getBoundsInParent().getMinY()+6 && hero.getBoundsInParent().getMinY()<redOrc.getBoundsInParent().getMinY() ){
+                arr = 12;
+            }
+            else if(hero.getBoundsInParent().getMinY()>=redOrc.getBoundsInParent().getMaxY()-6 && hero.getBoundsInParent().getMaxY()>redOrc.getBoundsInParent().getMaxY()){
+                arr = 13;
+            }
+            else{
+                //System.out.println("hello2");
+                arr = 11;
+            }
+        }
+        else{
+            arr = 0;
+        }
+        return arr;
+    }
+
+
+    public void jumpOrcGreen(Platform obj){
+        jump.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
+            greenOrc.setY(greenOrc.getY() + j);
             arr = obj.getControl().ifCollide(greenOrc);
-            arr1 = obj.getControl().ifCollide(redOrc);
                     if(arr[0]==1){
                         j = -3;
                         jHT = 325;
                     }
-                    if(greenOrc.getY() < jHT - 190){
+                    if(greenOrc.getY() < jHT - 240){
                         //System.out.println("jht" +jHT);
                         j = 3;
                     }
-//                    if(arr1[0]==1){
-//                        j = -3;
-//                        jHT = 325;
-//                    }
-//                    if(redOrc.getY() < jHT - 190){
-//                        //System.out.println("jht" +jHT);
-//                        j = 3;
-//                    }
-                    //System.out.println(g.getY());
+                }));
+        jump.setCycleCount(Animation.INDEFINITE);
+        jump.play();
+    }
+
+    public void jumpOrcRed(Platform obj){
+        jump.getKeyFrames().add(new KeyFrame(Duration.millis(25),
+                (e) -> {redOrc.setY(redOrc.getY() + j);
+                    arr = obj.getControl().ifCollide(redOrc);
+                    if(arr[0]==1){
+                        j = -3;
+                        jHT = 325;
+                    }
+                    if(redOrc.getY() < jHT - 190){
+                        //System.out.println("jht" +jHT);
+                        j = 3;
+                    }
                 }));
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
