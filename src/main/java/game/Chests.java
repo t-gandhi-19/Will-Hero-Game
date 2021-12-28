@@ -12,12 +12,17 @@ public abstract class Chests {
     private String type;
     protected boolean open;
 
+
+
     public Chests(String type, boolean open) throws IOException {
         this.type=type;
         this.open=open;
         fxmlLoader = new FXMLLoader(getClass().getResource("Chests.fxml"));
         obsPane = fxmlLoader.load();
         controller = fxmlLoader.<ChestsController>getController();
+    }
+    public boolean isOpen() {
+        return open;
     }
 
 

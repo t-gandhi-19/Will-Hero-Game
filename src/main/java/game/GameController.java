@@ -108,6 +108,7 @@ public class GameController implements Initializable {
     private ArrayList<Node> enemiesImage;
     private ArrayList<Platform> platform;
     private ArrayList<Chests> chests;
+    private ArrayList<Pane> chestsImage;
     private ArrayList<Weapon> weapons;
     private ArrayList<FallingPlatform> fallingPlatforms;
 
@@ -143,6 +144,8 @@ public class GameController implements Initializable {
     public void start() throws IOException, BelowBoundaryException {
         enemies = new ArrayList<Orc>();
         enemiesImage = new ArrayList<Node>();
+        chests = new ArrayList<Chests>();
+        chestsImage = new ArrayList<Pane>();
 
         fallingPlatforms = new ArrayList<FallingPlatform>();
         weapons = new ArrayList<Weapon>();
@@ -193,7 +196,7 @@ public class GameController implements Initializable {
         sword = (ImageView) hero.getObsPane().getChildren().get(3);
         islandSetUp();
         orcSetUP();
-        ChestsSetUp(chestCode);
+        ChestsSetUp();
         setUp();
 
         knife.setY(heroAll.getLayoutY()+25);
@@ -321,8 +324,14 @@ public class GameController implements Initializable {
                 if(!falling) {
                     falling = true;
 
-                    fallPlatSetUp1(isl1.getBoundsInParent().getMaxX(), 310);
+                    //fallPlatSetUp1(isl1.getBoundsInParent().getMaxX(), 310);
+                    fallPlatSetUp1(820, 310);
                 }
+            }
+            if(score>90) {
+                System.out.println(isl1.getLayoutX() + " " + isl1.getTranslateX());
+                System.out.println(isl1.getBoundsInParent().getMaxX());
+                System.out.println(grp4.getChildren().get(0).getLayoutX() + " fPlat " + grp4.getChildren().get(0).getTranslateX());
             }
 
 
@@ -383,7 +392,7 @@ public class GameController implements Initializable {
 //        greenOrc3.getController().jumpOrc(island);
     }
 
-    public void ChestsSetUp(int code) throws IOException {
+    public void ChestsSetUp() throws IOException {
         Weapon sword = new Sword(0, 100);
         weapons.add(sword);
         Weapon throwingknife = new ThrowingKnives(0, 50, 0);
@@ -391,20 +400,79 @@ public class GameController implements Initializable {
 
         Chests T1 = new TreasureChest(10);
         chests.add(T1);
-        Chests T2 = new TreasureChest(10);
-        chests.add(T2);
-        Chests T3 = new TreasureChest(10);
-        chests.add(T3);
-        Chests W1 = new WeaponChest(weapons.get(0));
-        chests.add(W1);
-        Chests W2 = new WeaponChest(weapons.get(0));
-        chests.add(W2);
-        Chests W3 = new WeaponChest(weapons.get(1));
-        chests.add(W3);
-        Chests W4 = new WeaponChest(weapons.get(1));
-        chests.add(W4);
+        Pane i1 = new Pane();
+        ImageView treasureChest = (ImageView) T1.getObsPane().getChildren().get(0);
+        i1.getChildren().add(treasureChest);
+        chestsImage.add(i1);
 
+        Chests T2 = new TreasureChest(10);
+        Pane i2 = new Pane();
+        ImageView treasureChest2 = (ImageView) T2.getObsPane().getChildren().get(0);
+        i2.getChildren().add(treasureChest2);
+        chestsImage.add(i2);
+        chests.add(T2);
+
+        Chests T3 = new TreasureChest(10);
+        Pane i3 = new Pane();
+        ImageView treasureChest3 = (ImageView) T3.getObsPane().getChildren().get(0);
+        i3.getChildren().add(treasureChest);
+        chestsImage.add(i3);
+        chests.add(T3);
+
+        Chests W1 = new WeaponChest(weapons.get(0));
+        Pane i4 = new Pane();
+        ImageView treasureChest4 = (ImageView) W1.getObsPane().getChildren().get(2);
+        i4.getChildren().add(treasureChest4);
+        chestsImage.add(i4);
+        chests.add(W1);
+        i4.setLayoutX(200);
+        i4.setLayoutY(255);
+
+        Chests W2 = new WeaponChest(weapons.get(0));
+        Pane i5 = new Pane();
+        ImageView treasureChest5 = (ImageView) W2.getObsPane().getChildren().get(2);
+        i5.getChildren().add(treasureChest5);
+        chestsImage.add(i5);
+        chests.add(W2);
+
+        Chests W3 = new WeaponChest(weapons.get(1));
+        Pane i6 = new Pane();
+        ImageView treasureChest6 = (ImageView) W3.getObsPane().getChildren().get(2);
+        i6.getChildren().add(treasureChest6);
+        chestsImage.add(i6);
+        chests.add(W3);
+
+        Chests W4 = new WeaponChest(weapons.get(1));
+        Pane i7 = new Pane();
+        ImageView treasureChest7 = (ImageView) W4.getObsPane().getChildren().get(2);
+        i7.getChildren().add(treasureChest5);
+        chestsImage.add(i7);
+        chests.add(W4);
+        grp3.getChildren().addAll(i1,i2,i3,i4,i5,i6,i7);
     }
+
+    public void openCh(int i){
+        chestsImage.get(i).getChildren().remove(0);
+        chestsImage.get(i).getChildren().add(chests.get(i).getObsPane().getChildren().get(1));
+    }
+
+
+
+//    public void openChW(int i){
+//        chestsImage.get(i).getChildren().remove(0);
+//        chestsImage.get(i).getChildren().add(chests.get(i).getObsPane().getChildren().get(1));
+//    }
+
+//    public void chestFactory(int open, int x, int y){
+//        Tchest = null;
+//        Wchest = null;
+//        try {
+//            Tchest = new TreasureChest(10);
+//            Wchest = new WeaponChest(weapons.)
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 //        Tchest = null;
 //        Wchest = null;
 //        try {
@@ -545,10 +613,10 @@ public class GameController implements Initializable {
         }
     }
 
-    public void chestFactory(int x, int y){
-        chestAll.setLayoutX(x);
-        chestAll.setLayoutY(y);
-    }
+//    public void chestFactory(int x, int y){
+//        chestAll.setLayoutX(x);
+//        chestAll.setLayoutY(y);
+//    }
 
     public void Jump() throws BelowBoundaryException{
 
@@ -626,9 +694,22 @@ public class GameController implements Initializable {
                     for (int i = 4; i < 7; i++) {
                         actAfterColl2(enemies.get(i).getController().collideRed(heroAll));
                     }
-                    if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
-                        ChestsSetUp(1);
-                        chestCode = 1;
+//                    if (chest.getController().chestCollide(heroAll, chestAll) == 1 && chestCode != 1) {
+//                        ChestsSetUp();
+//                        chestCode = 1;
+//                    }
+                    for (int i = 0; i < 3; i++) {
+                        if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
+                            openCh(i);
+                            chests.get(i).collectChest(hero);
+                        }
+                    }
+                    for (int i = 3; i < 7; i++) {
+                        if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
+                            openCh(i);
+                            chests.get(i).collectChest(hero);
+                            System.out.println(chests.get(i).isOpen());
+                        }
                     }
                     if(heroAll.getLayoutY()>350) {
                         try {
@@ -687,9 +768,17 @@ public class GameController implements Initializable {
                 }
             }
             //System.out.println("gg");
-            if(chest.getController().chestCollide(heroAll, chestAll)==1 && chestCode!=1) {
-                ChestsSetUp(1);
-                chestCode = 1;
+            for (int i = 0; i < 3; i++) {
+                if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
+                    openCh(i);
+                    chests.get(i).collectChest(hero);
+                }
+            }
+            for (int i = 3; i < 7; i++) {
+                if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
+                    openCh(i);
+                    chests.get(i).collectChest(hero);
+                }
             }
         }));
         inBtw.setCycleCount(12);
@@ -773,7 +862,9 @@ public class GameController implements Initializable {
         for (int i = 0; i < grp5.getChildren().size(); i++) {
             translateX(grp5.getChildren().get(i), shiftLeftBy, time);
         }
-        translateX(chestAll,shiftLeftBy,time);
+//        for (int i = 0; i < 7; i++) {
+//            translateX(chestsImage.get(), shiftLeftBy, time);
+//        }
 //        translateX(fallPlat,shiftLeftBy,time);
 //        translateX(buf,shiftLeftBy,time);
         heroMove(time);
@@ -807,7 +898,7 @@ public class GameController implements Initializable {
         for (int i = 0; i < grp5.getChildren().size(); i++) {
             translateX(grp5.getChildren().get(i), amount, time);
         }
-        translateX(chestAll,amount,time);
+        //translateX(chestAll,amount,time);
 //        translateX(fallPlat,amount,time);
 //        translateX(buf,amount,time);
     }

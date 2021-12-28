@@ -20,7 +20,7 @@ public class TreasureChest extends Chests{
     public void collectChest(Hero hero){
         hero.addCoins(coins);
         this.open=true;
-
+        System.out.println(this.open);
     }
 
 }
