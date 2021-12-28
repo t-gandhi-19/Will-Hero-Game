@@ -4,10 +4,11 @@ public class ThrowingKnives extends Weapon{
     private int throwDistance;
     private int knifeCount;
 
-    public void ThrowingKnives(){
-        ThrowingKnives knife = new ThrowingKnives();
-
+    public ThrowingKnives(int level, int hitPoint,int knifeC) {
+        super(level, hitPoint);
+        knifeCount = knifeC;
     }
+
     public int getThrowDistance(){
         return this.throwDistance;
     }
