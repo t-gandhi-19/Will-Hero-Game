@@ -12,11 +12,15 @@ public class Sword extends Weapon{
 //    SwordController controller;
 //    private int id;
 
-    public Sword(){
+//    public Sword(){
 //        fxmlLoader = new FXMLLoader(getClass().getResource("Sword.fxml"));
 //        obsPane = fxmlLoader.load();
 //        id = 10;
 //        controller = fxmlLoader.<SwordController>getController();
+//    }
+
+    public Sword(int level, int hitPoint) {
+        super(level, hitPoint);
     }
 
 //    public AnchorPane getObsPane() {
