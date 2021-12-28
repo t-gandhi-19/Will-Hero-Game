@@ -5,22 +5,28 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Chests {
+public abstract class Chests {
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
     ChestsController controller;
-    private int id;
     private String type;
+    protected boolean open;
 
-    public Chests() throws IOException {
+    public Chests(String type, boolean open) throws IOException {
+        this.type=type;
+        this.open=open;
         fxmlLoader = new FXMLLoader(getClass().getResource("Chests.fxml"));
         obsPane = fxmlLoader.load();
-        id = 10;
         controller = fxmlLoader.<ChestsController>getController();
     }
+
+
+
     public String getType(){
         return type;
     }
+    public abstract void collectChest(Hero hero);
+
     public void setType(String ChestType){
         type=ChestType;
     }

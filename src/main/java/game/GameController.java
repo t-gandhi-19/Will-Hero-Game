@@ -76,7 +76,8 @@ public class GameController implements Initializable {
     private ImageView isl5;
 
 
-    private Pane chestAll;
+    private Pane chestTreasure;
+    private Pane chestWeapon;
     private int chestCode;
 
     //private Group fallPlat;
@@ -97,7 +98,9 @@ public class GameController implements Initializable {
 //    private Orc greenOrc3;
 //    private Orc redOrc;
 //    private Boss BossMain;
-    private Chests chest;
+    private Chests Tchest;
+    private Chests Wchest;
+
     private Platform island;
     private FallingPlatform finalPlat;
 
@@ -140,8 +143,9 @@ public class GameController implements Initializable {
     public void start() throws IOException, BelowBoundaryException {
         enemies = new ArrayList<Orc>();
         enemiesImage = new ArrayList<Node>();
+
         fallingPlatforms = new ArrayList<FallingPlatform>();
-        
+        weapons = new ArrayList<Weapon>();
         hero = new Hero();
 //        greenOrc = new Orc();
 //        greenOrc1 = new Orc();
@@ -149,7 +153,8 @@ public class GameController implements Initializable {
 //        greenOrc2 = new Orc();
 //        redOrc = new Orc();
 //        BossMain = new Boss();
-        chest = new Chests();
+
+
         island = new Platform();
         finalPlat = new FallingPlatform();
         //tform = new FallingPlatform();
@@ -171,7 +176,8 @@ public class GameController implements Initializable {
         arr = new int[5];
 //        arr2 = new int[5];
 //        arr3 = new int[5];
-        chestAll= new Pane();
+        chestTreasure= new Pane();
+        chestWeapon=new Pane();
 
         heroCode = 0;
         heroAll = (ImageView) hero.getObsPane().getChildren().get(0);
@@ -377,39 +383,63 @@ public class GameController implements Initializable {
 //        greenOrc3.getController().jumpOrc(island);
     }
 
-    public void ChestsSetUp(int code){
-        Chests chest1 = null;
-        try {
-            chest1 = new Chests();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert chest != null;
-        ImageView treasureChest = (ImageView) chest1.getObsPane().getChildren().get(0);
+    public void ChestsSetUp(int code) throws IOException {
+        Weapon sword = new Sword(0, 100);
+        weapons.add(sword);
+        Weapon throwingknife = new ThrowingKnives(0, 50, 0);
+        weapons.add(throwingknife);
 
-        ImageView openChest = (ImageView) chest1.getObsPane().getChildren().get(1);
+        Chests T1 = new TreasureChest(10);
+        chests.add(T1);
+        Chests T2 = new TreasureChest(10);
+        chests.add(T2);
+        Chests T3 = new TreasureChest(10);
+        chests.add(T3);
+        Chests W1 = new WeaponChest(weapons.get(0));
+        chests.add(W1);
+        Chests W2 = new WeaponChest(weapons.get(0));
+        chests.add(W2);
+        Chests W3 = new WeaponChest(weapons.get(1));
+        chests.add(W3);
+        Chests W4 = new WeaponChest(weapons.get(1));
+        chests.add(W4);
 
-        ImageView weaponChest = (ImageView) chest1.getObsPane().getChildren().get(2);
 
-        if(code == 0) {
-            while(!chestAll.getChildren().isEmpty()){
-                chestAll.getChildren().remove(0);
-            }
-            chestAll.getChildren().add(treasureChest);
-        }
-        if(code == 1) {
-            while(!chestAll.getChildren().isEmpty()){
-                chestAll.getChildren().remove(0);
-            }
-            chestAll.getChildren().add(openChest);
-        }
-        if(code == 2) {
-            while(!chestAll.getChildren().isEmpty()){
-                chestAll.getChildren().remove(0);
-            }
-            chestAll.getChildren().add(weaponChest);
-        }
     }
+//        Tchest = null;
+//        Wchest = null;
+//        try {
+//            Tchest = new TreasureChest(10);
+//            W
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        assert chest != null;
+//        ImageView treasureChest = (ImageView) chest1.getObsPane().getChildren().get(0);
+//
+//        ImageView openChest = (ImageView) chest1.getObsPane().getChildren().get(1);
+//
+//        ImageView weaponChest = (ImageView) chest1.getObsPane().getChildren().get(2);
+//
+//        if(code == 0) {
+//            while(!chestAll.getChildren().isEmpty()){
+//                chestAll.getChildren().remove(0);
+//            }
+//            chestAll.getChildren().add(treasureChest);
+//        }
+//        if(code == 1) {
+//            while(!chestAll.getChildren().isEmpty()){
+//                chestAll.getChildren().remove(0);
+//            }
+//            chestAll.getChildren().add(openChest);
+//        }
+//        if(code == 2) {
+//            while(!chestAll.getChildren().isEmpty()){
+//                chestAll.getChildren().remove(0);
+//            }
+//            chestAll.getChildren().add(weaponChest);
+//        }
+//    }
 
     public void orcSetUP() throws IOException {
         Orc greenOrc = new Orc(50,3,"green");
