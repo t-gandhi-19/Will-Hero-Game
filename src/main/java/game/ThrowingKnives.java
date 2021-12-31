@@ -1,10 +1,12 @@
 package game;
 
+import java.io.IOException;
+
 public class ThrowingKnives extends Weapon{
     private int throwDistance;
     private int knifeCount;
 
-    public ThrowingKnives(int level, int hitPoint,int knifeC) {
+    public ThrowingKnives(int level, int hitPoint,int knifeC) throws IOException {
         super(level, hitPoint);
         knifeCount = knifeC;
     }

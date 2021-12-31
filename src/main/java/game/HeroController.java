@@ -137,6 +137,7 @@ public class HeroController implements Initializable{
         inBtw.play();
         jump.play();
     }
+
     public void rotSword(Node n1){
         RotateTransition rot = new RotateTransition(Duration.millis(250), n1);
         rot.setAxis(Rotate.Z_AXIS);

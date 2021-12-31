@@ -19,7 +19,7 @@ public class Sword extends Weapon{
 //        controller = fxmlLoader.<SwordController>getController();
 //    }
 
-    public Sword(int level, int hitPoint) {
+    public Sword(int level, int hitPoint) throws IOException {
         super(level, hitPoint);
     }
 

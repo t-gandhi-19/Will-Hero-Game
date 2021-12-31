@@ -61,6 +61,7 @@ public class GameController implements Initializable {
     private int heroCode;
     private ImageView sword;
     private ImageView knife;
+    private ImageView knife2;
 
     private ImageView GOrc1;
     private ImageView GOrc2;
@@ -94,6 +95,8 @@ public class GameController implements Initializable {
 //    private Pane grp4;
 
     private Hero hero;
+    private Weapon w1;
+    private Weapon w2;
 //    private Orc greenOrc;
 //    private Orc greenOrc1;
 //    private Orc greenOrc2;
@@ -122,7 +125,7 @@ public class GameController implements Initializable {
     private Timeline jump = new Timeline();
     private Timeline jumpOnOrc = new Timeline();
     private Timeline inBtw = new Timeline();
-    private Timeline timeline;
+    private Timeline timeline = new Timeline();
 
     private int j;
     private int arr[];
@@ -132,6 +135,8 @@ public class GameController implements Initializable {
     private int fl;
     private int upFlag;
     private int arr4;
+    private boolean fl1;
+    private boolean fl2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -152,6 +157,8 @@ public class GameController implements Initializable {
         fallingPlatforms = new ArrayList<FallingPlatform>();
         weapons = new ArrayList<Weapon>();
         hero = new Hero();
+        w1 = new Weapon(0,3);
+        w2 = new Weapon(0,3);
 //        greenOrc = new Orc();
 //        greenOrc1 = new Orc();
 //        greenOrc3 = new Orc();
@@ -184,7 +191,7 @@ public class GameController implements Initializable {
         chestTreasure= new Pane();
         chestWeapon=new Pane();
 
-        heroCode = 0;
+        heroCode = 1;
         heroAll = (ImageView) hero.getObsPane().getChildren().get(0);
         heroAll.setLayoutY(200);
         heroAll.setLayoutX(150);
@@ -194,8 +201,9 @@ public class GameController implements Initializable {
 //        ROrc2 = new Pane();
 //        ROrc3 = new Pane();
 
-        knife = (ImageView) hero.getObsPane().getChildren().get(4);
-        sword = (ImageView) hero.getObsPane().getChildren().get(3);
+        knife = (ImageView) w1.getObsPane().getChildren().get(0);
+        knife2 = (ImageView) w2.getObsPane().getChildren().get(0);
+        sword = (ImageView) w1.getObsPane().getChildren().get(1);
         islandSetUp();
         orcSetUP();
         ChestsSetUp();
@@ -203,8 +211,12 @@ public class GameController implements Initializable {
 
         knife.setY(heroAll.getLayoutY()+25);
         knife.setX(heroAll.getLayoutX()+17);
+        knife2.setY(heroAll.getLayoutY()+15);
+        knife2.setX(heroAll.getLayoutX()+17);
+        knife2.setVisible(false);
         if(heroCode != 1) {
             knife.setVisible(false);
+
         }
 
         sword.setY(heroAll.getLayoutY()+22);
@@ -224,6 +236,7 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(heroAll);
 
         MainBase.getChildren().add(knife);
+        MainBase.getChildren().add(knife2);
         MainBase.getChildren().add(sword);
         //MainBase.getChildren().add(fallingPlatform.getObsPane());
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
@@ -346,7 +359,7 @@ public class GameController implements Initializable {
 
             //islandFactory(1, 10);
         });
-        timeline = new Timeline(kf);
+        timeline.getKeyFrames().add(kf);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
@@ -666,6 +679,7 @@ public class GameController implements Initializable {
             heroAll.setLayoutY(heroAll.getLayoutY() + j);
             sword.setLayoutY(sword.getLayoutY() + j);
             knife.setLayoutY(knife.getLayoutY() + j);
+            knife2.setLayoutY(knife2.getLayoutY() + j);
 
             if (heroAll.getLayoutY() < jHT - 200) {
                 //System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
@@ -689,6 +703,7 @@ public class GameController implements Initializable {
                     heroAll.setLayoutY(heroAll.getLayoutY() + j);
                     sword.setLayoutY(sword.getLayoutY() + j);
                     knife.setLayoutY(knife.getLayoutY() + j);
+                    knife2.setLayoutY(knife2.getLayoutY() + j);
                     actAfterCollIsland(island.getControl().ifCollide(heroAll));
                     if (heroAll.getLayoutY() < jHT - 130) {
                         //System.out.println("hh" +heroAll.getLayoutX()+" "+heroAll.getLayoutY());
@@ -770,7 +785,7 @@ public class GameController implements Initializable {
         jumpOnOrc.stop();
         //System.out.println("jump on orc stopped");
         if(heroCode == 1)
-            throwKnife();
+            throwKnife(1);
         if(heroCode == 2)
             rotSword();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
@@ -878,6 +893,7 @@ public class GameController implements Initializable {
                 heroAll.setLayoutY(heroAll.getLayoutY() - 40);
                 sword.setLayoutY(sword.getLayoutY() - 40);
                 knife.setLayoutY(knife.getLayoutY() - 40);
+                knife2.setLayoutY(knife2.getLayoutY() - 40);
                 //heroNormal.setX(heroNormal.getX() - 50);
                 //upFlag = 1;
                 adjust(90, 10);
@@ -988,31 +1004,102 @@ public class GameController implements Initializable {
         rot.play();
         rot.setOnFinished((e)->{rotBack.play();});
     }
-    public void throwKnife(){
-        //heroAll.getChildren().get(1).setVisible(true);
-//        knife.setVisible(true);
-//
-//        heroSetUp(0);
-        TranslateTransition tran1 = new TranslateTransition();
-        TranslateTransition tran = new TranslateTransition(Duration.millis(100));
-        tran.setNode(knife);
-        tran.setByX(250f);
-        tran.play();
-        tran.setOnFinished((e)->{
-            knife.setVisible(false);
-            tran1.setNode(knife);
-            tran1.setByX(-250f);
-            tran1.setDuration(Duration.millis(1));
-            tran1.play();
+    public void hitAnimation(int i){
+        FadeTransition ft = new FadeTransition(Duration.millis(100), enemiesImage.get(i));
+        ft.setFromValue(1.0);
+        ft.setToValue(0.1);
+        ft.play();
+        ft.setOnFinished((e)->{
+            FadeTransition ft2 = new FadeTransition(Duration.millis(100), enemiesImage.get(i));
+            ft2.setFromValue(0.1);
+            ft2.setToValue(1.0);
+            ft2.play();
         });
-        tran1.setOnFinished((e)->{knife.setVisible(true);});
-//        for(int i=0; i<greenOrc.getObsPane().getChildren().size(); i++){
-//            if(knife.intersects(greenOrc.getObsPane().getChildren().get(i).getBoundsInParent())) {
-//                FallAndDie(greenOrc.getObsPane().getChildren().get(i), 1000, 500);
-//            }
-//
-//        }
     }
+
+    public void deathAnimation(int i){
+        TranslateTransition t = new TranslateTransition(Duration.millis(1000), enemiesImage.get(i));
+        t.setByY(500);
+        t.play();
+    }
+
+
+    public void throwKnife(int level){
+        Timeline th = new Timeline();
+        fl1 = false;
+        fl2 = false;
+        th.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e)->{
+            for (int i = 0; i < 7; i++) {
+                if(w1.getController().ifCollide(enemiesImage.get(i))==1 && (level == 1 || level == 2) && !fl1){
+                    fl1 = true;
+                    System.out.println("dieOrc1");
+                    hitAnimation(i);
+                    //deathAnimation(i);
+
+                }
+                if(w2.getController().ifCollide(enemiesImage.get(i))==1 && level == 2 && !fl2){
+                    fl2 = true;
+                    System.out.println("dieOrc2");
+                }
+            }
+        }));
+        th.setCycleCount(10);
+        th.play();
+        if(level == 1) {
+            TranslateTransition tran1 = new TranslateTransition();
+            TranslateTransition tran = new TranslateTransition(Duration.millis(100));
+            tran.setNode(knife);
+            tran.setByX(250f);
+            tran.play();
+            tran.setOnFinished((e) -> {
+                    knife.setVisible(false);
+                    tran1.setNode(knife);
+                    tran1.setByX(-250f);
+                    tran1.setDuration(Duration.millis(1));
+                    tran1.play();
+
+            });
+            tran1.setOnFinished((e) -> {
+                knife.setVisible(true);
+            });
+        }
+        if(level == 2) {
+            TranslateTransition tran1 = new TranslateTransition();
+            TranslateTransition tran = new TranslateTransition(Duration.millis(100));
+            tran.setNode(knife);
+            tran.setByX(250f);
+            tran.play();
+            tran.setOnFinished((e) -> {
+                knife.setVisible(false);
+                tran1.setNode(knife);
+                tran1.setByX(-250f);
+                tran1.setDuration(Duration.millis(1));
+                tran1.play();
+            });
+            tran1.setOnFinished((e) -> {
+                knife.setVisible(true);
+            });
+            knife2.setVisible(true);
+            TranslateTransition tran12 = new TranslateTransition();
+            TranslateTransition tran2 = new TranslateTransition(Duration.millis(100));
+            tran2.setNode(knife2);
+            tran2.setByX(250f);
+            tran2.play();
+            tran2.setOnFinished((e) -> {
+                knife2.setVisible(false);
+                tran12.setNode(knife2);
+                tran12.setByX(-250f);
+                tran12.setDuration(Duration.millis(1));
+                tran12.play();
+            });
+            tran12.setOnFinished((e) -> {
+                knife2.setVisible(false);
+                fl1 = false;
+                fl2 = false;
+            });
+        }
+    }
+
     public void DisplayPauseMenu(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("InGamePause.fxml"));
         root =loader.load();
@@ -1026,9 +1113,13 @@ public class GameController implements Initializable {
     public void DisplaySaveMe() throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("SaveMe.fxml"));
         root2 =loader.load();
-        scene2 = new Scene(root2);
-        stage.setScene(scene2);
-        stage.show();
+//        stage =(Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//        scene2 = new Scene(root2);
+//        stage.setScene(scene2);
+//        stage.show();
 
     }
 
@@ -1042,6 +1133,7 @@ public class GameController implements Initializable {
         //translate.setCycleCount(TranslateTransition.INDEFINITE);
         translate.play();
     }
+
     public void actAfterColl(int a){
         if(arr2==11){
             //System.out.println("hl");
