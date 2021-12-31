@@ -137,6 +137,8 @@ public class GameController implements Initializable {
     private int arr4;
     private boolean fl1;
     private boolean fl2;
+    private boolean fl3;
+    private boolean fl4;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -184,6 +186,8 @@ public class GameController implements Initializable {
         fl = 0;
         upFlag = 0;
         falling = false;
+        fl3 = true;
+        fl4 = true;
 
         arr = new int[5];
 //        arr2 = new int[5];
@@ -300,6 +304,7 @@ public class GameController implements Initializable {
     }
 
     public void gameFlow(){
+
         KeyFrame kf = new KeyFrame(Duration.millis(100), e -> {
 //            System.out.println("check");
 //            System.out.println(isl1.getTranslateX());
@@ -309,7 +314,21 @@ public class GameController implements Initializable {
 //            System.out.println(fallPlat.getTranslateX() + " " + buf.getTranslateX());
 //            System.out.println(fallPlat.getTranslateY() + " Y " + buf.getTranslateY());
             //System.out.println(isl5.getTranslateX());
-            if(score<78) {
+//            System.out.println("score " + score);
+//            System.out.println("fl3 " + fl3);
+//            if(score ==19){
+//                System.out.println("hell");
+//                isl1.setTranslateX(isl5.getTranslateX() + 2950);
+//                isl2.setTranslateX(isl5.getTranslateX() + 3000);
+//                isl3.setTranslateX(isl5.getTranslateX() + 3000);
+//                isl4.setTranslateX(isl5.getTranslateX() + 3000);
+//            }
+//            if(score >= 25 && fl4){
+//                isl5.setTranslateX(isl5.getTranslateX() + 3000);
+//                fl4 = false;
+//            }
+
+            if(score<82) {
                 if (isl1.getTranslateX() < -600) {
                     isl1.setTranslateX(isl5.getTranslateX() + 2950);
                     //fallPlatSetUp();
@@ -335,19 +354,27 @@ public class GameController implements Initializable {
                     fallPlatSetUp(isl5.getBoundsInParent().getMaxX()-50, 325);
                 }
             }
-            if(score==90){
+            if(score==89 && fl3){
                 if(!falling) {
                     falling = true;
 
                     //fallPlatSetUp1(isl1.getBoundsInParent().getMaxX(), 310);
-                    fallPlatSetUp1(820, 310);
+                    fallPlatSetUp1(1750, 310);
+                    System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
+                    isl3.setTranslateX(0);
+                    System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
+//                    isl1.setTranslateX(1170);
+//                    System.out.println(isl1.getLayoutX() + " isl1 "+ isl1.getTranslateX());
+                    isl3.setLayoutX(3920);
+                    System.out.println(isl3.getLayoutX() + " isl13 "+ isl3.getTranslateX());
+                    fl3 = false;
                 }
             }
-            if(score>90) {
-                System.out.println(isl1.getLayoutX() + " " + isl1.getTranslateX());
-                System.out.println(isl1.getBoundsInParent().getMaxX());
-                System.out.println(grp4.getChildren().get(0).getLayoutX() + " fPlat " + grp4.getChildren().get(0).getTranslateX());
-            }
+//            if(score>90) {
+//                System.out.println(isl1.getLayoutX() + " " + isl1.getTranslateX());
+//                System.out.println(isl1.getBoundsInParent().getMaxX());
+//                //System.out.println(grp4.getChildren().get(0).getLayoutX() + " fPlat " + grp4.getChildren().get(0).getTranslateX());
+//            }
 
 
 //            if(fallPlat.getTranslateX()<-2700){
@@ -397,7 +424,7 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
-        grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4);
+       // grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4);
 
         //grp3.getChildren().addAll(isl4);
 
@@ -914,7 +941,7 @@ public class GameController implements Initializable {
             translateX(grp3.getChildren().get(i), shiftLeftBy, time);
         }
         for (int i = 0; i < grp4.getChildren().size(); i++) {
-            System.out.println("shift4");
+            //System.out.println("shift4");
             translateX(grp4.getChildren().get(i), shiftLeftBy, time);
         }
         for (int i = 0; i < grp5.getChildren().size(); i++) {

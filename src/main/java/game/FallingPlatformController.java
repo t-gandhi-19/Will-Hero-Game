@@ -90,6 +90,22 @@ public class FallingPlatformController implements Initializable {
     private ImageView block217;
     @FXML
     private ImageView block218;
+    @FXML
+    private ImageView block2181;
+    @FXML
+    private ImageView block2182;
+    @FXML
+    private ImageView block2183;
+    @FXML
+    private ImageView block2184;
+    @FXML
+    private ImageView block2185;
+    @FXML
+    private ImageView block2186;
+    @FXML
+    private ImageView block2187;
+    @FXML
+    private ImageView block2188;
 
 
     @FXML
@@ -320,6 +336,30 @@ public class FallingPlatformController implements Initializable {
                 }),
                 new KeyFrame(Duration.millis(13500), (e) -> {
                     fall(block218);
+                }),
+                new KeyFrame(Duration.millis(14250), (e) -> {
+                    fall(block2181);
+                }),
+                new KeyFrame(Duration.millis(15000), (e) -> {
+                    fall(block2182);
+                }),
+                new KeyFrame(Duration.millis(15750), (e) -> {
+                    fall(block2183);
+                }),
+                new KeyFrame(Duration.millis(16500), (e) -> {
+                    fall(block2184);
+                }),
+                new KeyFrame(Duration.millis(17250), (e) -> {
+                    fall(block2185);
+                }),
+                new KeyFrame(Duration.millis(18000), (e) -> {
+                    fall(block2186);
+                }),
+                new KeyFrame(Duration.millis(18750), (e) -> {
+                    fall(block2187);
+                }),
+                new KeyFrame(Duration.millis(19500), (e) -> {
+                    fall(block2188);
                 })
         );
         falling.play();
@@ -396,6 +436,38 @@ public class FallingPlatformController implements Initializable {
                 new KeyFrame(Duration.millis(13500), (e) -> {
                     buffer1.getChildren().add(block218);
                     fallPlatform1.getChildren().remove(block218);
+                }),
+                new KeyFrame(Duration.millis(14250), (e) -> {
+                    buffer1.getChildren().add(block2181);
+                    fallPlatform1.getChildren().remove(block2181);
+                }),
+                new KeyFrame(Duration.millis(15000), (e) -> {
+                    buffer1.getChildren().add(block2182);
+                    fallPlatform1.getChildren().remove(block2182);
+                }),
+                new KeyFrame(Duration.millis(15750), (e) -> {
+                    buffer1.getChildren().add(block2183);
+                    fallPlatform1.getChildren().remove(block2183);
+                }),
+                new KeyFrame(Duration.millis(16500), (e) -> {
+                    buffer1.getChildren().add(block2184);
+                    fallPlatform1.getChildren().remove(block2184);
+                }),
+                new KeyFrame(Duration.millis(17250), (e) -> {
+                    buffer1.getChildren().add(block2185);
+                    fallPlatform1.getChildren().remove(block2185);
+                }),
+                new KeyFrame(Duration.millis(18000), (e) -> {
+                    buffer1.getChildren().add(block2186);
+                    fallPlatform1.getChildren().remove(block2186);
+                }),
+                new KeyFrame(Duration.millis(18750), (e) -> {
+                    buffer1.getChildren().add(block2187);
+                    fallPlatform1.getChildren().remove(block2187);
+                }),
+                new KeyFrame(Duration.millis(19500), (e) -> {
+                    buffer1.getChildren().add(block2188);
+                    fallPlatform1.getChildren().remove(block2188);
                 })
         );
         //falling.setCycleCount(11);
