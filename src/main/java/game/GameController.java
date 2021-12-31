@@ -366,6 +366,14 @@ public class GameController implements Initializable {
         islandFactory(3,1005);
         islandFactory(4,1500);
         islandFactory(5,1900);
+
+        chestFactory(1, 300, 260);
+        chestFactory(2, 1050, 260);
+        chestFactory(3, 1650, 260);
+        chestFactory(4, 2100, 260);
+        chestFactory(5, 2500, 250);
+        chestFactory(6, 3100, 200);
+        chestFactory(7, 3580, 200);
 //        fallPlat.setLayoutX(2225);
 //        fallPlat.setLayoutY(325);
 
@@ -401,51 +409,49 @@ public class GameController implements Initializable {
         Chests T1 = new TreasureChest(10);
         chests.add(T1);
         Pane i1 = new Pane();
-        ImageView treasureChest = (ImageView) T1.getObsPane().getChildren().get(0);
+        ImageView treasureChest = (ImageView) T1.getObsPane().getChildren().get(2);
         i1.getChildren().add(treasureChest);
         chestsImage.add(i1);
 
         Chests T2 = new TreasureChest(10);
         Pane i2 = new Pane();
-        ImageView treasureChest2 = (ImageView) T2.getObsPane().getChildren().get(0);
+        ImageView treasureChest2 = (ImageView) T2.getObsPane().getChildren().get(2);
         i2.getChildren().add(treasureChest2);
         chestsImage.add(i2);
         chests.add(T2);
 
         Chests T3 = new TreasureChest(10);
         Pane i3 = new Pane();
-        ImageView treasureChest3 = (ImageView) T3.getObsPane().getChildren().get(0);
-        i3.getChildren().add(treasureChest);
+        ImageView treasureChest3 = (ImageView) T3.getObsPane().getChildren().get(2);
+        i3.getChildren().add(treasureChest3);
         chestsImage.add(i3);
         chests.add(T3);
 
         Chests W1 = new WeaponChest(weapons.get(0));
         Pane i4 = new Pane();
-        ImageView treasureChest4 = (ImageView) W1.getObsPane().getChildren().get(2);
+        ImageView treasureChest4 = (ImageView) W1.getObsPane().getChildren().get(1);
         i4.getChildren().add(treasureChest4);
         chestsImage.add(i4);
         chests.add(W1);
-        i4.setLayoutX(200);
-        i4.setLayoutY(255);
 
         Chests W2 = new WeaponChest(weapons.get(0));
         Pane i5 = new Pane();
-        ImageView treasureChest5 = (ImageView) W2.getObsPane().getChildren().get(2);
+        ImageView treasureChest5 = (ImageView) W2.getObsPane().getChildren().get(1);
         i5.getChildren().add(treasureChest5);
         chestsImage.add(i5);
         chests.add(W2);
 
         Chests W3 = new WeaponChest(weapons.get(1));
         Pane i6 = new Pane();
-        ImageView treasureChest6 = (ImageView) W3.getObsPane().getChildren().get(2);
+        ImageView treasureChest6 = (ImageView) W3.getObsPane().getChildren().get(1);
         i6.getChildren().add(treasureChest6);
         chestsImage.add(i6);
         chests.add(W3);
 
         Chests W4 = new WeaponChest(weapons.get(1));
         Pane i7 = new Pane();
-        ImageView treasureChest7 = (ImageView) W4.getObsPane().getChildren().get(2);
-        i7.getChildren().add(treasureChest5);
+        ImageView treasureChest7 = (ImageView) W4.getObsPane().getChildren().get(1);
+        i7.getChildren().add(treasureChest7);
         chestsImage.add(i7);
         chests.add(W4);
         grp3.getChildren().addAll(i1,i2,i3,i4,i5,i6,i7);
@@ -453,8 +459,42 @@ public class GameController implements Initializable {
 
     public void openCh(int i){
         chestsImage.get(i).getChildren().remove(0);
-        chestsImage.get(i).getChildren().add(chests.get(i).getObsPane().getChildren().get(1));
+        chestsImage.get(i).getChildren().add(chests.get(i).getObsPane().getChildren().get(0));
     }
+
+    public void chestFactory(int code, int x, int y) {
+        switch (code) {
+            case 1:
+                chestsImage.get(0).setLayoutX(x);
+                chestsImage.get(0).setLayoutY(y);
+                break;
+            case 2:
+                chestsImage.get(1).setLayoutX(x);
+                chestsImage.get(1).setLayoutY(y);
+                break;
+            case 3:
+                chestsImage.get(2).setLayoutX(x);
+                chestsImage.get(2).setLayoutY(y);
+                break;
+            case 4:
+                chestsImage.get(3).setLayoutX(x);
+                chestsImage.get(3).setLayoutY(y);
+                break;
+            case 5:
+                chestsImage.get(4).setLayoutX(x);
+                chestsImage.get(4).setLayoutY(y);
+                break;
+            case 6:
+                chestsImage.get(5).setLayoutX(x);
+                chestsImage.get(5).setLayoutY(y);
+                break;
+            case 7:
+                chestsImage.get(6).setLayoutX(x);
+                chestsImage.get(6).setLayoutY(y);
+                break;
+        }
+    }
+
 
 
 
