@@ -27,6 +27,8 @@ public class GameController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private Parent root2;
+    private Scene scene2;
 
 
     @FXML
@@ -1020,6 +1022,17 @@ public class GameController implements Initializable {
         stage.show();
 
     }
+
+    public void DisplaySaveMe() throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("SaveMe.fxml"));
+        root2 =loader.load();
+        scene2 = new Scene(root2);
+        stage.setScene(scene2);
+        stage.show();
+
+    }
+
+
     public void translateX(Node n1, double amount, double time){
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(n1);
