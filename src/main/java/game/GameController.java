@@ -1,6 +1,7 @@
 package game;
 
 import javafx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,6 +45,9 @@ public class GameController implements Initializable {
 
     @FXML
     private Text locationText;
+
+    @FXML
+    private Pane saveMe;
 
     @FXML
     private ImageView pauseButton;
@@ -492,11 +496,12 @@ public class GameController implements Initializable {
                         }
                         catch (BelowBoundaryException ex) {
                             System.out.println(ex.getMessage());
-                            try {
-                                DisplaySaveMe(e1);
-                            } catch (IOException exc) {
-                                exc.printStackTrace();
-                            }
+                            saveMe.setLayoutY(0);
+//                            try {
+//                                DisplaySaveMe(e1);
+//                            } catch (IOException exc) {
+//                                exc.printStackTrace();
+//                            }
                         }
                         finally {
                             jump.stop();
@@ -534,11 +539,12 @@ public class GameController implements Initializable {
                     }
                     catch (GameLoseException ex) {
                         System.out.println(ex.getMessage());
-                        try {
-                            DisplaySaveMe(e1);
-                        } catch (IOException exc) {
-                            exc.printStackTrace();
-                        }
+                        saveMe.setLayoutY(0);
+//                        try {
+//                            DisplaySaveMe(e1);
+//                        } catch (IOException exc) {
+//                            exc.printStackTrace();
+//                        }
                     }
                     finally {
                         jump.stop();
@@ -563,11 +569,12 @@ public class GameController implements Initializable {
                     }
                     catch (GameLoseException ex) {
                         System.out.println(ex.getMessage());
-                        try {
-                            DisplaySaveMe(e1);
-                        } catch (IOException exc) {
-                            exc.printStackTrace();
-                        }
+                        saveMe.setLayoutY(0);
+//                        try {
+//                            DisplaySaveMe(e1);
+//                        } catch (IOException exc) {
+//                            exc.printStackTrace();
+//                        }
                     }
                     finally {
                         jump.stop();
@@ -614,11 +621,12 @@ public class GameController implements Initializable {
             }
             catch (GameLoseException ex) {
                 System.out.println(ex.getMessage());
-                try {
-                    DisplaySaveMe(e1);
-                } catch (IOException exc) {
-                    exc.printStackTrace();
-                }
+//                try {
+//                    DisplaySaveMe(e1);
+//                } catch (IOException exc) {
+//                    exc.printStackTrace();
+//                }
+                saveMe.setLayoutY(0);
             }
             finally {
                 jump.stop();
@@ -913,5 +921,23 @@ public class GameController implements Initializable {
         else if(a == 13){
             //System.out.println("die");
         }
+    }
+    public void EndGame(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("WelcomeScreen.fxml"));
+        root =loader.load();
+        stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void Spend(ActionEvent event) throws IOException, InsufficientCoinsException {
+        saveMe.setLayoutY(700);
+        heroAll.setTranslateY(0);
+        heroAll.setLayoutY(-50);
+
+        jump.play();
+        timeline.play();
+        inBtw.play();
+
     }
 }
