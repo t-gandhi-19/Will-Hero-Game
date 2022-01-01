@@ -19,13 +19,14 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.event.Event;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-public class GameController implements Initializable {
+public class GameController extends GameObjects implements Initializable  {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -940,5 +941,30 @@ public class GameController implements Initializable {
         timeline.play();
         inBtw.play();
 
+    }
+    public static void serialize() throws IOException{
+        System.out.println("serializing..");
+        ObjectOutputStream outputStream= null;
+        try {
+            outputStream = new ObjectOutputStream(new FileOutputStream("data.txt"));
+            //outputStream.writeObject(Object);
+            //outputStream.writeObject(Object);
+        }finally {
+            outputStream.close();
+            System.out.println("saved");
+        }
+
+
+    }
+    public static void deserislize() throws FileNotFoundException, ClassNotFoundException, IOException{
+        System.out.println("deserializing");
+        ObjectInputStream inputStream= null;
+        try{
+            inputStream= new ObjectInputStream(new FileInputStream("data.txt"));
+            //Object = (Data) inputStream.readObject();
+            inputStream.close();
+        }catch (FileNotFoundException e){
+            //Object = Data.getinstance();
+        }
     }
 }
