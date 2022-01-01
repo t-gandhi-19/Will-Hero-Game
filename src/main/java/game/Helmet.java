@@ -1,4 +1,17 @@
 package game;
 
+import java.util.ArrayList;
+
 public class Helmet {
+    private ArrayList<Weapon> weapons;
+
+    public void addWeapon(Weapon weapon){
+        if(!weapons.contains(weapon)){
+            weapons.add(weapon);
+        }
+        else{
+            weapon.setLevel(weapon.getLevel()+1);
+        }
+    }
+
 }

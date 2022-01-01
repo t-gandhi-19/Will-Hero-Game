@@ -96,7 +96,7 @@
             </Lighting>
          </effect>
       </Text>
-      <Button layoutX="317.0" layoutY="185.0" mnemonicParsing="false" opacity="0.58" prefHeight="81.0" prefWidth="508.0" text="Continue? Spend 10 coins" textFill="#781414">
+      <Button layoutX="317.0" layoutY="185.0" mnemonicParsing="false" onAction="#Spend" opacity="0.58" prefHeight="81.0" prefWidth="508.0" text="Continue? Spend 10 coins" textFill="#781414">
          <font>
             <Font name="Luminari" size="35.0" />
          </font>
@@ -104,7 +104,7 @@
             <Blend mode="SOFT_LIGHT" />
          </effect>
       </Button>
-      <Button layoutX="469.0" layoutY="289.0" mnemonicParsing="false" opacity="0.58" prefHeight="66.0" prefWidth="245.0" text="End Game" textFill="#590975">
+      <Button layoutX="469.0" layoutY="289.0" mnemonicParsing="false" onAction="#EndGame" opacity="0.58" prefHeight="66.0" prefWidth="245.0" text="End Game" textFill="#590975">
          <font>
             <Font name="Luminari" size="30.0" />
          </font>

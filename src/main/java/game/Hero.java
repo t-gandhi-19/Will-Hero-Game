@@ -15,6 +15,9 @@ public class Hero extends GameObjects{
     private int id;
     private int coins;
     private int yCoordinate;
+    private Helmet helmet;
+    private Weapon CurrentWeapon;
+
 
     public Hero () throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Hero.fxml"));

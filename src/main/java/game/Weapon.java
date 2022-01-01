@@ -11,7 +11,7 @@ public class Weapon extends GameObjects{
     WeaponController controller;
 
     private int level;
-    public int hitPoint;
+    private int hitPoint;
 
     public Weapon(int level, int hitPoint) throws IOException {
         this.level = level;
@@ -34,8 +34,8 @@ public class Weapon extends GameObjects{
 
 
     }
-    public int getLevel(Weapon weapon){
-        return weapon.level;
+    public int getLevel(){
+        return this.level;
 
     }
 }
