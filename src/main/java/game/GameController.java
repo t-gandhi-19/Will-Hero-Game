@@ -141,6 +141,7 @@ public class GameController implements Initializable {
 //            } catch (IOException ex) {
 //                ex.printStackTrace();
 //            }
+            saveMe.setLayoutY(0);
         }
 
     }
