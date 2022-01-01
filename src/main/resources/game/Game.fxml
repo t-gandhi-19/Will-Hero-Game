@@ -34,6 +34,7 @@
       <Group fx:id="grp3" />
       <Group fx:id="grp4" />
       <Group fx:id="grp5" />
+      <Group fx:id="grp6" layoutX="10.0" layoutY="10.0" />
       <Text fx:id="coinText" fill="#fffefe" layoutX="1030.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font name="Luminari" size="36.0" />
