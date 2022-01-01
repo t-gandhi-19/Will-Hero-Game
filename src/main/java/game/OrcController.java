@@ -120,7 +120,7 @@ public class OrcController implements Initializable {
                         j = -3;
                         jHT = 325;
                     }
-                    if(greenOrc.getY() < jHT - 240){
+                    if(greenOrc.getY() < jHT - 190){
                         //System.out.println("jht" +jHT);
                         j = 3;
                     }
@@ -137,7 +137,7 @@ public class OrcController implements Initializable {
                         j = -3;
                         jHT = 325;
                     }
-                    if(redOrc.getY() < jHT - 190){
+                    if(redOrc.getY() < jHT - 220){
                         //System.out.println("jht" +jHT);
                         j = 3;
                     }

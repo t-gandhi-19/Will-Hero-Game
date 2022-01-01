@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class Helmet {
     private ArrayList<Weapon> weapons;
 
+    public Helmet() {
+        this.weapons = new ArrayList<Weapon>();
+    }
+
     public void addWeapon(Weapon weapon){
         ArrayList<Weapon> weaponlist = new ArrayList<>();
         if(!weapons.contains(weapon)){

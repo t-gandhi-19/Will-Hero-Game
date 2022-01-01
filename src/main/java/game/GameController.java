@@ -1,6 +1,7 @@
 package game;
 
 import javafx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -45,6 +47,9 @@ public class GameController implements Initializable {
     private Text locationText;
 
     @FXML
+    private Pane saveMe;
+
+    @FXML
     private ImageView pauseButton;
 
     @FXML
@@ -57,6 +62,8 @@ public class GameController implements Initializable {
     private Group grp4;
     @FXML
     private Group grp5;
+    @FXML
+    private Group grp6;
 
     private ImageView heroAll;
     private int heroCode;
@@ -64,13 +71,6 @@ public class GameController implements Initializable {
     private ImageView knife;
     private ImageView knife2;
 
-    private ImageView GOrc1;
-    private ImageView GOrc2;
-    private ImageView GOrc3;
-    private ImageView GOrc4;
-    private ImageView ROrc1;
-    private ImageView ROrc2;
-    private ImageView ROrc3;
     private ImageView Boss;
 
     private ImageView isl1;
@@ -79,41 +79,23 @@ public class GameController implements Initializable {
     private ImageView isl4;
     private ImageView isl5;
 
-
-    private Pane chestTreasure;
-    private Pane chestWeapon;
-    private int chestCode;
-
-    //private Group fallPlat;
-    //private Group buf;
     private boolean bufMain;
     private boolean falling;
-
-
-//    private Pane grp1;
-//    private Pane grp2;
-//    private Pane grp3;
-//    private Pane grp4;
 
     private Hero hero;
     private Weapon w1;
     private Weapon w2;
     private Helmet helmet;
-//    private Orc greenOrc;
-//    private Orc greenOrc1;
-//    private Orc greenOrc2;
-//    private Orc greenOrc3;
-//    private Orc redOrc;
-//    private Boss BossMain;
+
     private Chests Tchest;
     private Chests Wchest;
 
     private Platform island;
     private FallingPlatform finalPlat;
 
-    private ArrayList<Orc> enemies;
-    private ArrayList<Node> enemiesImage;
-    private ArrayList<Platform> platform;
+    private ArrayList<Orc> Genemies;
+    private ArrayList<Orc> Renemies;
+    private ArrayList<Platform> platforms;
     private ArrayList<Chests> chests;
     private ArrayList<Pane> chestsImage;
     private ArrayList<Weapon> weapons;
@@ -159,42 +141,30 @@ public class GameController implements Initializable {
 //            } catch (IOException ex) {
 //                ex.printStackTrace();
 //            }
+            saveMe.setLayoutY(0);
         }
 
     }
 
     public void start() throws IOException, BelowBoundaryException {
-        enemies = new ArrayList<Orc>();
-        enemiesImage = new ArrayList<Node>();
+        Genemies = new ArrayList<Orc>();
+        Renemies = new ArrayList<Orc>();
         chests = new ArrayList<Chests>();
         chestsImage = new ArrayList<Pane>();
-
+        platforms = new ArrayList<Platform>();
         fallingPlatforms = new ArrayList<FallingPlatform>();
         weapons = new ArrayList<Weapon>();
         helmet = new Helmet();
         hero = new Hero(helmet);
         w1 = new Weapon(0,3);
         w2 = new Weapon(0,3);
-//        greenOrc = new Orc();
-//        greenOrc1 = new Orc();
-//        greenOrc3 = new Orc();
-//        greenOrc2 = new Orc();
-//        redOrc = new Orc();
-//        BossMain = new Boss();
-
 
         island = new Platform();
         finalPlat = new FallingPlatform();
-        //tform = new FallingPlatform();
-        //hero.getControl().st(this.);
-//        grp1 = new Group();
-//        grp2 = new Group();
-//        grp3 = new Group();
-//        grp4 = new Group();
         score = 0;
         coins = 0;
 
-        chestCode = 0;
+        int chestCode = 0;
 
         j = 3;
         jHT = -1;
@@ -206,8 +176,8 @@ public class GameController implements Initializable {
 
         arr = new int[5];
 
-        chestTreasure= new Pane();
-        chestWeapon=new Pane();
+        Pane chestTreasure = new Pane();
+        Pane chestWeapon = new Pane();
 
         heroCode = 0;
         heroAll = (ImageView) hero.getObsPane().getChildren().get(0);
@@ -217,8 +187,6 @@ public class GameController implements Initializable {
         knife = (ImageView) w1.getObsPane().getChildren().get(0);
         knife2 = (ImageView) w2.getObsPane().getChildren().get(0);
         sword = (ImageView) w1.getObsPane().getChildren().get(1);
-        islandSetUp();
-        orcSetUP();
         ChestsSetUp();
         setUp();
 
@@ -237,16 +205,11 @@ public class GameController implements Initializable {
             sword.setVisible(false);
         }
 
-        fallPlatSetUp(2225,325);
-
         MainBase.getChildren().add(heroAll);
-
         MainBase.getChildren().add(knife);
         MainBase.getChildren().add(knife2);
         MainBase.getChildren().add(sword);
         Jump();
-        gameFlow();
-        System.out.println(e1 + " thisE");
     }
 
     public void fallPlatSetUp(double x, double y){
@@ -260,17 +223,10 @@ public class GameController implements Initializable {
         Group fallPlat = (Group) f.getObsPane().getChildren().get(0);
         Group buf = (Group) f.getObsPane().getChildren().get(2);
         fallPlat.setLayoutY(y);
-        //fallPlat.setLayoutX(2225);
         fallPlat.setLayoutX(x);
         buf.setLayoutY(y);
-        //buf.setLayoutX(2225);
         buf.setLayoutX(x);
-        while(!grp5.getChildren().isEmpty()){
-            grp5.getChildren().remove(0);
-        }
         grp5.getChildren().addAll(fallPlat,buf);
-        //MainBase.getChildren().add(fallPlat);
-        //MainBase.getChildren().add(buf);
     }
 
     public void fallPlatSetUp1(double x, double y){
@@ -280,69 +236,21 @@ public class GameController implements Initializable {
         fallPlat.setLayoutX(x);
         buf.setLayoutY(y);
         buf.setLayoutX(x);
-        while(!grp4.getChildren().isEmpty()){
-            grp4.getChildren().remove(0);
-        }
-        grp4.getChildren().addAll(fallPlat,buf);
+        grp5.getChildren().addAll(fallPlat,buf);
     }
 
-    public void gameFlow(){
+    public void setUp() throws IOException {
 
-        KeyFrame kf = new KeyFrame(Duration.millis(100), e -> {
-            if(score<82) {
-                if (isl1.getTranslateX() < -600) {
-                    isl1.setTranslateX(isl5.getTranslateX() + 2950);
-                }
-                if (isl2.getTranslateX() < -1000) {
-                    isl2.setTranslateX(isl5.getTranslateX() + 3000);
-                }
-                if (isl3.getTranslateX() < -1400) {
-                    isl3.setTranslateX(isl5.getTranslateX() + 3000);
+        addOrcGreen(675,200);
+        addOrcRed(1100,200);
 
-                }
-                if (isl4.getTranslateX() < -1800) {
-                    isl4.setTranslateX(isl5.getTranslateX() + 3000);
-                }
-                if (isl5.getTranslateX() < -2300) {
-                    isl5.setTranslateX(isl5.getTranslateX() + 3000);
-                }
-                if(isl5.getTranslateX()>0 && isl5.getTranslateX()<125){
-                    fallPlatSetUp(isl5.getBoundsInParent().getMaxX()-50, 325);
-                }
-            }
-            if(score==89 && fl3){
-                if(!falling) {
-                    falling = true;
-                    fallPlatSetUp1(1750, 310);
-                    System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
-                    isl3.setTranslateX(0);
-                    System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
-                    isl3.setLayoutX(3920);
-                    System.out.println(isl3.getLayoutX() + " isl13 "+ isl3.getTranslateX());
-                    fl3 = false;
-                }
-            }
-        });
-        timeline.getKeyFrames().add(kf);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
-
-    public void setUp(){
-        orcFactory(1,675,200);
-        orcFactory(2,1100,200);
-        orcFactory(3,1200,200);
-        orcFactory(4,1700,250);
-        orcFactory(5,1200,250);
-        orcFactory(6,2150,200);
-        orcFactory(7,2250,40);
-        orcFactory(8,3150,-20);
-
-        islandFactory(1,-10);
-        islandFactory(2,575);
-        islandFactory(3,1005);
-        islandFactory(4,1500);
-        islandFactory(5,1900);
+        addIsland(-10);
+        fallPlatSetUp(2200,325);
+        addIsland(2850);
+        fallPlatSetUp(5050,325);
+        addIsland(5800);
+        fallPlatSetUp(8000,325);
+        addLastIsland(8650);
 
         chestFactory(1, 300, 260);
         chestFactory(2, 1050, 260);
@@ -352,13 +260,17 @@ public class GameController implements Initializable {
         chestFactory(6, 3100, 200);
         chestFactory(7, 3580, 200);
 
-        grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
-        grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4);
-        for (int i = 0; i < 4; i++) {
-            enemies.get(i).getController().jumpOrcGreen(island);
+        //grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
+        int a = score - 25;
+        int b = 0;
+        if(a>0){
+            b++;
         }
-        for (int i = 4; i < 7; i++) {
-            enemies.get(i).getController().jumpOrcRed(island);
+        for (int i = 0; i < Genemies.size(); i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(b));
+        }
+        for (int i = 0; i < Renemies.size(); i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(b));
         }
     }
 
@@ -416,7 +328,7 @@ public class GameController implements Initializable {
         i7.getChildren().add(treasureChest7);
         chestsImage.add(i7);
         chests.add(W4);
-        grp3.getChildren().addAll(i1,i2,i3,i4,i5,i6,i7);
+        grp4.getChildren().addAll(i1,i2,i3,i4,i5,i6,i7);
     }
 
     public void openCh(int i){
@@ -457,113 +369,57 @@ public class GameController implements Initializable {
         }
     }
 
-    public void orcSetUP() throws IOException {
-        Orc greenOrc = new Orc(50,3,"green");
-        enemies.add(greenOrc);
-        Orc greenOrc1 = new Orc(50,3,"green");
-        enemies.add(greenOrc1);
-        Orc greenOrc2 = new Orc(50,3,"green");
-        enemies.add(greenOrc2);
-        Orc greenOrc3 = new Orc(50,3,"green");
-        enemies.add(greenOrc3);
-        Orc redOrc = new Orc(100,5,"red");
-        enemies.add(redOrc);
-        Orc redOrc1 = new Orc(100,5,"red");
-        enemies.add(redOrc1);
-        Orc redOrc2 = new Orc(100,5,"red");
-        enemies.add(redOrc2);
-        Orc BossMain = new Boss(350,20,"Boss");
-        enemies.add(BossMain);
-        GOrc1 = (ImageView) greenOrc.getObsPane().getChildren().get(0);
-        GOrc2 = (ImageView) greenOrc1.getObsPane().getChildren().get(0);
-        GOrc3 = (ImageView) greenOrc2.getObsPane().getChildren().get(0);
-        GOrc4 = (ImageView) greenOrc3.getObsPane().getChildren().get(0);
-        ROrc1 = (ImageView) redOrc.getObsPane().getChildren().get(1);
-        ROrc2 = (ImageView) redOrc1.getObsPane().getChildren().get(1);
-        ROrc3 = (ImageView) redOrc2.getObsPane().getChildren().get(1);
-        Boss = (ImageView) BossMain.getObsPane().getChildren().get(2);
-        enemiesImage.add(GOrc1);
-        enemiesImage.add(GOrc2);
-        enemiesImage.add(GOrc3);
-        enemiesImage.add(GOrc4);
-        enemiesImage.add(ROrc1);
-        enemiesImage.add(ROrc2);
-        enemiesImage.add(ROrc3);
-        enemiesImage.add(Boss);
+    public void addOrcGreen(int x, int y) throws IOException {
+        Orc green = new Orc(50,3,"green");
+        Genemies.add(green);
+        ImageView GOrc = (ImageView) green.getObsPane().getChildren().get(0);
+        GOrc.setX(x);
+        GOrc.setY(y);
+        grp2.getChildren().add(GOrc);
     }
 
-    public void islandSetUp(){
-        isl1 = (ImageView) island.getObsPane().getChildren().get(0);
-        isl2 = (ImageView) island.getObsPane().getChildren().get(1);
-        isl3 = (ImageView) island.getObsPane().getChildren().get(2);
-        isl4 = (ImageView) island.getObsPane().getChildren().get(3);
-        isl5 = (ImageView) island.getObsPane().getChildren().get(4);
+    public void addOrcRed(int x, int y) throws IOException {
+        Orc red = new Orc(100,5,"red");
+        Renemies.add(red);
+        ImageView ROrc = (ImageView) red.getObsPane().getChildren().get(1);
+        ROrc.setX(x);
+        ROrc.setY(y);
+        grp3.getChildren().add(ROrc);
     }
 
-    public void orcFactory(int code, int x, int y){
-        switch(code) {
-            case 1:
-                GOrc1.setY(y);
-                GOrc1.setX(x);
-                break;
-            case 2:
-                GOrc2.setY(y);
-                GOrc2.setX(x);
-                break;
-            case 3:
-                GOrc3.setY(y);
-                GOrc3.setX(x);
-                break;
-            case 4:
-                ROrc1.setY(y);
-                ROrc1.setX(x);
-                break;
-            case 5:
-                ROrc2.setY(y);
-                ROrc2.setX(x);
-                break;
-            case 6:
-                ROrc3.setY(y);
-                ROrc3.setX(x);
-                break;
-            case 7:
-                GOrc4.setY(y);
-                GOrc4.setX(x);
-                break;
-            case 8:
-                Boss.setY(y);
-                Boss.setX(x);
-                break;
-        }
+    public void addIsland(int x) throws IOException {
+        Platform i = new Platform();
+        ImageView i1 = (ImageView) i.getObsPane().getChildren().get(0);
+        i1.setX(x);i1.setY(300);
+        ImageView i2 = (ImageView) i.getObsPane().getChildren().get(1);
+        i2.setX(x+630);i2.setY(310);
+        ImageView i3 = (ImageView) i.getObsPane().getChildren().get(2);
+        i3.setX(x+955);i3.setY(310);
+        ImageView i4 = (ImageView) i.getObsPane().getChildren().get(3);
+        i4.setX(x+1510);i4.setY(300);
+        ImageView i5 = (ImageView) i.getObsPane().getChildren().get(4);
+        i5.setX(x+1890);i5.setY(325);
+        grp1.getChildren().add(i1);
+        grp1.getChildren().add(i2);
+        grp1.getChildren().add(i3);
+        grp1.getChildren().add(i4);
+        grp1.getChildren().add(i5);
+        platforms.add(i);
     }
 
-    public void islandFactory(int code, int x){
-        switch (code){
-            case 1:
-                isl1.setX(x);
-                isl1.setY(300);
-                break;
-            case 2:
-                isl2.setX(x);
-                isl2.setY(310);
-                break;
-            case 3:
-                isl3.setX(x);
-                isl3.setY(310);
-                break;
-            case 4:
-                isl4.setX(x);
-                isl4.setY(300);
-                break;
-            case 5:
-                isl5.setX(x);
-                isl5.setY(325);
-                break;
-        }
+    public void addLastIsland(int x) throws IOException {
+        Platform i = new Platform();
+        ImageView i1 = (ImageView) i.getObsPane().getChildren().get(0);
+        i1.setX(x);i1.setY(300);
+        fallPlatSetUp1(x+420,300);
+        ImageView i3 = (ImageView) i.getObsPane().getChildren().get(2);
+        i3.setX(x+1590);i3.setY(310);
+        grp1.getChildren().add(i1);
+        grp1.getChildren().add(i3);
+        platforms.add(i);
     }
 
     public void Jump() throws BelowBoundaryException{
-
         jumpOnOrc.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e)->{
             heroAll.setLayoutY(heroAll.getLayoutY() + j);
             sword.setLayoutY(sword.getLayoutY() + j);
@@ -573,13 +429,15 @@ public class GameController implements Initializable {
             if (heroAll.getLayoutY() < jHT - 200) {
                 j = 3;
             }
-            for (int i = 0; i < 4; i++) {
-                actAfterColl3(enemies.get(i).getController().collideGreen(heroAll));
+            for (int i = 0; i < Genemies.size(); i++) {
+                actAfterColl3(Genemies.get(i).getController().collideGreen(heroAll));
             }
-            for (int i = 4; i < 7; i++) {
-                actAfterColl3(enemies.get(i).getController().collideRed(heroAll));
+            for (int i = 0; i < Renemies.size(); i++) {
+                actAfterColl3(Renemies.get(i).getController().collideRed(heroAll));
             }
-            actAfterCollIsland(island.getControl().ifCollide(heroAll));
+            for (int i = 0; i < platforms.size(); i++) {
+                actAfterCollIsland(platforms.get(i).getControl().ifCollide(heroAll));
+            }
         }));
         jumpOnOrc.setCycleCount(Animation.INDEFINITE);
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20),
@@ -588,7 +446,9 @@ public class GameController implements Initializable {
                     sword.setLayoutY(sword.getLayoutY() + j);
                     knife.setLayoutY(knife.getLayoutY() + j);
                     knife2.setLayoutY(knife2.getLayoutY() + j);
-                    actAfterCollIsland(island.getControl().ifCollide(heroAll));
+                    for (int i = 0; i < platforms.size(); i++) {
+                        actAfterCollIsland(platforms.get(i).getControl().ifCollide(heroAll));
+                    }
                     if (heroAll.getLayoutY() < jHT - 130) {
                         System.out.println("cc  " + j);
                         j = 3;
@@ -604,14 +464,14 @@ public class GameController implements Initializable {
                         j = -3;
                         jHT = 310;
                     }
-                    if(Boss.getBoundsInParent().intersects(heroAll.getBoundsInParent())){
-                        adjust(80, 120);
+//                    if(Boss.getBoundsInParent().intersects(heroAll.getBoundsInParent())){
+//                        adjust(80, 120);
+//                    }
+                    for (int i = 0; i < Genemies.size(); i++) {
+                        actAfterColl2(Genemies.get(i).getController().collideGreen(heroAll));
                     }
-                    for (int i = 0; i < 4; i++) {
-                        actAfterColl2(enemies.get(i).getController().collideGreen(heroAll));
-                    }
-                    for (int i = 4; i < 7; i++) {
-                        actAfterColl2(enemies.get(i).getController().collideRed(heroAll));
+                    for (int i = 0; i < Renemies.size(); i++) {
+                        actAfterColl2(Renemies.get(i).getController().collideRed(heroAll));
                     }
                     for (int i = 0; i < 3; i++) {
                         if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
@@ -637,11 +497,12 @@ public class GameController implements Initializable {
                         }
                         catch (BelowBoundaryException ex) {
                             System.out.println(ex.getMessage());
-                            try {
-                                DisplaySaveMe(e1);
-                            } catch (IOException exc) {
-                                exc.printStackTrace();
-                            }
+                            saveMe.setLayoutY(0);
+//                            try {
+//                                DisplaySaveMe(e1);
+//                            } catch (IOException exc) {
+//                                exc.printStackTrace();
+//                            }
                         }
                         finally {
                             jump.stop();
@@ -654,7 +515,7 @@ public class GameController implements Initializable {
         jump.play();
     }
 
-    public void heroMove (double time) throws GameLoseException{
+    public void heroMove () throws GameLoseException{
         jump.stop();
         jumpOnOrc.stop();
         //System.out.println("jump on orc stopped");
@@ -663,13 +524,13 @@ public class GameController implements Initializable {
         if(heroCode == 2)
             rotSword();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
-            for (int i = 0; i < 4; i++) {
-                arr3 = enemies.get(i).getController().collideGreen(heroAll);
+            for (int i = 0; i < Genemies.size(); i++) {
+                arr3 = Genemies.get(i).getController().collideGreen(heroAll);
                 if(arr3==11){
                     //upFlag = 1;
                     System.out.println("orcColl");
                     adjust(90,120);
-                    translateX(enemiesImage.get(i), orcX, 120);
+                    translateX(grp2.getChildren().get(i), orcX, 120);
                     //heroSetUp(1);
                 }
                 else if(arr3 == 13){
@@ -679,11 +540,12 @@ public class GameController implements Initializable {
                     }
                     catch (GameLoseException ex) {
                         System.out.println(ex.getMessage());
-                        try {
-                            DisplaySaveMe(e1);
-                        } catch (IOException exc) {
-                            exc.printStackTrace();
-                        }
+                        saveMe.setLayoutY(0);
+//                        try {
+//                            DisplaySaveMe(e1);
+//                        } catch (IOException exc) {
+//                            exc.printStackTrace();
+//                        }
                     }
                     finally {
                         jump.stop();
@@ -692,13 +554,13 @@ public class GameController implements Initializable {
                     }
                 }
             }
-            for (int i = 4; i < 7; i++) {
-                arr3 = enemies.get(i).getController().collideRed(heroAll);
+            for (int i = 0; i < Renemies.size(); i++) {
+                arr3 = Renemies.get(i).getController().collideRed(heroAll);
                 if(arr3==11){
                     //upFlag = 1;
                     System.out.println("orcColl");
                     adjust(90,120);
-                    translateX(enemiesImage.get(i), orcX, 120);
+                    translateX(grp3.getChildren().get(i), orcX, 120);
                     //heroSetUp(1);
                 }
                 else if(arr3 == 13){
@@ -708,11 +570,12 @@ public class GameController implements Initializable {
                     }
                     catch (GameLoseException ex) {
                         System.out.println(ex.getMessage());
-                        try {
-                            DisplaySaveMe(e1);
-                        } catch (IOException exc) {
-                            exc.printStackTrace();
-                        }
+                        saveMe.setLayoutY(0);
+//                        try {
+//                            DisplaySaveMe(e1);
+//                        } catch (IOException exc) {
+//                            exc.printStackTrace();
+//                        }
                     }
                     finally {
                         jump.stop();
@@ -759,11 +622,12 @@ public class GameController implements Initializable {
             }
             catch (GameLoseException ex) {
                 System.out.println(ex.getMessage());
-                try {
-                    DisplaySaveMe(e1);
-                } catch (IOException exc) {
-                    exc.printStackTrace();
-                }
+//                try {
+//                    DisplaySaveMe(e1);
+//                } catch (IOException exc) {
+//                    exc.printStackTrace();
+//                }
+                saveMe.setLayoutY(0);
             }
             finally {
                 jump.stop();
@@ -796,7 +660,7 @@ public class GameController implements Initializable {
 
     public void move(MouseEvent e2){
         e1 = e2;
-        System.out.println(e1 + " thisE");
+        //System.out.println(e1 + " thisE");
         //hero.getControl().pause(true);
         for (int i = 0; i < grp1.getChildren().size(); i++) {
             translateX(grp1.getChildren().get(i), shiftLeftBy, time);
@@ -815,7 +679,7 @@ public class GameController implements Initializable {
             translateX(grp5.getChildren().get(i), shiftLeftBy, time);
         }
         try {
-            heroMove(time);
+            heroMove();
         } catch (GameLoseException e) {
             e.printStackTrace();
         }
@@ -897,42 +761,55 @@ public class GameController implements Initializable {
         rot.play();
         rot.setOnFinished((e)->{rotBack.play();});
     }
-    public void hitAnimation(int i){
-        FadeTransition ft = new FadeTransition(Duration.millis(100), enemiesImage.get(i));
+
+    public void hitAnimation(Node n){
+        FadeTransition ft = new FadeTransition(Duration.millis(100), n);
         ft.setFromValue(1.0);
         ft.setToValue(0.1);
         ft.play();
         ft.setOnFinished((e)->{
-            FadeTransition ft2 = new FadeTransition(Duration.millis(100), enemiesImage.get(i));
+            FadeTransition ft2 = new FadeTransition(Duration.millis(100), n);
             ft2.setFromValue(0.1);
             ft2.setToValue(1.0);
             ft2.play();
         });
     }
 
-    public void deathAnimation(int i){
-        TranslateTransition t = new TranslateTransition(Duration.millis(1000), enemiesImage.get(i));
+    public void deathAnimation(Node n){
+        TranslateTransition t = new TranslateTransition(Duration.millis(1000), n);
         t.setByY(500);
         t.play();
     }
-
 
     public void throwKnife(int level){
         Timeline th = new Timeline();
         fl1 = false;
         fl2 = false;
         th.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e)->{
-            for (int i = 0; i < 7; i++) {
-                if(w1.getController().ifCollide(enemiesImage.get(i))==1 && (level == 1 || level == 2) && !fl1){
+            for (int i = 0; i < Genemies.size(); i++) {
+                if(w1.getController().ifCollide(grp2.getChildren().get(i))==1 && (level == 1 || level == 2) && !fl1){
                     fl1 = true;
                     System.out.println("dieOrc1");
-                    hitAnimation(i);
+                    hitAnimation(grp2.getChildren().get(i));
                     //deathAnimation(i);
                 }
-                if(w2.getController().ifCollide(enemiesImage.get(i))==1 && level == 2 && !fl2){
+                if(w2.getController().ifCollide(grp2.getChildren().get(i))==1 && level == 2 && !fl2){
                     fl2 = true;
                     System.out.println("dieOrc2");
-                    hitAnimation(i);
+                    hitAnimation(grp2.getChildren().get(i));
+                }
+            }
+            for (int i = 0; i < Renemies.size(); i++) {
+                if(w1.getController().ifCollide(grp3.getChildren().get(i))==1 && (level == 1 || level == 2) && !fl1){
+                    fl1 = true;
+                    System.out.println("dieOrc1");
+                    hitAnimation(grp3.getChildren().get(i));
+                    //deathAnimation(i);
+                }
+                if(w2.getController().ifCollide(grp3.getChildren().get(i))==1 && level == 2 && !fl2){
+                    fl2 = true;
+                    System.out.println("dieOrc2");
+                    hitAnimation(grp3.getChildren().get(i));
                 }
             }
         }));
@@ -994,11 +871,11 @@ public class GameController implements Initializable {
     }
 
     public void DisplayPauseMenu(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
-        System.out.println(mouseEvent + " thisMouseEv");
+        //System.out.println(mouseEvent + " thisMouseEv");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("InGamePause.fxml"));
         root =loader.load();
         Stage stage3 =(Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        System.out.println(stage3 + " insideMenuSt");
+        //System.out.println(stage3 + " insideMenuSt");
         scene = new Scene(root);
         stage3.setScene(scene);
         stage3.show();
@@ -1006,11 +883,11 @@ public class GameController implements Initializable {
     }
 
     public void DisplaySaveMe(Event e) throws IOException {
-        System.out.println(e + " insideSave");
+        //System.out.println(e + " insideSave");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("SaveMe.fxml"));
         root2 =loader.load();
         Stage stage1 =(Stage)((Node)e.getSource()).getScene().getWindow();
-        System.out.println(stage1 + " insideSaveStage");
+        //System.out.println(stage1 + " insideSaveStage");
         scene2 = new Scene(root2);
         stage1.setScene(scene2);
         stage1.show();
@@ -1045,5 +922,23 @@ public class GameController implements Initializable {
         else if(a == 13){
             //System.out.println("die");
         }
+    }
+    public void EndGame(ActionEvent event) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("WelcomeScreen.fxml"));
+        root =loader.load();
+        stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void Spend(ActionEvent event) throws IOException, InsufficientCoinsException {
+        saveMe.setLayoutY(700);
+        heroAll.setTranslateY(0);
+        heroAll.setLayoutY(-50);
+
+        jump.play();
+        timeline.play();
+        inBtw.play();
+
     }
 }

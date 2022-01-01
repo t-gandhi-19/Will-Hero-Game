@@ -21,9 +21,8 @@ public class InGamePauseController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-
     }
+
     public void ReturnToMain(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("WelcomeScreen.fxml"));
         root =loader.load();
@@ -31,8 +30,5 @@ public class InGamePauseController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-
     }
-
 }
