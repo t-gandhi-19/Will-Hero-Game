@@ -12,10 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChestsController implements Initializable {
+public class ChestsController implements Initializable, Serializable {
     @FXML
     private ImageView weaponChest;
 

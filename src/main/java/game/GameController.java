@@ -215,14 +215,15 @@ public class GameController extends GameObjects implements Initializable  {
         MainBase.getChildren().add(sword);
         Jump();
 
-        check();
+        //check();
     }
 
     public void check(){
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(500),(e)->{
-            System.out.println(grp1.getChildren().get(0).getLayoutX() + " " + grp1.getChildren().get(0).getTranslateX());
-            System.out.println(grp1.getChildren().get(1).getLayoutX() + " " + grp1.getChildren().get(1).getTranslateX());
-            System.out.println(grp1.getChildren().get(2).getLayoutX() + " " + grp1.getChildren().get(2).getTranslateX());
+//            System.out.println(grp1.getChildren().get(0).getLayoutX() + " " + grp1.getChildren().get(0).getTranslateX());
+//            System.out.println(grp1.getChildren().get(1).getLayoutX() + " " + grp1.getChildren().get(1).getTranslateX());
+//            System.out.println(grp1.getChildren().get(2).getLayoutX() + " " + grp1.getChildren().get(2).getTranslateX());
+            System.out.println(score + " scoreeeeee");
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -758,6 +759,7 @@ public class GameController extends GameObjects implements Initializable  {
 
     public void update(){
         score += 1;
+        System.out.println(score + " score updated");
         locationText.setText("" + (score));
     }
 
@@ -1012,7 +1014,8 @@ public class GameController extends GameObjects implements Initializable  {
     }
 
     public int getScore() {
-        return score;
+        System.out.println(score +" score from gamCon");
+        return this.score;
     }
 
     public int getCoins() {

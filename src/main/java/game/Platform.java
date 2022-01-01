@@ -5,7 +5,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Platform {
+public class Platform extends GameObjects{
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
     PlatformController controller;

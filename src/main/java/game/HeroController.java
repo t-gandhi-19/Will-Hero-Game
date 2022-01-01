@@ -8,12 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
-public class HeroController implements Initializable{
+public class HeroController implements Initializable, Serializable {
     @FXML
     private ImageView heroNormal;
 

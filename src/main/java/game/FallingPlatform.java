@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-public class FallingPlatform {
+public class FallingPlatform extends GameObjects{
 
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;

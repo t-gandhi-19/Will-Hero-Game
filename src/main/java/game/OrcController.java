@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 

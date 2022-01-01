@@ -6,9 +6,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+import java.io.Serializable;
 
 
-public class PlatformController {
+public class PlatformController implements Serializable {
 
     @FXML
     private Pane Mrock1;

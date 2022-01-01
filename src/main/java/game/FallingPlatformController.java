@@ -12,10 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FallingPlatformController implements Initializable {
+public class FallingPlatformController implements Initializable, Serializable {
     @FXML
     private Group fallPlatform;
 
