@@ -122,6 +122,7 @@ public class GameController implements Initializable {
     private final int time = 120;
     private final int orcX=180;
     private int score;
+    private int coins;
 
     private Timeline jump = new Timeline();
     private Timeline jumpOnOrc = new Timeline();
@@ -188,6 +189,7 @@ public class GameController implements Initializable {
 //        grp3 = new Group();
 //        grp4 = new Group();
         score = 0;
+        coins = 0;
 
         chestCode = 0;
 
@@ -432,7 +434,7 @@ public class GameController implements Initializable {
 //        ch1.setY(280);
 
         grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
-       // grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4);
+        grp2.getChildren().addAll(ROrc1,ROrc2,ROrc3, GOrc1, GOrc2, GOrc3, GOrc4);
 
         //grp3.getChildren().addAll(isl4);
 
@@ -810,12 +812,15 @@ public class GameController implements Initializable {
                     }
                     if(heroAll.getLayoutY()>600){
                         try {
-                            DisplaySaveMe(e1);
                             throw new BelowBoundaryException("Below Boundary");
-                        } catch (BelowBoundaryException ex) {
+                        }
+                        catch (BelowBoundaryException ex) {
                             System.out.println(ex.getMessage());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
+                            try {
+                                DisplaySaveMe(e1);
+                            } catch (IOException exc) {
+                                exc.printStackTrace();
+                            }
                         }
                         finally {
                             jump.stop();
@@ -828,12 +833,12 @@ public class GameController implements Initializable {
         jump.play();
     }
 
-    public void heroMove (double time) {
+    public void heroMove (double time) throws GameLoseException{
         jump.stop();
         jumpOnOrc.stop();
         //System.out.println("jump on orc stopped");
         if(heroCode == 1)
-            throwKnife(1);
+            throwKnife(2);
         if(heroCode == 2)
             rotSword();
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
@@ -855,7 +860,22 @@ public class GameController implements Initializable {
                 }
                 else if(arr3 == 13){
                     System.out.println("die");
-                    //throw new GameLoseException("Hero Dies");
+                    try {
+                        throw new GameLoseException("Hero Dies");
+                    }
+                    catch (GameLoseException ex) {
+                        System.out.println(ex.getMessage());
+                        try {
+                            DisplaySaveMe(e1);
+                        } catch (IOException exc) {
+                            exc.printStackTrace();
+                        }
+                    }
+                    finally {
+                        jump.stop();
+                        inBtw.stop();
+                        timeline.stop();
+                    }
                 }
             }
             for (int i = 4; i < 7; i++) {
@@ -869,7 +889,22 @@ public class GameController implements Initializable {
                 }
                 else if(arr3 == 13){
                     System.out.println("die");
-                    //throw new GameLoseException("Hero Dies");
+                    try {
+                        throw new GameLoseException("Hero Dies");
+                    }
+                    catch (GameLoseException ex) {
+                        System.out.println(ex.getMessage());
+                        try {
+                            DisplaySaveMe(e1);
+                        } catch (IOException exc) {
+                            exc.printStackTrace();
+                        }
+                    }
+//                    finally {
+//                        jump.stop();
+//                        inBtw.stop();
+//                        timeline.stop();
+//                    }
                 }
             }
             //System.out.println("gg");
@@ -920,7 +955,22 @@ public class GameController implements Initializable {
         }
         else if(a == 13){
             System.out.println("die");
-            //throw new GameLoseException("Hero Dies");
+            try {
+                throw new GameLoseException("Hero Dies");
+            }
+            catch (GameLoseException ex) {
+                System.out.println(ex.getMessage());
+                try {
+                    DisplaySaveMe(e1);
+                } catch (IOException exc) {
+                    exc.printStackTrace();
+                }
+            }
+            finally {
+                jump.stop();
+                inBtw.stop();
+                timeline.stop();
+            }
         }
     }
 
@@ -975,7 +1025,11 @@ public class GameController implements Initializable {
 //        }
 //        translateX(fallPlat,shiftLeftBy,time);
 //        translateX(buf,shiftLeftBy,time);
-        heroMove(time);
+        try {
+            heroMove(time);
+        } catch (GameLoseException e) {
+            e.printStackTrace();
+        }
         //rotSword();
         if(upFlag == 0) {
             update();
@@ -1029,6 +1083,12 @@ public class GameController implements Initializable {
         score = score - 1;
         locationText.setText("" + (score));
     }
+
+    public void updateCoins(int no){
+        coins = coins + no;
+        coinText.setText("" + coins);
+    }
+
     public void rotSword(){
         Rotate rotate1 = new Rotate(60, 160,235);
         Rotate rotate2 = new Rotate(-60, 160, 235);
@@ -1090,6 +1150,7 @@ public class GameController implements Initializable {
                 if(w2.getController().ifCollide(enemiesImage.get(i))==1 && level == 2 && !fl2){
                     fl2 = true;
                     System.out.println("dieOrc2");
+                    hitAnimation(i);
                 }
             }
         }));

@@ -24,7 +24,7 @@
             <Font name="Luminari" size="36.0" />
          </font>
       </Text>
-      <Text fx:id="coinText" fill="WHITE" layoutX="871.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins :         " textAlignment="CENTER" wrappingWidth="228.23557662963867">
+      <Text fill="WHITE" layoutX="871.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins :         " textAlignment="CENTER" wrappingWidth="228.23557662963867">
          <font>
             <Font name="Luminari" size="36.0" />
          </font>
@@ -34,5 +34,10 @@
       <Group fx:id="grp3" />
       <Group fx:id="grp4" />
       <Group fx:id="grp5" />
+      <Text fx:id="coinText" fill="#fffefe" layoutX="1030.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Luminari" size="36.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
