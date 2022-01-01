@@ -804,7 +804,11 @@ public class GameController implements Initializable {
                         }
                     }
                     if(heroAll.getLayoutY()>350) {
-
+                        TranslateTransition t = new TranslateTransition(Duration.millis(1000), heroAll);
+                        t.setByY(500);
+                        t.play();
+                    }
+                    if(heroAll.getLayoutY()>600){
                         try {
                             DisplaySaveMe(e1);
                             throw new BelowBoundaryException("Below Boundary");
