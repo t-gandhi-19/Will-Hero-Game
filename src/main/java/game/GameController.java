@@ -24,16 +24,16 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GameController extends GameObjects implements Initializable  {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private Parent root2;
-    private Scene scene2;
+//    private Stage stage;
+//    private Scene scene;
+//    private Parent root;
+//    private Parent root2;
+//    private Scene scene2;
     private Event e1;
-
 
     @FXML
     private AnchorPane MainBase;
@@ -74,12 +74,6 @@ public class GameController extends GameObjects implements Initializable  {
 
     private ImageView Boss;
 
-    private ImageView isl1;
-    private ImageView isl2;
-    private ImageView isl3;
-    private ImageView isl4;
-    private ImageView isl5;
-
     private boolean bufMain;
     private boolean falling;
 
@@ -101,6 +95,10 @@ public class GameController extends GameObjects implements Initializable  {
     private ArrayList<Pane> chestsImage;
     private ArrayList<Weapon> weapons;
     private ArrayList<FallingPlatform> fallingPlatforms;
+
+    private ArrayList<Double> posIsland;
+
+    private HashMap<Integer, ArrayList<GameObjects>> map;
 
     private final double shiftLeftBy = -90;
     private final int time = 120;
@@ -127,6 +125,8 @@ public class GameController extends GameObjects implements Initializable  {
     private boolean fl3;
     private boolean fl4;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {         //start
@@ -136,18 +136,20 @@ public class GameController extends GameObjects implements Initializable  {
         }
         catch (BelowBoundaryException e){
             System.out.println(e.getMessage());
-//            try {
-//                System.out.println("hello");
-//                DisplaySaveMe();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
             saveMe.setLayoutY(0);
         }
 
     }
 
+    public HashMap<Integer, ArrayList<GameObjects>> getMap() {
+        return map;
+    }
+
+
     public void start() throws IOException, BelowBoundaryException {
+        posIsland = new ArrayList<Double>();
+        map = new HashMap<Integer,ArrayList<GameObjects>>();
+
         Genemies = new ArrayList<Orc>();
         Renemies = new ArrayList<Orc>();
         chests = new ArrayList<Chests>();
@@ -188,6 +190,7 @@ public class GameController extends GameObjects implements Initializable  {
         knife = (ImageView) w1.getObsPane().getChildren().get(0);
         knife2 = (ImageView) w2.getObsPane().getChildren().get(0);
         sword = (ImageView) w1.getObsPane().getChildren().get(1);
+        orcSetUp();
         ChestsSetUp();
         setUp();
 
@@ -211,6 +214,18 @@ public class GameController extends GameObjects implements Initializable  {
         MainBase.getChildren().add(knife2);
         MainBase.getChildren().add(sword);
         Jump();
+
+        check();
+    }
+
+    public void check(){
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(500),(e)->{
+            System.out.println(grp1.getChildren().get(0).getLayoutX() + " " + grp1.getChildren().get(0).getTranslateX());
+            System.out.println(grp1.getChildren().get(1).getLayoutX() + " " + grp1.getChildren().get(1).getTranslateX());
+            System.out.println(grp1.getChildren().get(2).getLayoutX() + " " + grp1.getChildren().get(2).getTranslateX());
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     public void fallPlatSetUp(double x, double y){
@@ -241,9 +256,9 @@ public class GameController extends GameObjects implements Initializable  {
     }
 
     public void setUp() throws IOException {
+        posIsland.add((double) -10);
 
-        addOrcGreen(675,200);
-        addOrcRed(1100,200);
+
 
         addIsland(-10);
         fallPlatSetUp(2200,325);
@@ -273,6 +288,11 @@ public class GameController extends GameObjects implements Initializable  {
         for (int i = 0; i < Renemies.size(); i++) {
             Renemies.get(i).getController().jumpOrcRed(platforms.get(b));
         }
+    }
+
+    public void orcSetUp() throws IOException {
+        addOrcGreen(675,200);
+        addOrcRed(1100,200);
     }
 
     public void ChestsSetUp() throws IOException {
@@ -418,6 +438,15 @@ public class GameController extends GameObjects implements Initializable  {
         grp1.getChildren().add(i1);
         grp1.getChildren().add(i3);
         platforms.add(i);
+    }
+
+    public void addBoss(int x, int y) throws IOException {
+        Orc boss = new Orc(350,25,"boss");
+        Genemies.add(boss);
+        ImageView b = (ImageView) boss.getObsPane().getChildren().get(0);
+        b.setX(x);
+        b.setY(y);
+        grp2.getChildren().add(b);
     }
 
     public void Jump() throws BelowBoundaryException{
@@ -874,10 +903,10 @@ public class GameController extends GameObjects implements Initializable  {
     public void DisplayPauseMenu(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
         //System.out.println(mouseEvent + " thisMouseEv");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("InGamePause.fxml"));
-        root =loader.load();
+        Parent root =loader.load();
         Stage stage3 =(Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
         //System.out.println(stage3 + " insideMenuSt");
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         stage3.setScene(scene);
         stage3.show();
 
@@ -886,10 +915,10 @@ public class GameController extends GameObjects implements Initializable  {
     public void DisplaySaveMe(Event e) throws IOException {
         //System.out.println(e + " insideSave");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("SaveMe.fxml"));
-        root2 =loader.load();
+        Parent root2 =loader.load();
         Stage stage1 =(Stage)((Node)e.getSource()).getScene().getWindow();
         //System.out.println(stage1 + " insideSaveStage");
-        scene2 = new Scene(root2);
+        Scene scene2 = new Scene(root2);
         stage1.setScene(scene2);
         stage1.show();
 
@@ -926,9 +955,9 @@ public class GameController extends GameObjects implements Initializable  {
     }
     public void EndGame(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("WelcomeScreen.fxml"));
-        root =loader.load();
-        stage =(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root =loader.load();
+        Stage stage =(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -940,31 +969,60 @@ public class GameController extends GameObjects implements Initializable  {
         jump.play();
         timeline.play();
         inBtw.play();
+    }
+
+    public void save(){
 
     }
-    public static void serialize() throws IOException{
-        System.out.println("serializing..");
-        ObjectOutputStream outputStream= null;
-        try {
-            outputStream = new ObjectOutputStream(new FileOutputStream("data.txt"));
-            //outputStream.writeObject(Object);
-            //outputStream.writeObject(Object);
-        }finally {
-            outputStream.close();
-            System.out.println("saved");
-        }
+
+    public Helmet getHelmet() {
+        return helmet;
+    }
+
+    public ArrayList<Orc> getGenemies() {
+        return Genemies;
+    }
+
+    public ArrayList<Orc> getRenemies() {
+        return Renemies;
+    }
+
+    public ArrayList<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    public ArrayList<Chests> getChests() {
+        return chests;
+    }
+
+    public ArrayList<Pane> getChestsImage() {
+        return chestsImage;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public ArrayList<FallingPlatform> getFallingPlatforms() {
+        return fallingPlatforms;
+    }
+
+    public ArrayList<Double> getPosIsland() {
+        return posIsland;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
 
 
-    }
-    public static void deserislize() throws FileNotFoundException, ClassNotFoundException, IOException{
-        System.out.println("deserializing");
-        ObjectInputStream inputStream= null;
-        try{
-            inputStream= new ObjectInputStream(new FileInputStream("data.txt"));
-            //Object = (Data) inputStream.readObject();
-            inputStream.close();
-        }catch (FileNotFoundException e){
-            //Object = Data.getinstance();
-        }
-    }
+
 }
