@@ -11,6 +11,7 @@ public class WeaponChest extends Chests{
     @Override
     public void collectChest(Hero hero) {
         this.open = true;
+        hero.getHelmet().addWeapon(weapon);
 
     }
 }

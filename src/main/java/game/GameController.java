@@ -98,6 +98,7 @@ public class GameController implements Initializable {
     private Hero hero;
     private Weapon w1;
     private Weapon w2;
+    private Helmet helmet;
 //    private Orc greenOrc;
 //    private Orc greenOrc1;
 //    private Orc greenOrc2;
@@ -123,6 +124,7 @@ public class GameController implements Initializable {
     private final int orcX=180;
     private int score;
     private int coins;
+
 
     private Timeline jump = new Timeline();
     private Timeline jumpOnOrc = new Timeline();
@@ -169,7 +171,8 @@ public class GameController implements Initializable {
 
         fallingPlatforms = new ArrayList<FallingPlatform>();
         weapons = new ArrayList<Weapon>();
-        hero = new Hero();
+        helmet = new Helmet();
+        hero = new Hero(helmet);
         w1 = new Weapon(0,3);
         w2 = new Weapon(0,3);
 //        greenOrc = new Orc();

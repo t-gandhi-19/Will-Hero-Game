@@ -12,6 +12,10 @@ public class Helmet {
         else{
             weapon.setLevel(weapon.getLevel()+1);
         }
+
+    }
+    public ArrayList<Weapon> getWeaponList(){
+        return weapons;
     }
 
 }

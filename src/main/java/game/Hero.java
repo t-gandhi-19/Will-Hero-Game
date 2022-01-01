@@ -19,7 +19,9 @@ public class Hero extends GameObjects{
     private Weapon CurrentWeapon;
 
 
-    public Hero () throws IOException {
+    public Hero (Helmet helmet) throws IOException {
+        this.helmet = helmet;
+
         fxmlLoader = new FXMLLoader(getClass().getResource("Hero.fxml"));
         obsPane = fxmlLoader.load();
         id = 6;
@@ -32,7 +34,9 @@ public class Hero extends GameObjects{
 //        obsPane.getChildren().add(1,heroKnife);
     }
 
-
+    public Helmet getHelmet(){
+        return this.helmet;
+    }
     public int getCoins(){
         return coins;
     }
