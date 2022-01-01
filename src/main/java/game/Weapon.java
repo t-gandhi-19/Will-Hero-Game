@@ -10,6 +10,7 @@ public class Weapon extends GameObjects{
     private FXMLLoader fxmlLoader;
     WeaponController controller;
 
+
     private int level;
     private int hitPoint;
 

@@ -22,6 +22,7 @@ public class SceneController {
 
     }
 
+
     public void SwitchToGame() throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
         scene = new Scene(root);

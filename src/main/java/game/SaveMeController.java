@@ -22,6 +22,7 @@ public class SaveMeController {
         stage.setScene(scene);
         stage.show();
     }
+
     public void EndGame(ActionEvent event) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("WelcomeScreen.fxml"));
         root =loader.load();

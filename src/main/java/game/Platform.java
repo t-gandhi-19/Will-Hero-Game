@@ -11,6 +11,7 @@ public class Platform extends GameObjects{
     PlatformController controller;
     private int id;
 
+
     public Platform() throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("Islands.fxml"));
         obsPane = fxmlLoader.load();

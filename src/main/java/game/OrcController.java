@@ -113,6 +113,7 @@ public class OrcController implements Initializable {
     }
 
 
+
     public void jumpOrcGreen(Platform obj){
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
             greenOrc.setY(greenOrc.getY() + j);

@@ -11,6 +11,7 @@ public class ThrowingKnives extends Weapon{
         knifeCount = knifeC;
     }
 
+
     public int getThrowDistance(){
         return this.throwDistance;
     }

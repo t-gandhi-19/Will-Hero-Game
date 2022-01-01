@@ -16,7 +16,6 @@ public class FallingPlatform extends GameObjects{
     private FXMLLoader fxmlLoader;
     FallingPlatformController controller;
     private int id;
-
     public FallingPlatform () throws IOException {
         fxmlLoader = new FXMLLoader(getClass().getResource("FallingPlatform.fxml"));
         obsPane = fxmlLoader.load();

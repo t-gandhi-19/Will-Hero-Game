@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Helmet extends GameObjects{
     private ArrayList<Weapon> weapons;
 
+
     public Helmet() {
         this.weapons = new ArrayList<Weapon>();
     }

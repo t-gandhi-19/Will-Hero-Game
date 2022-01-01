@@ -13,7 +13,6 @@ public abstract class Chests extends GameObjects{
     protected boolean open;
 
 
-
     public Chests(String type, boolean open) throws IOException {
         this.type=type;
         this.open=open;

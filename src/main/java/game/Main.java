@@ -11,37 +11,36 @@ import javafx.stage.Stage;
 import java.io.*;
 
 
-public class Main{
-    private static Game game;
-
+public class Main extends Application {
+//    private Game game;
+//
 //    public Main() throws IOException {
 //        this.game = new Game();
 //    }
 
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//                //AnchorPane root = FXMLLoader.load(getClass().getResource("Game1.fxml"));
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
-//        AnchorPane root = fxmlLoader.load();
-//
-//        //Group root1 = new Group();
-//
-//        Scene scene = new Scene(root);
-//        //ImageView bg = new ImageView(new Image(getClass().getResourceAsStream("images/bg.jpeg")));
-//        stage.setResizable(false);
-//        stage.setTitle("Will Hero Game!");
-//        stage.setHeight(600);
-//        stage.setWidth(1100);
-//        stage.setScene(scene);
-//        stage.show();
-//
-//
-//    }
+    @Override
+    public void start(Stage stage) throws IOException {
+                //AnchorPane root = FXMLLoader.load(getClass().getResource("Game1.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
+        AnchorPane root = fxmlLoader.load();
 
-    public static void main(String[] args) throws IOException {
-        //launch(args);
-        game = new Game();
-        game.main(args);
+        //Group root1 = new Group();
+
+        Scene scene = new Scene(root);
+        //ImageView bg = new ImageView(new Image(getClass().getResourceAsStream("images/bg.jpeg")));
+        stage.setResizable(false);
+        stage.setTitle("Will Hero Game!");
+        stage.setHeight(600);
+        stage.setWidth(1100);
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
 //        try {
 //            Game g = new Game();
 //        } catch (IOException e) {
@@ -51,14 +50,14 @@ public class Main{
     }
 
     public static void serialize() throws IOException{
-
-        game.save();
-        System.out.println(game.getHelmet() + " " + game.getScore());
+        Game g = new Game();
+        g.save();
+        System.out.println(g.getGenemies() + " " + g.getScore());
         System.out.println("serializing..");
         ObjectOutputStream outputStream= null;
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream("data.txt"));
-            outputStream.writeObject(game);
+            outputStream.writeObject(g);
             //outputStream.writeObject(Object);
         }finally {
             outputStream.close();
