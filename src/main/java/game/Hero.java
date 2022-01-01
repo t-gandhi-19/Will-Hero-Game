@@ -34,6 +34,7 @@ public class Hero extends GameObjects{
 //        obsPane.getChildren().add(1,heroKnife);
     }
 
+
     public Helmet getHelmet(){
         return this.helmet;
     }

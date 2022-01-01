@@ -11,7 +11,6 @@ public class TreasureChest extends Chests{
 
     private int coins;
 
-
     public TreasureChest(int coinN) throws IOException {
         super("Treasure", false);
         this.coins=coinN;

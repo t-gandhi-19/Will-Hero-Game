@@ -20,6 +20,7 @@ public class SwordController implements Initializable {
     private ImageView Sword;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

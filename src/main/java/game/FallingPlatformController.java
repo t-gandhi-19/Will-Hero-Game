@@ -138,6 +138,7 @@ public class FallingPlatformController implements Initializable {
                 new KeyFrame(Duration.millis(2250), (e) -> {
                     fall(block12);
                 }),
+
                 new KeyFrame(Duration.millis(3000), (e) -> {
                     fall(block13);
                 }),

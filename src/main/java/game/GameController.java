@@ -124,6 +124,7 @@ public class GameController extends GameObjects implements Initializable  {
     private boolean fl2;
     private boolean fl3;
     private boolean fl4;
+//    private Orc BossOrc;
 
 
 
@@ -272,7 +273,7 @@ public class GameController extends GameObjects implements Initializable  {
         chestFactory(2, 1050, 260);
         chestFactory(3, 1650, 260);
         chestFactory(4, 2100, 260);
-        chestFactory(5, 2500, 250);
+        chestFactory(5, 2900, 250);
         chestFactory(6, 3100, 200);
         chestFactory(7, 3580, 200);
 
@@ -293,6 +294,7 @@ public class GameController extends GameObjects implements Initializable  {
     public void orcSetUp() throws IOException {
         addOrcGreen(675,200);
         addOrcRed(1100,200);
+        addBoss(2600, 200);
     }
 
     public void ChestsSetUp() throws IOException {
@@ -443,7 +445,7 @@ public class GameController extends GameObjects implements Initializable  {
     public void addBoss(int x, int y) throws IOException {
         Orc boss = new Orc(350,25,"boss");
         Genemies.add(boss);
-        ImageView b = (ImageView) boss.getObsPane().getChildren().get(0);
+        ImageView b = (ImageView) boss.getObsPane().getChildren().get(2);
         b.setX(x);
         b.setY(y);
         grp2.getChildren().add(b);
@@ -488,13 +490,15 @@ public class GameController extends GameObjects implements Initializable  {
                             j = -3;
                             jHT = 325;
                         }
+
+
                     }
                     if (finalPlat.getController().ifCollide1(heroAll) == 1) {
                         System.out.println("here");
                         j = -3;
                         jHT = 310;
                     }
-//                    if(Boss.getBoundsInParent().intersects(heroAll.getBoundsInParent())){
+//                    if(Genemies.get(Genemies.size()-1).getController().{
 //                        adjust(80, 120);
 //                    }
                     for (int i = 0; i < Genemies.size(); i++) {

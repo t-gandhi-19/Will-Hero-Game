@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Game implements Serializable {
     private transient GameController controller;
     private transient AnchorPane obsPane;

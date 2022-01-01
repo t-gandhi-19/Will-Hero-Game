@@ -11,6 +11,7 @@ public class WeaponController {
     @FXML
     private ImageView sword;
 
+
     public int ifCollide(Node orc){
         if(knife.getBoundsInParent().intersects(orc.getBoundsInParent())){
             return 1;

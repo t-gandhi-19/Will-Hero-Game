@@ -39,6 +39,7 @@ public class MainPageController {
 
 
     }
+
     public void Exit(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit Game");

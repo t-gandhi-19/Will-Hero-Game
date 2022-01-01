@@ -21,7 +21,6 @@ public class ChestsController implements Initializable {
 
     @FXML
     private ImageView treasureChest;
-
     @FXML
     private ImageView openChest;
     private Timeline chestOpen=new Timeline();

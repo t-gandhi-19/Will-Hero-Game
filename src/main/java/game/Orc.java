@@ -5,7 +5,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Orc {
+
+public class Orc extends GameObjects{
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
     OrcController controller;

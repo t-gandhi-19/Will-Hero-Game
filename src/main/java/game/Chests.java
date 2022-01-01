@@ -5,13 +5,12 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public abstract class Chests {
+public abstract class Chests extends GameObjects{
     private AnchorPane obsPane;
     private FXMLLoader fxmlLoader;
     ChestsController controller;
     private String type;
     protected boolean open;
-
 
 
     public Chests(String type, boolean open) throws IOException {
