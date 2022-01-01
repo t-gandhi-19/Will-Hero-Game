@@ -88,6 +88,7 @@
                   <Font name="Luminari" size="35.0" />
                </font>
             </Button>
+
             <Button layoutX="469.0" layoutY="289.0" mnemonicParsing="false" onAction="#EndGame" opacity="0.58" prefHeight="66.0" prefWidth="245.0" text="End Game" textFill="#590975">
                <font>
                   <Font name="Luminari" size="30.0" />
