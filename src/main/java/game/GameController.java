@@ -91,9 +91,6 @@ public class GameController implements Initializable {
 
     private ArrayList<Orc> Genemies;
     private ArrayList<Orc> Renemies;
-
-    private ArrayList<ImageView> GenemiesImage;
-    private ArrayList<ImageView> RenemiesImage;
     private ArrayList<Platform> platforms;
     private ArrayList<Chests> chests;
     private ArrayList<Pane> chestsImage;
@@ -146,9 +143,7 @@ public class GameController implements Initializable {
 
     public void start() throws IOException, BelowBoundaryException {
         Genemies = new ArrayList<Orc>();
-        GenemiesImage = new ArrayList<ImageView>();
         Renemies = new ArrayList<Orc>();
-        RenemiesImage = new ArrayList<ImageView>();
         chests = new ArrayList<Chests>();
         chestsImage = new ArrayList<Pane>();
         platforms = new ArrayList<Platform>();
@@ -187,8 +182,6 @@ public class GameController implements Initializable {
         knife = (ImageView) w1.getObsPane().getChildren().get(0);
         knife2 = (ImageView) w2.getObsPane().getChildren().get(0);
         sword = (ImageView) w1.getObsPane().getChildren().get(1);
-        //islandSetUp();
-        //orcSetUP();
         ChestsSetUp();
         setUp();
 
@@ -207,15 +200,11 @@ public class GameController implements Initializable {
             sword.setVisible(false);
         }
 
-
-
         MainBase.getChildren().add(heroAll);
-
         MainBase.getChildren().add(knife);
         MainBase.getChildren().add(knife2);
         MainBase.getChildren().add(sword);
         Jump();
-        gameFlow();
     }
 
     public void fallPlatSetUp(double x, double y){
@@ -232,9 +221,6 @@ public class GameController implements Initializable {
         fallPlat.setLayoutX(x);
         buf.setLayoutY(y);
         buf.setLayoutX(x);
-//        while(!grp5.getChildren().isEmpty()){
-//            grp5.getChildren().remove(0);
-//        }
         grp5.getChildren().addAll(fallPlat,buf);
     }
 
@@ -245,78 +231,21 @@ public class GameController implements Initializable {
         fallPlat.setLayoutX(x);
         buf.setLayoutY(y);
         buf.setLayoutX(x);
-        while(!grp4.getChildren().isEmpty()){
-            grp4.getChildren().remove(0);
-        }
-        grp4.getChildren().addAll(fallPlat,buf);
+        grp5.getChildren().addAll(fallPlat,buf);
     }
-
-    public void gameFlow(){
-        KeyFrame kf = new KeyFrame(Duration.millis(5), e -> {
-//            if(score == 20){
-//                try {
-//                    addIsland(2800);
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//                //fallPlatSetUp(3110,325);
-//            }
-//            if(score<82) {
-//                if (isl1.getTranslateX() < -600) {
-//                    isl1.setTranslateX(isl5.getTranslateX() + 2950);
-//                }
-//                if (isl2.getTranslateX() < -1000) {
-//                    isl2.setTranslateX(isl5.getTranslateX() + 3000);
-//                }
-//                if (isl3.getTranslateX() < -1400) {
-//                    isl3.setTranslateX(isl5.getTranslateX() + 3000);
-//                }
-//                if (isl4.getTranslateX() < -1800) {
-//                    isl4.setTranslateX(isl5.getTranslateX() + 3000);
-//                }
-//                if (isl5.getTranslateX() < -2300) {
-//                    isl5.setTranslateX(isl5.getTranslateX() + 3000);
-//                }
-//                if(isl5.getTranslateX()>0 && isl5.getTranslateX()<125){
-//                    fallPlatSetUp(isl5.getBoundsInParent().getMaxX()-50, 325);
-//                }
-//            }
-//            if(score==89 && fl3){
-//                if(!falling) {
-//                    falling = true;
-//                    fallPlatSetUp1(1750, 310);
-//                    System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
-//                    isl3.setTranslateX(0);
-//                    System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
-//                    isl3.setLayoutX(3920);
-//                    System.out.println(isl3.getLayoutX() + " isl13 "+ isl3.getTranslateX());
-//                    fl3 = false;
-//                }
-//            }
-        });
-        timeline.getKeyFrames().add(kf);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
-
 
     public void setUp() throws IOException {
 
         addOrcGreen(675,200);
         addOrcRed(1100,200);
 
-//        islandFactory(1,-10);
-//        islandFactory(2,575);
-//        islandFactory(3,1005);
-//        islandFactory(4,1500);
-//        islandFactory(5,1900);
         addIsland(-10);
         fallPlatSetUp(2200,325);
         addIsland(2850);
         fallPlatSetUp(5050,325);
         addIsland(5800);
         fallPlatSetUp(8000,325);
-
+        addLastIsland(8650);
 
         chestFactory(1, 300, 260);
         chestFactory(2, 1050, 260);
@@ -331,7 +260,6 @@ public class GameController implements Initializable {
         int b = 0;
         if(a>0){
             b++;
-            a = 0;
         }
         for (int i = 0; i < Genemies.size(); i++) {
             Genemies.get(i).getController().jumpOrcGreen(platforms.get(b));
@@ -395,7 +323,7 @@ public class GameController implements Initializable {
         i7.getChildren().add(treasureChest7);
         chestsImage.add(i7);
         chests.add(W4);
-        grp3.getChildren().addAll(i1,i2,i3,i4,i5,i6,i7);
+        grp4.getChildren().addAll(i1,i2,i3,i4,i5,i6,i7);
     }
 
     public void openCh(int i){
@@ -442,7 +370,6 @@ public class GameController implements Initializable {
         ImageView GOrc = (ImageView) green.getObsPane().getChildren().get(0);
         GOrc.setX(x);
         GOrc.setY(y);
-        GenemiesImage.add(GOrc);
         grp2.getChildren().add(GOrc);
     }
 
@@ -452,8 +379,7 @@ public class GameController implements Initializable {
         ImageView ROrc = (ImageView) red.getObsPane().getChildren().get(1);
         ROrc.setX(x);
         ROrc.setY(y);
-        RenemiesImage.add(ROrc);
-        grp2.getChildren().add(ROrc);
+        grp3.getChildren().add(ROrc);
     }
 
     public void addIsland(int x) throws IOException {
@@ -476,38 +402,16 @@ public class GameController implements Initializable {
         platforms.add(i);
     }
 
-    public void islandSetUp(){
-        isl1 = (ImageView) island.getObsPane().getChildren().get(0);
-        isl2 = (ImageView) island.getObsPane().getChildren().get(1);
-        isl3 = (ImageView) island.getObsPane().getChildren().get(2);
-        isl4 = (ImageView) island.getObsPane().getChildren().get(3);
-        isl5 = (ImageView) island.getObsPane().getChildren().get(4);
-    }
-
-
-    public void islandFactory(int code, int x){
-        switch (code){
-            case 1:
-                isl1.setX(x);
-                isl1.setY(300);
-                break;
-            case 2:
-                isl2.setX(x);
-                isl2.setY(310);
-                break;
-            case 3:
-                isl3.setX(x);
-                isl3.setY(310);
-                break;
-            case 4:
-                isl4.setX(x);
-                isl4.setY(300);
-                break;
-            case 5:
-                isl5.setX(x);
-                isl5.setY(325);
-                break;
-        }
+    public void addLastIsland(int x) throws IOException {
+        Platform i = new Platform();
+        ImageView i1 = (ImageView) i.getObsPane().getChildren().get(0);
+        i1.setX(x);i1.setY(300);
+        fallPlatSetUp1(x+420,300);
+        ImageView i3 = (ImageView) i.getObsPane().getChildren().get(2);
+        i3.setX(x+1590);i3.setY(310);
+        grp1.getChildren().add(i1);
+        grp1.getChildren().add(i3);
+        platforms.add(i);
     }
 
     public void Jump() throws BelowBoundaryException{
@@ -620,7 +524,7 @@ public class GameController implements Initializable {
                     //upFlag = 1;
                     System.out.println("orcColl");
                     adjust(90,120);
-                    translateX(GenemiesImage.get(i), orcX, 120);
+                    translateX(grp2.getChildren().get(i), orcX, 120);
                     //heroSetUp(1);
                 }
                 else if(arr3 == 13){
@@ -649,7 +553,7 @@ public class GameController implements Initializable {
                     //upFlag = 1;
                     System.out.println("orcColl");
                     adjust(90,120);
-                    translateX(RenemiesImage.get(i), orcX, 120);
+                    translateX(grp3.getChildren().get(i), orcX, 120);
                     //heroSetUp(1);
                 }
                 else if(arr3 == 13){
@@ -868,36 +772,35 @@ public class GameController implements Initializable {
         t.play();
     }
 
-
     public void throwKnife(int level){
         Timeline th = new Timeline();
         fl1 = false;
         fl2 = false;
         th.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e)->{
-            for (int i = 0; i < GenemiesImage.size(); i++) {
-                if(w1.getController().ifCollide(GenemiesImage.get(i))==1 && (level == 1 || level == 2) && !fl1){
+            for (int i = 0; i < Genemies.size(); i++) {
+                if(w1.getController().ifCollide(grp2.getChildren().get(i))==1 && (level == 1 || level == 2) && !fl1){
                     fl1 = true;
                     System.out.println("dieOrc1");
-                    hitAnimation(GenemiesImage.get(i));
+                    hitAnimation(grp2.getChildren().get(i));
                     //deathAnimation(i);
                 }
-                if(w2.getController().ifCollide(GenemiesImage.get(i))==1 && level == 2 && !fl2){
+                if(w2.getController().ifCollide(grp2.getChildren().get(i))==1 && level == 2 && !fl2){
                     fl2 = true;
                     System.out.println("dieOrc2");
-                    hitAnimation(GenemiesImage.get(i));
+                    hitAnimation(grp2.getChildren().get(i));
                 }
             }
-            for (int i = 0; i < RenemiesImage.size(); i++) {
-                if(w1.getController().ifCollide(RenemiesImage.get(i))==1 && (level == 1 || level == 2) && !fl1){
+            for (int i = 0; i < Renemies.size(); i++) {
+                if(w1.getController().ifCollide(grp3.getChildren().get(i))==1 && (level == 1 || level == 2) && !fl1){
                     fl1 = true;
                     System.out.println("dieOrc1");
-                    hitAnimation(RenemiesImage.get(i));
+                    hitAnimation(grp3.getChildren().get(i));
                     //deathAnimation(i);
                 }
-                if(w2.getController().ifCollide(RenemiesImage.get(i))==1 && level == 2 && !fl2){
+                if(w2.getController().ifCollide(grp3.getChildren().get(i))==1 && level == 2 && !fl2){
                     fl2 = true;
                     System.out.println("dieOrc2");
-                    hitAnimation(RenemiesImage.get(i));
+                    hitAnimation(grp3.getChildren().get(i));
                 }
             }
         }));
