@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import javafx.event.Event;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +29,7 @@ public class GameController implements Initializable {
     private Parent root;
     private Parent root2;
     private Scene scene2;
+    private Event e1;
 
 
     @FXML
@@ -144,8 +145,17 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {         //start
             start();
-        } catch (IOException | BelowBoundaryException e) {
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+        catch (BelowBoundaryException e){
+            System.out.println(e.getMessage());
+//            try {
+//                System.out.println("hello");
+//                DisplaySaveMe();
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
         }
 
     }
@@ -244,13 +254,15 @@ public class GameController implements Initializable {
         MainBase.getChildren().add(sword);
         //MainBase.getChildren().add(fallingPlatform.getObsPane());
         //System.out.println(heroAll.getChildren().get(0).getLayoutY() + " " +heroAll.getChildren().get(1).getLayoutY());
-        try{
-            Jump();
-        } catch (BelowBoundaryException e) {
-
-            System.out.println(e.getMessage());
-        }
+        Jump();
+//        try{
+//            Jump();
+//        } catch (BelowBoundaryException e) {
+//
+//            System.out.println(e.getMessage());
+//        }
         gameFlow();
+        System.out.println(e1 + " thisE");
     }
 
 //    public void addObj(int code){
@@ -357,14 +369,10 @@ public class GameController implements Initializable {
             if(score==89 && fl3){
                 if(!falling) {
                     falling = true;
-
-                    //fallPlatSetUp1(isl1.getBoundsInParent().getMaxX(), 310);
                     fallPlatSetUp1(1750, 310);
                     System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
                     isl3.setTranslateX(0);
                     System.out.println(isl3.getLayoutX() + " isl1 "+ isl3.getTranslateX());
-//                    isl1.setTranslateX(1170);
-//                    System.out.println(isl1.getLayoutX() + " isl1 "+ isl1.getTranslateX());
                     isl3.setLayoutX(3920);
                     System.out.println(isl3.getLayoutX() + " isl13 "+ isl3.getTranslateX());
                     fl3 = false;
@@ -796,10 +804,19 @@ public class GameController implements Initializable {
                         }
                     }
                     if(heroAll.getLayoutY()>350) {
+
                         try {
+                            DisplaySaveMe(e1);
                             throw new BelowBoundaryException("Below Boundary");
                         } catch (BelowBoundaryException ex) {
                             System.out.println(ex.getMessage());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        finally {
+                            jump.stop();
+                            inBtw.stop();
+                            timeline.stop();
                         }
                     }
                 }));
@@ -929,7 +946,9 @@ public class GameController implements Initializable {
         }
     }
 
-    public void move(MouseEvent e){
+    public void move(MouseEvent e2){
+        e1 = e2;
+        System.out.println(e1 + " thisE");
         //hero.getControl().pause(true);
         for (int i = 0; i < grp1.getChildren().size(); i++) {
             translateX(grp1.getChildren().get(i), shiftLeftBy, time);
@@ -1128,22 +1147,26 @@ public class GameController implements Initializable {
     }
 
     public void DisplayPauseMenu(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        System.out.println(mouseEvent + " thisMouseEv");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("InGamePause.fxml"));
         root =loader.load();
-        stage =(Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Stage stage3 =(Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        System.out.println(stage3 + " insideMenuSt");
         scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        stage3.setScene(scene);
+        stage3.show();
 
     }
 
-    public void DisplaySaveMe() throws IOException {
+    public void DisplaySaveMe(Event e) throws IOException {
+        System.out.println(e + " insideSave");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("SaveMe.fxml"));
         root2 =loader.load();
-//        stage =(Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
+        Stage stage1 =(Stage)((Node)e.getSource()).getScene().getWindow();
+        System.out.println(stage1 + " insideSaveStage");
+        scene2 = new Scene(root2);
+        stage1.setScene(scene2);
+        stage1.show();
 //        scene2 = new Scene(root2);
 //        stage.setScene(scene2);
 //        stage.show();

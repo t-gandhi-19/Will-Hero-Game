@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Game extends Application {
+public class Game extends Application{
     GameController controller;
 
     public Game() throws IOException {
