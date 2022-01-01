@@ -6,6 +6,7 @@ public class Helmet {
     private ArrayList<Weapon> weapons;
 
     public void addWeapon(Weapon weapon){
+        ArrayList<Weapon> weaponlist = new ArrayList<>();
         if(!weapons.contains(weapon)){
             weapons.add(weapon);
         }
