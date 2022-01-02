@@ -588,7 +588,7 @@ public class GameController implements Initializable  {
                         }
                     }
                     if (finalPlat.getController().ifCollide1(heroAll) == 1) {
-                        System.out.println("here");
+                        //System.out.println("here");
                         j = -3;
                         jHT = 310;
                     }
@@ -604,7 +604,7 @@ public class GameController implements Initializable  {
                     for (int i = 0; i < 3; i++) {
                         if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
                             openCh(i);
-                            System.out.println(chests.get(i).isOpen());
+                            //System.out.println(chests.get(i).isOpen());
                             chests.get(i).collectChest(hero);
                             coins = hero.getCoins();
                             updateCoins();
@@ -614,7 +614,7 @@ public class GameController implements Initializable  {
                     for (int i = 3; i < 7; i++) {
                         if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
                             openCh(i);
-                            System.out.println(chests.get(i).isOpen());
+                            //System.out.println(chests.get(i).isOpen());
                             chests.get(i).collectChest(hero);
                             int a = hero.updateWea();
                             if(a == 0){
@@ -628,18 +628,18 @@ public class GameController implements Initializable  {
                                 knife.setVisible(true);
                                 sword.setVisible(false);
                             }
-                            System.out.println(heroCode + " heroCode");
+                            //System.out.println(heroCode + " heroCode");
                         }
                     }
                     arr4 = Genemies.get(Genemies.size()-1).getController().collideBoss(heroAll);
                     if(arr4==1){
-                        System.out.println("die");
+                        //System.out.println("die");
                     }
                     else if(arr4 == 2){
                         timeline.pause();
                         adjust(90,120);
                         translateX(grp2.getChildren().get(Genemies.size()-1), 150, 120);
-                        System.out.println("boss Coll");
+                        //System.out.println("boss Coll");
                         if(heroCode==2){
                             rotSword();
                             hitAnimation(grp2.getChildren().get(Genemies.size()-1));
@@ -716,7 +716,7 @@ public class GameController implements Initializable  {
                 arr3 = Genemies.get(i).getController().collideGreen(heroAll);
                 if(arr3==11){
                     //upFlag = 1;
-                    System.out.println("orcColl");
+                    //System.out.println("orcColl");
                     if(heroCode==2){
                         rotSword();
                         hitAnimation(grp2.getChildren().get(i));
@@ -768,7 +768,7 @@ public class GameController implements Initializable  {
                 arr3 = Renemies.get(i).getController().collideRed(heroAll);
                 if(arr3==11){
                     //upFlag = 1;
-                    System.out.println("orcColl");
+                    //System.out.println("orcColl");
                     if(heroCode == 2){
                         rotSword();
                         hitAnimation(grp3.getChildren().get(i));
@@ -825,7 +825,7 @@ public class GameController implements Initializable  {
                 timeline.pause();
                 adjust(90,120);
                 translateX(grp2.getChildren().get(Genemies.size()-1), orcX, 120);
-                System.out.println("boss Coll");
+                //System.out.println("boss Coll");
                 if(heroCode==2){
                     rotSword();
                     hitAnimation(grp2.getChildren().get(Genemies.size()-1));
@@ -864,7 +864,7 @@ public class GameController implements Initializable  {
                         knife.setVisible(true);
                         sword.setVisible(false);
                     }
-                    System.out.println(heroCode + " heroCode");
+                    //System.out.println(heroCode + " heroCode");
                 }
             }
         }));
@@ -1280,7 +1280,7 @@ public class GameController implements Initializable  {
         sword.setY(heroAll.getLayoutY()-22);
 
         jump.play();
-        timeline.play();
+        //timeline.play();
         inBtw.play();
     }
 
@@ -1325,7 +1325,7 @@ public class GameController implements Initializable  {
     }
 
     public int getScore() {
-        System.out.println(score +" score from gamCon");
+        //System.out.println(score +" score from gamCon");
         return this.score;
     }
 
