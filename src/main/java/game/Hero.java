@@ -56,9 +56,6 @@ public class Hero extends GameObjects{
     public int getyCoordinate(){
         return  this.yCoordinate;
     }
-    public void setyCoordinate(int y){
-        this.yCoordinate=y;
-    }
 
     public void useCoins() throws InsufficientCoinsException{
         if(this.coins < 10){

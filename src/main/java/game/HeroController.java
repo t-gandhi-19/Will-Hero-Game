@@ -38,14 +38,6 @@ public class HeroController implements Initializable {
         fl = 0;
         arr = new int[5];
 
-
-//        TranslateTransition translate = new TranslateTransition();
-//        translate.setNode(heroNormal);
-//        translate.setByY(40);
-//        translate.setAutoReverse(true);
-//        translate.setDuration(Duration.millis(500));
-//        translate.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate.play();
     }
 
     public void Jump(Platform obj){
@@ -96,15 +88,6 @@ public class HeroController implements Initializable {
         });
     }
 
-//        Timeline beat = new Timeline(
-//                new KeyFrame(Duration.ZERO,         event -> scale.setValue(1)),
-//                new KeyFrame(Duration.seconds(0.5), event -> scale.setValue(1.1))
-//        );
-
-        //System.out.println("hh");
-        //new SequentialTransition(delay(1000)).play();
-        //jump.play();
-
 
     public void pause(boolean v){
         if(v == true){
@@ -124,15 +107,6 @@ public class HeroController implements Initializable {
                 (e) -> {
                     heroNormal.setX(heroNormal.getX());
                     System.out.println("hh");
-//                    if(obj.getControl().ifCollide(heroNormal)){
-//                        j = -j;
-//                        //System.out.println("hkkk");
-//                    }
-//                    if(heroNormal.getY() <yPos - 120){
-//                        j = 3;
-//                    }
-
-
 
                 }));
         inBtw.setCycleCount(25);
@@ -145,7 +119,6 @@ public class HeroController implements Initializable {
         rot.setAxis(Rotate.Z_AXIS);
         rot.setByAngle(180);
         rot.setInterpolator(Interpolator.LINEAR);
-        //rot.setAutoReverse(true);
         rot.play();
     }
 
