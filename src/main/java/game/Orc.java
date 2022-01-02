@@ -33,4 +33,9 @@ public class Orc extends GameObjects{
     public OrcController getController() {
         return controller;
     }
+
+    public int decHealth(int a){
+        health = health -a;
+        return health;
+    }
 }

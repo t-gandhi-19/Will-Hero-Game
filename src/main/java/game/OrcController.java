@@ -1,9 +1,6 @@
 package game;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -148,36 +145,50 @@ public class OrcController implements Initializable {
         jump.play();
     }
 
-    public void moveForward(Boss boss){
+    public void moveForward(){
         //boss.getObsPane().
         //boss.getObsPane().setLayoutY(180);
-        TranslateTransition translateY= new TranslateTransition(Duration.millis(120));
-        translateY.setByY(-bossJumpHt);;
-        translateY.setNode(bossOrc);
-        translateY.play();
-
-        TranslateTransition translate= new TranslateTransition(Duration.millis(120));
-        translate.setByX(-boss.getForwardBossDistance());
-        translate.setNode(bossOrc);
-        translate.setDelay(Duration.millis(120));
-        translate.play();
-        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
-        translateYy.setByY(0.01);
-
-        translateYy.setNode(bossOrc);
-        translateYy.setDelay(Duration.millis(240));
-        translateYy.play();
-
+//        TranslateTransition translateY= new TranslateTransition(Duration.millis(120));
+//        translateY.setByY(-bossJumpHt);;
+//        translateY.setNode(bossOrc);
+//        //translateY.play();
+//
+//        TranslateTransition translate= new TranslateTransition(Duration.millis(120));
+//        translate.setByX(-40);
+//        translate.setNode(bossOrc);
+//        //translate.setDelay(Duration.millis(120));
+//        //translate.play();
+//        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
+//        translateYy.setByY(70);
+//        translateYy.setNode(bossOrc);
+//        //translateYy.setDelay(Duration.millis(240));
+//        //translateYy.play();
+//        SequentialTransition s = new SequentialTransition(translateY, translate, translateYy);
+//        s.setCycleCount(Animation.INDEFINITE);
+//        s.play();
+        int tim = 200;
+        TranslateTransition tran = new TranslateTransition(Duration.millis(tim), bossOrc);
+        tran.setByY(-70);
+        TranslateTransition tran2 = new TranslateTransition(Duration.millis(tim), bossOrc);
+        tran2.setByX(-40);
+        TranslateTransition tran3 = new TranslateTransition(Duration.millis(tim), bossOrc);
+        tran3.setByY(70);
+        Timeline t = new Timeline();
+        t.getKeyFrames().addAll(new KeyFrame(Duration.millis(200), (e)->{tran.play();}),
+                new KeyFrame(Duration.millis(400), (e)->{tran2.play();}),
+                new KeyFrame(Duration.millis(600), (e)->{tran3.play();})
+                );
+        t.play();
 
     }
-    public void land(Boss boss){
+
+    public void land(){
         System.out.println("k");
-        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
-        translateYy.setToY(200);
-
-        translateYy.setNode(bossOrc);
-        translateYy.play();
-
+        TranslateTransition transla= new TranslateTransition(Duration.millis(200));
+        transla.setByY(300);
+        transla.setNode(bossOrc);
+        transla.play();
+        //transla.setOnFinished((e)->{moveForward();});
     }
 
 }

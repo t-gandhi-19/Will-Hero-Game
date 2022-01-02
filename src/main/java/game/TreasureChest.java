@@ -17,9 +17,10 @@ public class TreasureChest extends Chests{
     }
     @Override
     public void collectChest(Hero hero){
-        hero.addCoins(coins);
+        System.out.println("treasure collect");
         this.open=true;
-        System.out.println(this.open);
+        hero.addCoins(coins);
+
     }
 
 }

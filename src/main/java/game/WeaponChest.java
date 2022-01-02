@@ -8,11 +8,11 @@ public class WeaponChest extends Chests{
         super("Weapon", false);
         this.weapon= weapon;
     }
+
     @Override
-
     public void collectChest(Hero hero) {
+        System.out.println("weapon collect");
         this.open = true;
-        hero.getHelmet().addWeapon(weapon);
-
+        hero.addWeapon(weapon);
     }
 }

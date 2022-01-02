@@ -276,6 +276,7 @@ public class FallingPlatformController implements Initializable, Serializable {
         return 0;
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         noOfBlocks = 10;

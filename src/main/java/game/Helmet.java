@@ -10,7 +10,7 @@ public class Helmet extends GameObjects{
         this.weapons = new ArrayList<Weapon>();
     }
 
-    public void addWeapon(Weapon weapon){
+    public Weapon addWeapon(Weapon weapon){
         ArrayList<Weapon> weaponlist = new ArrayList<>();
         if(!weapons.contains(weapon)){
             weapons.add(weapon);
@@ -18,7 +18,7 @@ public class Helmet extends GameObjects{
         else{
             weapon.setLevel(weapon.getLevel()+1);
         }
-
+        return weapon;
     }
     public ArrayList<Weapon> getWeaponList(){
         return weapons;

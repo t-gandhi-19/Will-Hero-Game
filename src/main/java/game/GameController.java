@@ -264,8 +264,6 @@ public class GameController extends GameObjects implements Initializable  {
     public void setUp() throws IOException {
         posIsland.add((double) -10);
 
-
-
         addIsland(-10);
         fallPlatSetUp(2200,325);
         addIsland(2850);
@@ -295,11 +293,6 @@ public class GameController extends GameObjects implements Initializable  {
         cPos.add(c5);
         cPos.add(c6);
         cPos.add(c7);
-
-
-
-        //grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
-        int a = score - 25;
 
 
         for (int i = 0; i < 5; i++) {
@@ -418,7 +411,6 @@ public class GameController extends GameObjects implements Initializable  {
         Pos.add(Rpos14);
         Pos.add(Rpos15);
 
-        //addBoss(5000, -100);
     }
 
     public void ChestsSetUp() throws IOException {
@@ -430,48 +422,48 @@ public class GameController extends GameObjects implements Initializable  {
         Chests T1 = new TreasureChest(10);
         chests.add(T1);
         Pane i1 = new Pane();
-        ImageView treasureChest = (ImageView) T1.getObsPane().getChildren().get(2);
+        ImageView treasureChest = (ImageView) T1.getObsPane().getChildren().get(1);
         i1.getChildren().add(treasureChest);
         chestsImage.add(i1);
 
         Chests T2 = new TreasureChest(10);
         Pane i2 = new Pane();
-        ImageView treasureChest2 = (ImageView) T2.getObsPane().getChildren().get(2);
+        ImageView treasureChest2 = (ImageView) T2.getObsPane().getChildren().get(1);
         i2.getChildren().add(treasureChest2);
         chestsImage.add(i2);
         chests.add(T2);
 
         Chests T3 = new TreasureChest(10);
         Pane i3 = new Pane();
-        ImageView treasureChest3 = (ImageView) T3.getObsPane().getChildren().get(2);
+        ImageView treasureChest3 = (ImageView) T3.getObsPane().getChildren().get(1);
         i3.getChildren().add(treasureChest3);
         chestsImage.add(i3);
         chests.add(T3);
 
         Chests W1 = new WeaponChest(weapons.get(0));
         Pane i4 = new Pane();
-        ImageView treasureChest4 = (ImageView) W1.getObsPane().getChildren().get(1);
+        ImageView treasureChest4 = (ImageView) W1.getObsPane().getChildren().get(2);
         i4.getChildren().add(treasureChest4);
         chestsImage.add(i4);
         chests.add(W1);
 
         Chests W2 = new WeaponChest(weapons.get(0));
         Pane i5 = new Pane();
-        ImageView treasureChest5 = (ImageView) W2.getObsPane().getChildren().get(1);
+        ImageView treasureChest5 = (ImageView) W2.getObsPane().getChildren().get(2);
         i5.getChildren().add(treasureChest5);
         chestsImage.add(i5);
         chests.add(W2);
 
         Chests W3 = new WeaponChest(weapons.get(1));
         Pane i6 = new Pane();
-        ImageView treasureChest6 = (ImageView) W3.getObsPane().getChildren().get(1);
+        ImageView treasureChest6 = (ImageView) W3.getObsPane().getChildren().get(2);
         i6.getChildren().add(treasureChest6);
         chestsImage.add(i6);
         chests.add(W3);
 
         Chests W4 = new WeaponChest(weapons.get(1));
         Pane i7 = new Pane();
-        ImageView treasureChest7 = (ImageView) W4.getObsPane().getChildren().get(1);
+        ImageView treasureChest7 = (ImageView) W4.getObsPane().getChildren().get(2);
         i7.getChildren().add(treasureChest7);
         chestsImage.add(i7);
         chests.add(W4);
@@ -606,7 +598,7 @@ public class GameController extends GameObjects implements Initializable  {
                         actAfterCollIsland(platforms.get(i).getControl().ifCollide(heroAll));
                     }
                     if (heroAll.getLayoutY() < jHT - 130) {
-                        System.out.println("cc  " + j);
+                        //System.out.println("cc  " + j);
                         j = 3;
                     }
                     for (int i = 0; i < fallingPlatforms.size(); i++) {
@@ -614,10 +606,7 @@ public class GameController extends GameObjects implements Initializable  {
                             j = -3;
                             jHT = 325;
                         }
-
-
                     }
-
                     if (finalPlat.getController().ifCollide1(heroAll) == 1) {
                         System.out.println("here");
                         j = -3;
@@ -635,20 +624,45 @@ public class GameController extends GameObjects implements Initializable  {
                     for (int i = 0; i < 3; i++) {
                         if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
                             openCh(i);
+                            System.out.println(chests.get(i).isOpen());
                             chests.get(i).collectChest(hero);
+                            coins = hero.getCoins();
+                            updateCoins();
+
                         }
                     }
                     for (int i = 3; i < 7; i++) {
                         if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
                             openCh(i);
-                            chests.get(i).collectChest(hero);
                             System.out.println(chests.get(i).isOpen());
+                            chests.get(i).collectChest(hero);
+                            int a = hero.updateWea();
+                            if(a == 0){
+                                heroCode = 2;
+                                knife.setVisible(false);
+                                sword.setVisible(true);
+                            }
+                            if(a == 1){
+                                heroCode = 1;
+                                knife.setVisible(true);
+                                sword.setVisible(false);
+                            }
+                            //System.out.println(heroCode + " heroCode");
                         }
                     }
                     if(heroAll.getLayoutY()>350) {
                         TranslateTransition t = new TranslateTransition(Duration.millis(1000), heroAll);
                         t.setByY(500);
                         t.play();
+                        TranslateTransition t1 = new TranslateTransition(Duration.millis(1000), sword);
+                        t1.setByY(500);
+                        t1.play();
+                        TranslateTransition t2 = new TranslateTransition(Duration.millis(1000), knife);
+                        t2.setByY(500);
+                        t2.play();
+                        TranslateTransition t3 = new TranslateTransition(Duration.millis(1000), knife2);
+                        t3.setByY(500);
+                        t3.play();
                     }
 //                    if(heroAll.getLayoutX()>2000){
 //                        Genemies.get(Genemies.size()-1).getController().land((Boss) Genemies.get(Genemies.size()-1));
@@ -682,15 +696,26 @@ public class GameController extends GameObjects implements Initializable  {
         jumpOnOrc.stop();
         //System.out.println("jump on orc stopped");
         if(heroCode == 1)
-            throwKnife(2);
-        if(heroCode == 2)
-            rotSword();
+            throwKnife(hero.getCurrentWeapon().getLevel()+1);
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
             for (int i = 0; i < Genemies.size(); i++) {
                 arr3 = Genemies.get(i).getController().collideGreen(heroAll);
                 if(arr3==11){
                     //upFlag = 1;
                     System.out.println("orcColl");
+                    if(heroCode==2){
+                        rotSword();
+                        hitAnimation(grp2.getChildren().get(i));
+                        if(Genemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                            deathAnimation(grp2.getChildren().get(i));
+                        }
+                    }
+                    if(heroCode==1){
+                        hitAnimation(grp2.getChildren().get(i));
+                        if(Genemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                            deathAnimation(grp2.getChildren().get(i));
+                        }
+                    }
                     adjust(90,120);
                     translateX(grp2.getChildren().get(i), orcX, 120);
                     //heroSetUp(1);
@@ -721,6 +746,19 @@ public class GameController extends GameObjects implements Initializable  {
                 if(arr3==11){
                     //upFlag = 1;
                     System.out.println("orcColl");
+                    if(heroCode == 2){
+                        rotSword();
+                        hitAnimation(grp3.getChildren().get(i));
+                        if(Renemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                            deathAnimation(grp3.getChildren().get(i));
+                        }
+                    }
+                    if(heroCode == 1){
+                        hitAnimation(grp3.getChildren().get(i));
+                        if(Renemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                            deathAnimation(grp3.getChildren().get(i));
+                        }
+                    }
                     adjust(90,120);
                     translateX(grp3.getChildren().get(i), orcX, 120);
                     //heroSetUp(1);
@@ -750,12 +788,26 @@ public class GameController extends GameObjects implements Initializable  {
                 if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
                     openCh(i);
                     chests.get(i).collectChest(hero);
+                    coins = hero.getCoins();
+                    updateCoins();
                 }
             }
             for (int i = 3; i < 7; i++) {
                 if(chests.get(i).getController().chestCollide(heroAll, chestsImage.get(i)) == 1 && !chests.get(i).isOpen()){
                     openCh(i);
                     chests.get(i).collectChest(hero);
+                    int a = hero.updateWea();
+                    if(a == 0){
+                        heroCode = 2;
+                        knife.setVisible(false);
+                        sword.setVisible(true);
+                    }
+                    if(a == 1){
+                        heroCode = 1;
+                        knife.setVisible(true);
+                        sword.setVisible(false);
+                    }
+                    //System.out.println(heroCode + " heroCode");
                 }
             }
         }));
@@ -807,7 +859,7 @@ public class GameController extends GameObjects implements Initializable  {
 
     public void actAfterCollIsland(int[] arr){
         if (arr[0] == 1) {
-            System.out.println("islandcoll");
+            //System.out.println("islandcoll");
             j = -j;
             jHT = arr[1];
             if (arr[2] == 1) {
@@ -845,7 +897,6 @@ public class GameController extends GameObjects implements Initializable  {
         } catch (GameLoseException e) {
             e.printStackTrace();
         }
-        //rotSword();
         if(upFlag == 0) {
             update();
         }
@@ -869,7 +920,7 @@ public class GameController extends GameObjects implements Initializable  {
             translateX(grp3.getChildren().get(i), amount, time);
         }
         for (int i = 0; i < grp4.getChildren().size(); i++) {
-            System.out.println("adjust4");
+            //System.out.println("adjust4");
             translateX(grp4.getChildren().get(i), amount, time);
         }
         for (int i = 0; i < grp5.getChildren().size(); i++) {
@@ -890,12 +941,11 @@ public class GameController extends GameObjects implements Initializable  {
 
     public void update(){
         score += 1;
-        System.out.println(score + " score updated");
+        //System.out.println(score + " score updated");
         locationText.setText("" + (score));
     }
 
-    public void updateCoins(int no){
-        coins = coins + no;
+    public void updateCoins(){
         coinText.setText("" + coins);
     }
 
@@ -954,12 +1004,18 @@ public class GameController extends GameObjects implements Initializable  {
                     fl1 = true;
                     System.out.println("dieOrc1");
                     hitAnimation(grp2.getChildren().get(i));
+                    if(Genemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                        deathAnimation(grp2.getChildren().get(i));
+                    }
                     //deathAnimation(i);
                 }
                 if(w2.getController().ifCollide(grp2.getChildren().get(i))==1 && level == 2 && !fl2){
                     fl2 = true;
                     System.out.println("dieOrc2");
                     hitAnimation(grp2.getChildren().get(i));
+                    if(Genemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                        deathAnimation(grp2.getChildren().get(i));
+                    }
                 }
             }
             for (int i = 0; i < Renemies.size(); i++) {
@@ -967,12 +1023,19 @@ public class GameController extends GameObjects implements Initializable  {
                     fl1 = true;
                     System.out.println("dieOrc1");
                     hitAnimation(grp3.getChildren().get(i));
+                    if(Renemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                        deathAnimation(grp3.getChildren().get(i));
+                    }
+
                     //deathAnimation(i);
                 }
                 if(w2.getController().ifCollide(grp3.getChildren().get(i))==1 && level == 2 && !fl2){
                     fl2 = true;
                     System.out.println("dieOrc2");
                     hitAnimation(grp3.getChildren().get(i));
+                    if(Renemies.get(i).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                        deathAnimation(grp3.getChildren().get(i));
+                    }
                 }
             }
         }));
@@ -1098,6 +1161,16 @@ public class GameController extends GameObjects implements Initializable  {
         saveMe.setLayoutY(700);
         heroAll.setTranslateY(0);
         heroAll.setLayoutY(-50);
+        System.out.println(sword.getTranslateY()+ "  sword");
+        sword.setTranslateY(0);
+        //sword.setLayoutY(-50+22);
+        knife.setTranslateY(0);
+        //knife.setLayoutY(-50+25);
+        knife2.setTranslateY(0);
+        //knife2.setLayoutY(-50+15);
+        knife.setY(heroAll.getLayoutY()-25);
+        knife2.setY(heroAll.getLayoutY()-15);
+        sword.setY(heroAll.getLayoutY()-22);
 
         jump.play();
         timeline.play();

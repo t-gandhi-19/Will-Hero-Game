@@ -32,11 +32,12 @@ public class Weapon extends GameObjects{
 
     public void setLevel(int Wlevel){
         this.level=Wlevel;
-
-
     }
     public int getLevel(){
         return this.level;
+    }
 
+    public int getHitPoint() {
+        return hitPoint;
     }
 }
