@@ -410,6 +410,7 @@ public class GameController extends GameObjects implements Initializable  {
         Pos.add(Rpos13);
         Pos.add(Rpos14);
         Pos.add(Rpos15);
+        addBoss(9700,-100);
 
     }
 
@@ -650,7 +651,8 @@ public class GameController extends GameObjects implements Initializable  {
                             //System.out.println(heroCode + " heroCode");
                         }
                     }
-                    if(grp1.getChildren().get(0).getTranslateX()< -1700 && grp1.getChildren().get(0).getTranslateX() > -1800 ){
+                    System.out.println("chhh" + grp1.getChildren().get(0).getTranslateX() );
+                    if(grp1.getChildren().get(0).getTranslateX()< -8820 && grp1.getChildren().get(0).getTranslateX() > -8900 ){
                         System.out.println("kopj" );
                         Genemies.get(Genemies.size()-1).getController().land();
                     }
