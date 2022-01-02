@@ -960,8 +960,18 @@ public class GameController extends GameObjects implements Initializable  {
             timeline.play();
             //Genemies.get(Genemies.size() - 1).getController().moveForward(platforms.get(platforms.size()-1),finalPlat);
         }
-        if(score >= 114){
+        if(score >= 112){
             //display win
+            try {
+                DisplayGameOver(e1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                jump.stop();
+                inBtw.stop();
+                timeline.stop();
+            }
         }
         if(heroCode==2){
             knife.setVisible(false);
@@ -1206,6 +1216,17 @@ public class GameController extends GameObjects implements Initializable  {
     public void DisplayGameOver(Event e) throws IOException {
         //System.out.println(e + " insideSave");
         FXMLLoader loader= new FXMLLoader(getClass().getResource("GameOver.fxml"));
+        Parent root2 =loader.load();
+        Stage stage1 =(Stage)((Node)e.getSource()).getScene().getWindow();
+        //System.out.println(stage1 + " insideSaveStage");
+        Scene scene2 = new Scene(root2);
+        stage1.setScene(scene2);
+        stage1.show();
+
+    }
+    public void DisplayGameWon(Event e) throws IOException {
+        //System.out.println(e + " insideSave");
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("Won.fxml"));
         Parent root2 =loader.load();
         Stage stage1 =(Stage)((Node)e.getSource()).getScene().getWindow();
         //System.out.println(stage1 + " insideSaveStage");
