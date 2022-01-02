@@ -224,7 +224,7 @@ public class FallingPlatformController implements Initializable, Serializable {
 
     }
     public int ifCollideOrc(Node orc) {
-        if (orc.getBoundsInParent().intersects(fallPlatform.getBoundsInParent())) {
+        if (orc.getBoundsInParent().intersects(fallPlatform1.getBoundsInParent())) {
             return 1;
         }
         return 0;

@@ -128,6 +128,7 @@ public class GameController extends GameObjects implements Initializable  {
     private boolean fl4;
 //    private Orc BossOrc;
 
+    private boolean flagSave;
 
 
     @Override
@@ -173,6 +174,7 @@ public class GameController extends GameObjects implements Initializable  {
         coins = 0;
 
         int chestCode = 0;
+        flagSave = false;
 
         j = 3;
         jHT = -1;
@@ -195,7 +197,7 @@ public class GameController extends GameObjects implements Initializable  {
         knife = (ImageView) w1.getObsPane().getChildren().get(0);
         knife2 = (ImageView) w2.getObsPane().getChildren().get(0);
         sword = (ImageView) w1.getObsPane().getChildren().get(1);
-        orcSetUp();
+        //orcSetUp();
         ChestsSetUp();
         setUp();
 
@@ -222,18 +224,7 @@ public class GameController extends GameObjects implements Initializable  {
 
         //check();
     }
-
-    public void check(){
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(500),(e)->{
-//            System.out.println(grp1.getChildren().get(0).getLayoutX() + " " + grp1.getChildren().get(0).getTranslateX());
-//            System.out.println(grp1.getChildren().get(1).getLayoutX() + " " + grp1.getChildren().get(1).getTranslateX());
-//            System.out.println(grp1.getChildren().get(2).getLayoutX() + " " + grp1.getChildren().get(2).getTranslateX());
-            System.out.println(score + " scoreeeeee");
-        }));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-    }
-
+    
     public void fallPlatSetUp(double x, double y){
         FallingPlatform f = null;
         try {
@@ -293,60 +284,48 @@ public class GameController extends GameObjects implements Initializable  {
         cPos.add(c5);
         cPos.add(c6);
         cPos.add(c7);
+        addBoss(9700,-100);
+//        int t = 2;
+//        for (int i = 0; i < t; i++) {
+//            Genemies.get(i).getController().jumpOrcGreen(platforms.get(0));
+//        }
+//        for (int i = 0; i < t; i++) {
+//            Renemies.get(i).getController().jumpOrcRed(platforms.get(0));
+//        }
+//        for (int i = t; i < t+5; i++) {
+//            Genemies.get(i).getController().jumpOrcGreen(platforms.get(1));
+//        }
+//        for (int i = t; i < t+5; i++) {
+//            Renemies.get(i).getController().jumpOrcRed(platforms.get(1));
+//        }
+//        for (int i = t+5; i < t+10; i++) {
+//            Genemies.get(i).getController().jumpOrcGreen(platforms.get(2));
+//        }
+//        for (int i = t+5; i < t+10; i++) {
+//            Renemies.get(i).getController().jumpOrcRed(platforms.get(2));
+//        }
 
-        int t = 3;
-        for (int i = 0; i < t; i++) {
-            Genemies.get(i).getController().jumpOrcGreen(platforms.get(0));
-        }
-        for (int i = 0; i < t; i++) {
-            Renemies.get(i).getController().jumpOrcRed(platforms.get(0));
-        }
-        for (int i = t; i < t+5; i++) {
-            Genemies.get(i).getController().jumpOrcGreen(platforms.get(1));
-        }
-        for (int i = t; i < t+5; i++) {
-            Renemies.get(i).getController().jumpOrcRed(platforms.get(1));
-        }
-        for (int i = t+5; i < t+10; i++) {
-            Genemies.get(i).getController().jumpOrcGreen(platforms.get(2));
-        }
-        for (int i = t+5; i < t+10; i++) {
-            Renemies.get(i).getController().jumpOrcRed(platforms.get(2));
-        }
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(400), (e)->{
+            System.out.println("move Boss");
+            Genemies.get(Genemies.size() - 1).getController().moveForward();
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+
     }
 
     public void orcSetUp() throws IOException {
-        //addOrcGreen(675,200);
         addOrcGreen(775,200);
-        addOrcGreen(975,200);
-        addOrcGreen(2475,200);
-        //addOrcGreen(1475,200);
+        addOrcGreen(1575,200);
         addOrcRed(1075,200);
-        //addOrcRed(1575,200);
-        addOrcRed(2175,200);
-        //addOrcRed(2275,200);
         addOrcRed(2075,200);
-        Position Gpos1 = new Position(675, 200);
         Position Gpos2 = new Position(775, 200);
-        Position Gpos3= new Position(975, 200);
-        Position Gpos4 = new Position(2475, 200);
-        Position Gpos5 = new Position(1475, 200);
-        Pos.add(Gpos1);
+        Position Gpos5 = new Position(1575, 200);
         Pos.add(Gpos2);
-        Pos.add(Gpos3);
-        Pos.add(Gpos4);
         Pos.add(Gpos5);
-        Position Rpos1 = new Position(1175,200);
-        Position Rpos2 = new Position(1575,200);
-        Position Rpos3= new Position(2175,200);
-        Position Rpos4 = new Position(2275,200);
+        Position Rpos1 = new Position(1075,200);
         Position Rpos5 = new Position(2075,200);
         Pos.add(Rpos1);
-        Pos.add(Rpos2);
-        Pos.add(Rpos3);
-        Pos.add(Rpos4);
         Pos.add(Rpos5);
-
         //2700
         addOrcGreen(3175,200);
         addOrcGreen(3275,200);
@@ -410,7 +389,6 @@ public class GameController extends GameObjects implements Initializable  {
         Pos.add(Rpos13);
         Pos.add(Rpos14);
         Pos.add(Rpos15);
-        addBoss(9700,-100);
 
     }
 
@@ -560,11 +538,12 @@ public class GameController extends GameObjects implements Initializable  {
     }
 
     public void addBoss(int x, int y) throws IOException {
-        Orc boss = new Orc(350,25,"boss");
+        Orc boss = new Orc(200,25,"boss");
         Genemies.add(boss);
         ImageView b = (ImageView) boss.getObsPane().getChildren().get(2);
         b.setX(x);
         b.setY(y);
+        //b.setVisible(false);
         grp2.getChildren().add(b);
     }
 
@@ -640,6 +619,7 @@ public class GameController extends GameObjects implements Initializable  {
                             int a = hero.updateWea();
                             if(a == 0){
                                 heroCode = 2;
+                                knife2.setVisible(false);
                                 knife.setVisible(false);
                                 sword.setVisible(true);
                             }
@@ -648,19 +628,31 @@ public class GameController extends GameObjects implements Initializable  {
                                 knife.setVisible(true);
                                 sword.setVisible(false);
                             }
-                            //System.out.println(heroCode + " heroCode");
+                            System.out.println(heroCode + " heroCode");
                         }
                     }
-                    System.out.println("chhh" + grp1.getChildren().get(0).getTranslateX() );
-                    if(grp1.getChildren().get(0).getTranslateX()< -8820 && grp1.getChildren().get(0).getTranslateX() > -8900 ){
-                        System.out.println("kopj" );
-                        Genemies.get(Genemies.size()-1).getController().land();
+                    arr4 = Genemies.get(Genemies.size()-1).getController().collideBoss(heroAll);
+                    if(arr4==1){
+                        System.out.println("die");
                     }
-                    if(Genemies.get(Genemies.size() - 1).getController().collideGreen(heroAll) == 1){
-                        System.out.println("pppp");
-                        Genemies.get(Genemies.size() - 1).getController().moveForward();
-                        adjust(80,120);
-
+                    else if(arr4 == 2){
+                        timeline.pause();
+                        adjust(90,120);
+                        translateX(grp2.getChildren().get(Genemies.size()-1), 150, 120);
+                        System.out.println("boss Coll");
+                        if(heroCode==2){
+                            rotSword();
+                            hitAnimation(grp2.getChildren().get(Genemies.size()-1));
+                            if(Genemies.get(Genemies.size()-1).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                                deathAnimation(grp2.getChildren().get(Genemies.size()-1));
+                            }
+                        }
+                        if(heroCode==1){
+                            hitAnimation(grp2.getChildren().get(Genemies.size()-1));
+                            if(Genemies.get(Genemies.size()-1).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                                deathAnimation(grp2.getChildren().get(Genemies.size()-1));
+                            }
+                        }
                     }
                     if(heroAll.getLayoutY()>350) {
                         TranslateTransition t = new TranslateTransition(Duration.millis(1000), heroAll);
@@ -685,7 +677,19 @@ public class GameController extends GameObjects implements Initializable  {
                         }
                         catch (BelowBoundaryException ex) {
                             System.out.println(ex.getMessage());
-                            saveMe.setLayoutY(0);
+                            if(!flagSave) {
+                                saveMe.setLayoutY(0);
+                                flagSave = true;
+                            }
+                            else if(flagSave){
+                                System.out.println("game over");
+                                try {
+                                    DisplayGameOver(e1);
+                                } catch (IOException exc) {
+                                    exc.printStackTrace();
+                                }
+                                //displayGameOver
+                            }
 //                            try {
 //                                DisplaySaveMe(e1);
 //                            } catch (IOException exc) {
@@ -703,12 +707,13 @@ public class GameController extends GameObjects implements Initializable  {
         jump.play();
     }
 
-    public void heroMove () throws GameLoseException{
+    public void heroMove() throws GameLoseException{
         jump.stop();
         jumpOnOrc.stop();
         //System.out.println("jump on orc stopped");
-        if(heroCode == 1)
-            throwKnife(hero.getCurrentWeapon().getLevel()+1);
+        if(heroCode == 1) {
+            throwKnife(hero.getCurrentWeapon().getLevel() + 1);
+        }
         inBtw.getKeyFrames().add(new KeyFrame(Duration.millis(10), (e) -> {
             for (int i = 0; i < Genemies.size(); i++) {
                 arr3 = Genemies.get(i).getController().collideGreen(heroAll);
@@ -739,7 +744,19 @@ public class GameController extends GameObjects implements Initializable  {
                     }
                     catch (GameLoseException ex) {
                         System.out.println(ex.getMessage());
-                        saveMe.setLayoutY(0);
+                        if(!flagSave) {
+                            saveMe.setLayoutY(0);
+                            flagSave = true;
+                        }
+                        else if(flagSave){
+                            System.out.println("Game Over");
+                            try {
+                                DisplayGameOver(e1);
+                            } catch (IOException exc) {
+                                exc.printStackTrace();
+                            }
+                            //displayGameOver
+                        }
 //                        try {
 //                            DisplaySaveMe(e1);
 //                        } catch (IOException exc) {
@@ -782,7 +799,19 @@ public class GameController extends GameObjects implements Initializable  {
                     }
                     catch (GameLoseException ex) {
                         System.out.println(ex.getMessage());
-                        saveMe.setLayoutY(0);
+                        if(!flagSave) {
+                            saveMe.setLayoutY(0);
+                            flagSave = true;
+                        }
+                        else if(flagSave){
+                            System.out.println("Game Over");
+                            try {
+                                DisplayGameOver(e1);
+                            } catch (IOException exc) {
+                                exc.printStackTrace();
+                            }
+                            //displayGameOver
+                        }
 //                        try {
 //                            DisplaySaveMe(e1);
 //                        } catch (IOException exc) {
@@ -793,6 +822,29 @@ public class GameController extends GameObjects implements Initializable  {
                         jump.stop();
                         inBtw.stop();
                         timeline.stop();
+                    }
+                }
+            }
+            arr4 = Genemies.get(Genemies.size()-1).getController().collideBoss(heroAll);
+            if(arr4==1){
+                System.out.println("die");
+            }
+            else if(arr4 == 2){
+                timeline.pause();
+                adjust(90,120);
+                translateX(grp2.getChildren().get(Genemies.size()-1), orcX, 120);
+                System.out.println("boss Coll");
+                if(heroCode==2){
+                    rotSword();
+                    hitAnimation(grp2.getChildren().get(Genemies.size()-1));
+                    if(Genemies.get(Genemies.size()-1).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                        deathAnimation(grp2.getChildren().get(Genemies.size()-1));
+                    }
+                }
+                if(heroCode==1){
+                    hitAnimation(grp2.getChildren().get(Genemies.size()-1));
+                    if(Genemies.get(Genemies.size()-1).decHealth(hero.getCurrentWeapon().getHitPoint())<0){
+                        deathAnimation(grp2.getChildren().get(Genemies.size()-1));
                     }
                 }
             }
@@ -812,6 +864,7 @@ public class GameController extends GameObjects implements Initializable  {
                     if(a == 0){
                         heroCode = 2;
                         knife.setVisible(false);
+                        knife2.setVisible(false);
                         sword.setVisible(true);
                     }
                     if(a == 1){
@@ -819,7 +872,7 @@ public class GameController extends GameObjects implements Initializable  {
                         knife.setVisible(true);
                         sword.setVisible(false);
                     }
-                    //System.out.println(heroCode + " heroCode");
+                    System.out.println(heroCode + " heroCode");
                 }
             }
         }));
@@ -853,7 +906,19 @@ public class GameController extends GameObjects implements Initializable  {
 //                } catch (IOException exc) {
 //                    exc.printStackTrace();
 //                }
-                saveMe.setLayoutY(0);
+                if(!flagSave) {
+                    saveMe.setLayoutY(0);
+                    flagSave = true;
+                }
+                else if(flagSave){
+                    System.out.println("game over");
+                    try {
+                        DisplayGameOver(e1);
+                    } catch (IOException exc) {
+                        exc.printStackTrace();
+                    }
+                    //displayGameOver
+                }
             }
             finally {
                 jump.stop();
@@ -886,6 +951,24 @@ public class GameController extends GameObjects implements Initializable  {
 
     public void move(MouseEvent e2){
         e1 = e2;
+        if(score == 97){
+            System.out.println("land Boss");
+            Genemies.get(Genemies.size()-1).getController().land();
+        }
+        if(score >= 99){
+            System.out.println("move Boss22");
+            timeline.play();
+            //Genemies.get(Genemies.size() - 1).getController().moveForward(platforms.get(platforms.size()-1),finalPlat);
+        }
+        if(score >= 114){
+            //display win
+        }
+        if(heroCode==2){
+            knife.setVisible(false);
+        }
+        if(heroCode==1){
+            sword.setVisible(false);
+        }
         //System.out.println(e1 + " thisE");
         //hero.getControl().pause(true);
         for (int i = 0; i < grp1.getChildren().size(); i++) {
@@ -1120,9 +1203,9 @@ public class GameController extends GameObjects implements Initializable  {
 
     }
 
-    public void DisplaySaveMe(Event e) throws IOException {
+    public void DisplayGameOver(Event e) throws IOException {
         //System.out.println(e + " insideSave");
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("SaveMe.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("GameOver.fxml"));
         Parent root2 =loader.load();
         Stage stage1 =(Stage)((Node)e.getSource()).getScene().getWindow();
         //System.out.println(stage1 + " insideSaveStage");
