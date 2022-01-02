@@ -31,6 +31,7 @@ public class OrcController implements Initializable {
     private int arr[];
     private int jHT;
     private  int bossJumpHt =70;
+    private  int forwardBossDistance=40;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,8 +48,12 @@ public class OrcController implements Initializable {
     }
     public int[] collideeHero(Node hero){
         int arr[] = new int [5];
-        if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
+        if(hero.getBoundsInParent().intersects(bossOrc.getBoundsInParent())){
+            arr[0]=1;
+        }
+        else if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
             System.out.println(greenOrc.getX()+" "+greenOrc.getY());
+
             if ((hero.getBoundsInParent().getMaxY() > greenOrc.getY()) || (hero.getBoundsInParent().getMaxX() > greenOrc.getX())) {
 
                 arr[0] = 10;
@@ -71,8 +76,10 @@ public class OrcController implements Initializable {
 
     public int collideGreen(Node hero){
         int arr;
-
-        if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
+        if(hero.getBoundsInParent().intersects(bossOrc.getBoundsInParent())){
+            arr =1;
+        }
+        else if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
             if(hero.getBoundsInParent().getMaxY()<=greenOrc.getBoundsInParent().getMinY()+6 && hero.getBoundsInParent().getMinY()<greenOrc.getBoundsInParent().getMinY() ){
                 arr = 12;
             }
@@ -147,7 +154,7 @@ public class OrcController implements Initializable {
         jump.play();
     }
 
-    public void moveForward(Boss boss){
+    public void moveForward(){
         //boss.getObsPane().
         //boss.getObsPane().setLayoutY(180);
         TranslateTransition translateY= new TranslateTransition(Duration.millis(120));
@@ -156,12 +163,12 @@ public class OrcController implements Initializable {
         translateY.play();
 
         TranslateTransition translate= new TranslateTransition(Duration.millis(120));
-        translate.setByX(-boss.getForwardBossDistance());
+        translate.setByX(-forwardBossDistance);
         translate.setNode(bossOrc);
         translate.setDelay(Duration.millis(120));
         translate.play();
         TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
-        translateYy.setByY(0.01);
+        translateYy.setToY(300);
 
         translateYy.setNode(bossOrc);
         translateYy.setDelay(Duration.millis(240));
@@ -169,10 +176,10 @@ public class OrcController implements Initializable {
 
 
     }
-    public void land(Boss boss){
+    public void land(){
         System.out.println("k");
-        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
-        translateYy.setToY(200);
+        TranslateTransition translateYy= new TranslateTransition(Duration.millis(300));
+        translateYy.setToY(300);
 
         translateYy.setNode(bossOrc);
         translateYy.play();
