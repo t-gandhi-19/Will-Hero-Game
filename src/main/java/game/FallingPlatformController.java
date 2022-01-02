@@ -223,6 +223,12 @@ public class FallingPlatformController implements Initializable, Serializable {
 
 
     }
+    public int ifCollideOrc(Node orc) {
+        if (orc.getBoundsInParent().intersects(fallPlatform.getBoundsInParent())) {
+            return 1;
+        }
+        return 0;
+    }
 
     public void fall(Node block) {
         TranslateTransition translate = new TranslateTransition();
