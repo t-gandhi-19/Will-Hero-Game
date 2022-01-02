@@ -72,7 +72,7 @@ public class GameController extends GameObjects implements Initializable  {
     private ImageView knife;
     private ImageView knife2;
 
-    private ImageView Boss;
+    //private ImageView Boss;
 
     private boolean bufMain;
     private boolean falling;
@@ -95,6 +95,8 @@ public class GameController extends GameObjects implements Initializable  {
     private ArrayList<Pane> chestsImage;
     private ArrayList<Weapon> weapons;
     private ArrayList<FallingPlatform> fallingPlatforms;
+    private ArrayList<Position> Pos;
+    private ArrayList<ChestPos> cPos;
 
     private ArrayList<Double> posIsland;
 
@@ -153,6 +155,8 @@ public class GameController extends GameObjects implements Initializable  {
 
         Genemies = new ArrayList<Orc>();
         Renemies = new ArrayList<Orc>();
+        Pos=new ArrayList<Position>();
+        cPos = new ArrayList<ChestPos>();
         chests = new ArrayList<Chests>();
         chestsImage = new ArrayList<Pane>();
         platforms = new ArrayList<Platform>();
@@ -269,32 +273,151 @@ public class GameController extends GameObjects implements Initializable  {
         fallPlatSetUp(8000,325);
         addLastIsland(8650);
 
-        chestFactory(1, 300, 260);
-        chestFactory(2, 1050, 260);
-        chestFactory(3, 1650, 260);
-        chestFactory(4, 2100, 260);
-        chestFactory(5, 2900, 250);
-        chestFactory(6, 3100, 200);
-        chestFactory(7, 3580, 200);
+        chestFactory(1, 700, 270);
+        chestFactory(2, 4100, 270);
+        chestFactory(3, 5300, 280);
+        chestFactory(4, 7000, 270);
+        chestFactory(5, 8800, 260);
+        chestFactory(6, 1900, 280);
+        chestFactory(7, 3000, 260);
+        ChestPos c1 = new ChestPos(1, 700, 270);
+        ChestPos c2 = new ChestPos(2, 4100, 270);
+        ChestPos c3 = new ChestPos(3, 5300, 280);
+        ChestPos c4 = new ChestPos(4, 7000, 270);
+        ChestPos c5 = new ChestPos(5, 8800, 260);
+        ChestPos c6 = new ChestPos(6, 1900, 280);
+        ChestPos c7 = new ChestPos(7, 3000, 260);
+        cPos.add(c1);
+        cPos.add(c2);
+        cPos.add(c3);
+        cPos.add(c4);
+        cPos.add(c5);
+        cPos.add(c6);
+        cPos.add(c7);
+
+
 
         //grp1.getChildren().addAll(isl1,isl2,isl3,isl4,isl5);
         int a = score - 25;
-        int b = 0;
-        if(a>0){
-            b++;
+
+
+        for (int i = 0; i < 5; i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(0));
         }
-        for (int i = 0; i < Genemies.size(); i++) {
-            Genemies.get(i).getController().jumpOrcGreen(platforms.get(b));
+        for (int i = 0; i < 5; i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(0));
         }
-        for (int i = 0; i < Renemies.size(); i++) {
-            Renemies.get(i).getController().jumpOrcRed(platforms.get(b));
+        for (int i = 5; i < 10; i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(1));
+        }
+        for (int i = 5; i < 10; i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(1));
+        }
+        for (int i = 10; i < 15; i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(2));
+        }
+        for (int i = 10; i < 15; i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(2));
         }
     }
 
     public void orcSetUp() throws IOException {
         addOrcGreen(675,200);
-        addOrcRed(1100,200);
-        addBoss(2600, 200);
+        addOrcGreen(775,200);
+        addOrcGreen(975,200);
+        addOrcGreen(2475,200);
+        addOrcGreen(1475,200);
+        addOrcRed(1175,200);
+        addOrcRed(1575,200);
+        addOrcRed(2175,200);
+        addOrcRed(2275,200);
+        addOrcRed(2075,200);
+        Position Gpos1 = new Position(675, 200);
+        Position Gpos2 = new Position(775, 200);
+        Position Gpos3= new Position(975, 200);
+        Position Gpos4 = new Position(2475, 200);
+        Position Gpos5 = new Position(1475, 200);
+        Pos.add(Gpos1);
+        Pos.add(Gpos2);
+        Pos.add(Gpos3);
+        Pos.add(Gpos4);
+        Pos.add(Gpos5);
+        Position Rpos1 = new Position(1175,200);
+        Position Rpos2 = new Position(1575,200);
+        Position Rpos3= new Position(2175,200);
+        Position Rpos4 = new Position(2275,200);
+        Position Rpos5 = new Position(2075,200);
+        Pos.add(Rpos1);
+        Pos.add(Rpos2);
+        Pos.add(Rpos3);
+        Pos.add(Rpos4);
+        Pos.add(Rpos5);
+
+        //2700
+        addOrcGreen(3175,200);
+        addOrcGreen(3275,200);
+        addOrcGreen(4975,200);
+        addOrcGreen(4275,200);
+        addOrcGreen(4875,200);
+        addOrcRed(4100,200);
+        addOrcRed(4275,200);
+        addOrcRed(5100,200);
+        addOrcRed(4475,200);
+        addOrcRed(5375,200);
+        Position Gpos6 = new Position(3175,200);
+        Position Gpos7 = new Position(3275,200);
+        Position Gpos8= new Position(4975,200);
+        Position Gpos9 = new Position(4275,200);
+        Position Gpos10 = new Position(4875,200);
+        Pos.add(Gpos6);
+        Pos.add(Gpos7);
+        Pos.add(Gpos8);
+        Pos.add(Gpos9);
+        Pos.add(Gpos10);
+        Position Rpos6 = new Position(4100,200);
+        Position Rpos7 = new Position(4275,200);
+        Position Rpos8= new Position(5100,200);
+        Position Rpos9 = new Position(4475,200);
+        Position Rpos10 = new Position(5375,200);
+        Pos.add(Rpos6);
+        Pos.add(Rpos7);
+        Pos.add(Rpos8);
+        Pos.add(Rpos9);
+        Pos.add(Rpos10);
+        //5400
+        addOrcGreen(5575,200);
+        addOrcGreen(5975,200);
+        addOrcGreen(6375,200);
+        addOrcGreen(7875,200);
+        addOrcGreen(6575,200);
+        addOrcRed(6875,200);
+        addOrcRed(8095,200);
+        addOrcRed(7075,200);
+        addOrcRed(7275,200);
+        addOrcRed(7475,200);
+        //8100
+        Position Gpos11 = new Position(5575,200);
+        Position Gpos12= new Position(5975,200);
+        Position Gpos13= new Position(6375,200);
+        Position Gpos14= new Position(7875,200);
+        Position Gpos15 = new Position(6575,200);
+        Pos.add(Gpos11);
+        Pos.add(Gpos12);
+        Pos.add(Gpos13);
+        Pos.add(Gpos14);
+        Pos.add(Gpos15);
+        Position Rpos11 = new Position(6875,200);
+        Position Rpos12= new Position(8095,200);
+        Position Rpos13= new Position(7075,200);
+        Position Rpos14= new Position(7275,200);
+        Position Rpos15 = new Position(7475,200);
+        Pos.add(Rpos11);
+        Pos.add(Rpos12);
+        Pos.add(Rpos13);
+        Pos.add(Rpos14);
+        Pos.add(Rpos15);
+
+        //addBoss(5000, -100);
     }
 
     public void ChestsSetUp() throws IOException {
@@ -493,6 +616,7 @@ public class GameController extends GameObjects implements Initializable  {
 
 
                     }
+
                     if (finalPlat.getController().ifCollide1(heroAll) == 1) {
                         System.out.println("here");
                         j = -3;
@@ -525,6 +649,9 @@ public class GameController extends GameObjects implements Initializable  {
                         t.setByY(500);
                         t.play();
                     }
+//                    if(heroAll.getLayoutX()>2000){
+//                        Genemies.get(Genemies.size()-1).getController().land((Boss) Genemies.get(Genemies.size()-1));
+//                    }
                     if(heroAll.getLayoutY()>600){
                         try {
                             throw new BelowBoundaryException("Below Boundary");
