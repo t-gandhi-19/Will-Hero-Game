@@ -25,7 +25,7 @@ public class InGamePauseController {
 
 
     public void ReturnToMain(ActionEvent event) throws IOException {
-        Main.serialize();
+        //Main.serialize();
         FXMLLoader loader= new FXMLLoader(getClass().getResource("WelcomeScreen.fxml"));
         root =loader.load();
         stage =(Stage)((Node)event.getSource()).getScene().getWindow();

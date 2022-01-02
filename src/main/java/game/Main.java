@@ -66,7 +66,7 @@ public class Main extends Application {
 
     }
 
-    public static void deserislize() throws ClassNotFoundException, IOException{
+    public static void deserialize() throws ClassNotFoundException, IOException{
         Game g;
         System.out.println("deserializing");
         ObjectInputStream inputStream= null;
