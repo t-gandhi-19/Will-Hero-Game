@@ -294,37 +294,37 @@ public class GameController extends GameObjects implements Initializable  {
         cPos.add(c6);
         cPos.add(c7);
 
-
-        for (int i = 0; i < 5; i++) {
+        int t = 3;
+        for (int i = 0; i < t; i++) {
             Genemies.get(i).getController().jumpOrcGreen(platforms.get(0));
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < t; i++) {
             Renemies.get(i).getController().jumpOrcRed(platforms.get(0));
         }
-        for (int i = 5; i < 10; i++) {
+        for (int i = t; i < t+5; i++) {
             Genemies.get(i).getController().jumpOrcGreen(platforms.get(1));
         }
-        for (int i = 5; i < 10; i++) {
+        for (int i = t; i < t+5; i++) {
             Renemies.get(i).getController().jumpOrcRed(platforms.get(1));
         }
-        for (int i = 10; i < 15; i++) {
+        for (int i = t+5; i < t+10; i++) {
             Genemies.get(i).getController().jumpOrcGreen(platforms.get(2));
         }
-        for (int i = 10; i < 15; i++) {
+        for (int i = t+5; i < t+10; i++) {
             Renemies.get(i).getController().jumpOrcRed(platforms.get(2));
         }
     }
 
     public void orcSetUp() throws IOException {
-        addOrcGreen(675,200);
+        //addOrcGreen(675,200);
         addOrcGreen(775,200);
         addOrcGreen(975,200);
         addOrcGreen(2475,200);
-        addOrcGreen(1475,200);
-        addOrcRed(1175,200);
-        addOrcRed(1575,200);
+        //addOrcGreen(1475,200);
+        addOrcRed(1075,200);
+        //addOrcRed(1575,200);
         addOrcRed(2175,200);
-        addOrcRed(2275,200);
+        //addOrcRed(2275,200);
         addOrcRed(2075,200);
         Position Gpos1 = new Position(675, 200);
         Position Gpos2 = new Position(775, 200);
@@ -649,6 +649,16 @@ public class GameController extends GameObjects implements Initializable  {
                             }
                             //System.out.println(heroCode + " heroCode");
                         }
+                    }
+                    if(grp1.getChildren().get(0).getTranslateX()< -1700 && grp1.getChildren().get(0).getTranslateX() > -1800 ){
+                        System.out.println("kopj" );
+                        Genemies.get(Genemies.size()-1).getController().land();
+                    }
+                    if(Genemies.get(Genemies.size() - 1).getController().collideGreen(heroAll) == 1){
+                        System.out.println("pppp");
+                        Genemies.get(Genemies.size() - 1).getController().moveForward();
+                        adjust(80,120);
+
                     }
                     if(heroAll.getLayoutY()>350) {
                         TranslateTransition t = new TranslateTransition(Duration.millis(1000), heroAll);

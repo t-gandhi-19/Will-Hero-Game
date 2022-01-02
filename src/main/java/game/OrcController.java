@@ -1,13 +1,15 @@
 package game;
 
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +31,7 @@ public class OrcController implements Initializable {
     private int arr[];
     private int jHT;
     private  int bossJumpHt =70;
+    private  int forwardBossDistance=40;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,8 +48,12 @@ public class OrcController implements Initializable {
     }
     public int[] collideeHero(Node hero){
         int arr[] = new int [5];
-        if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
+        if(hero.getBoundsInParent().intersects(bossOrc.getBoundsInParent())){
+            arr[0]=1;
+        }
+        else if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
             System.out.println(greenOrc.getX()+" "+greenOrc.getY());
+
             if ((hero.getBoundsInParent().getMaxY() > greenOrc.getY()) || (hero.getBoundsInParent().getMaxX() > greenOrc.getX())) {
 
                 arr[0] = 10;
@@ -69,8 +76,10 @@ public class OrcController implements Initializable {
 
     public int collideGreen(Node hero){
         int arr;
-
-        if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
+        if(hero.getBoundsInParent().intersects(bossOrc.getBoundsInParent())){
+            arr =1;
+        }
+        else if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())){
             if(hero.getBoundsInParent().getMaxY()<=greenOrc.getBoundsInParent().getMinY()+6 && hero.getBoundsInParent().getMinY()<greenOrc.getBoundsInParent().getMinY() ){
                 arr = 12;
             }
@@ -115,15 +124,15 @@ public class OrcController implements Initializable {
         jump.getKeyFrames().add(new KeyFrame(Duration.millis(20), (e) -> {
             greenOrc.setY(greenOrc.getY() + j);
             arr = obj.getControl().ifCollide(greenOrc);
-                    if(arr[0]==1){
-                        j = -3;
-                        jHT = 325;
-                    }
-                    if(greenOrc.getY() < jHT - 190){
-                        //System.out.println("jht" +jHT);
-                        j = 3;
-                    }
-                }));
+            if(arr[0]==1){
+                j = -3;
+                jHT = 325;
+            }
+            if(greenOrc.getY() < jHT - 190){
+                //System.out.println("jht" +jHT);
+                j = 3;
+            }
+        }));
         jump.setCycleCount(Animation.INDEFINITE);
         jump.play();
     }
@@ -148,47 +157,33 @@ public class OrcController implements Initializable {
     public void moveForward(){
         //boss.getObsPane().
         //boss.getObsPane().setLayoutY(180);
-//        TranslateTransition translateY= new TranslateTransition(Duration.millis(120));
-//        translateY.setByY(-bossJumpHt);;
-//        translateY.setNode(bossOrc);
-//        //translateY.play();
-//
-//        TranslateTransition translate= new TranslateTransition(Duration.millis(120));
-//        translate.setByX(-40);
-//        translate.setNode(bossOrc);
-//        //translate.setDelay(Duration.millis(120));
-//        //translate.play();
-//        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
-//        translateYy.setByY(70);
-//        translateYy.setNode(bossOrc);
-//        //translateYy.setDelay(Duration.millis(240));
-//        //translateYy.play();
-//        SequentialTransition s = new SequentialTransition(translateY, translate, translateYy);
-//        s.setCycleCount(Animation.INDEFINITE);
-//        s.play();
-        int tim = 200;
-        TranslateTransition tran = new TranslateTransition(Duration.millis(tim), bossOrc);
-        tran.setByY(-70);
-        TranslateTransition tran2 = new TranslateTransition(Duration.millis(tim), bossOrc);
-        tran2.setByX(-40);
-        TranslateTransition tran3 = new TranslateTransition(Duration.millis(tim), bossOrc);
-        tran3.setByY(70);
-        Timeline t = new Timeline();
-        t.getKeyFrames().addAll(new KeyFrame(Duration.millis(200), (e)->{tran.play();}),
-                new KeyFrame(Duration.millis(400), (e)->{tran2.play();}),
-                new KeyFrame(Duration.millis(600), (e)->{tran3.play();})
-                );
-        t.play();
+        TranslateTransition translateY= new TranslateTransition(Duration.millis(120));
+        translateY.setByY(-bossJumpHt);;
+        translateY.setNode(bossOrc);
+        translateY.play();
+
+        TranslateTransition translate= new TranslateTransition(Duration.millis(120));
+        translate.setByX(-forwardBossDistance);
+        translate.setNode(bossOrc);
+        translate.setDelay(Duration.millis(120));
+        translate.play();
+        TranslateTransition translateYy= new TranslateTransition(Duration.millis(120));
+        translateYy.setToY(300);
+
+        translateYy.setNode(bossOrc);
+        translateYy.setDelay(Duration.millis(240));
+        translateYy.play();
+
 
     }
-
     public void land(){
         System.out.println("k");
-        TranslateTransition transla= new TranslateTransition(Duration.millis(200));
-        transla.setByY(300);
-        transla.setNode(bossOrc);
-        transla.play();
-        //transla.setOnFinished((e)->{moveForward();});
+        TranslateTransition translateYy= new TranslateTransition(Duration.millis(300));
+        translateYy.setToY(300);
+
+        translateYy.setNode(bossOrc);
+        translateYy.play();
+
     }
 
 }
