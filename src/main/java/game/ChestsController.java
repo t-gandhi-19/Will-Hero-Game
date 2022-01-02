@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChestsController implements Initializable, Serializable {
+public class ChestsController implements Initializable {
     @FXML
     private ImageView weaponChest;
 

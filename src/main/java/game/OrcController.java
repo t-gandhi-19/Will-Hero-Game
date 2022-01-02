@@ -37,13 +37,6 @@ public class OrcController implements Initializable {
         arr = new int[5];
         jHT = -1;
 
-//        TranslateTransition translate = new TranslateTransition();
-//        translate.setNode(redOrc);
-//        translate.setByY(40);
-//        translate.setAutoReverse(true);
-//        translate.setDuration(Duration.millis(500));
-//        translate.setCycleCount(TranslateTransition.INDEFINITE);
-//        translate.play();
     }
     public int[] collideeHero(Node hero){
         int arr[] = new int [5];
@@ -51,7 +44,7 @@ public class OrcController implements Initializable {
             arr[0]=1;
         }
         else if(hero.getBoundsInParent().intersects(greenOrc.getBoundsInParent())) {
-            System.out.println(greenOrc.getX()+" "+greenOrc.getY());
+            //System.out.println(greenOrc.getX()+" "+greenOrc.getY());
 
             if ((hero.getBoundsInParent().getMaxY() > greenOrc.getY()) || (hero.getBoundsInParent().getMaxX() > greenOrc.getX())) {
 
@@ -177,44 +170,14 @@ public class OrcController implements Initializable {
         translateY.play();
         translateY.setOnFinished((e)->{translate.play();});
         translate.setOnFinished((e)->{translateYy.play();});
-        //translateYy.setDelay(Duration.millis(240));
-        //translateYy.play();
 
-//        SequentialTransition s = new SequentialTransition(translateY,translate,translateYy);
-//        s.setCycleCount(Animation.INDEFINITE);
-//        s.play();
-//        Timeline t = new Timeline(new KeyFrame(Duration.millis(20),(e)->{
-//            bossOrc.setY(bossOrc.getY() + j);
-//            arr = obj.getControl().ifCollide(bossOrc);
-//            if(arr[0]==1){
-//                j = -3;
-//                jHT = 325;
-//            }
-//            if(bossOrc.getY() < jHT - 220){
-//                //System.out.println("jht" +jHT);
-//                j = 3;
-//            }
-//            arr1 = ob.getController().ifCollideOrc(bossOrc);
-//            if(arr1 == 1){
-//                j = -3;
-//                jHT = 325;
-//            }
-//        }));
-//        t.setCycleCount(Animation.INDEFINITE);
-//        t.play();
     }
     public void land(){
-        System.out.println("k");
+        //System.out.println("k");
         TranslateTransition translateYy= new TranslateTransition(Duration.millis(300));
         translateYy.setByY(300);
         translateYy.setNode(bossOrc);
         translateYy.play();
-//        Timeline t = new Timeline();
-//        t.getKeyFrames().addAll(new KeyFrame(Duration.millis(20),(e)->{
-//            bossOrc.setY(bossOrc.getY() + j);
-//        }));
-//        t.setCycleCount(10);
-//        t.play();
     }
 
     public int collideBoss(Node hero) {

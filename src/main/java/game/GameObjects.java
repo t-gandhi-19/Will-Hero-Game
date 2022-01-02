@@ -8,5 +8,4 @@ import java.io.Serializable;
 public abstract class GameObjects implements Serializable {
     public GameObjects() {
     }
-
 }

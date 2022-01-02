@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Thread.sleep;
 
-public class HeroController implements Initializable, Serializable {
+public class HeroController implements Initializable {
     @FXML
     private ImageView heroNormal;
 

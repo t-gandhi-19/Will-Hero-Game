@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FallingPlatformController implements Initializable, Serializable {
+public class FallingPlatformController implements Initializable {
     @FXML
     private Group fallPlatform;
 

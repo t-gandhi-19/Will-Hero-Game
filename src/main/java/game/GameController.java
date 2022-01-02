@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class GameController extends GameObjects implements Initializable  {
+public class GameController implements Initializable  {
 //    private Stage stage;
 //    private Scene scene;
 //    private Parent root;
@@ -197,7 +197,7 @@ public class GameController extends GameObjects implements Initializable  {
         knife = (ImageView) w1.getObsPane().getChildren().get(0);
         knife2 = (ImageView) w2.getObsPane().getChildren().get(0);
         sword = (ImageView) w1.getObsPane().getChildren().get(1);
-        //orcSetUp();
+        orcSetUp();
         ChestsSetUp();
         setUp();
 
@@ -285,28 +285,28 @@ public class GameController extends GameObjects implements Initializable  {
         cPos.add(c6);
         cPos.add(c7);
         addBoss(9700,-100);
-//        int t = 2;
-//        for (int i = 0; i < t; i++) {
-//            Genemies.get(i).getController().jumpOrcGreen(platforms.get(0));
-//        }
-//        for (int i = 0; i < t; i++) {
-//            Renemies.get(i).getController().jumpOrcRed(platforms.get(0));
-//        }
-//        for (int i = t; i < t+5; i++) {
-//            Genemies.get(i).getController().jumpOrcGreen(platforms.get(1));
-//        }
-//        for (int i = t; i < t+5; i++) {
-//            Renemies.get(i).getController().jumpOrcRed(platforms.get(1));
-//        }
-//        for (int i = t+5; i < t+10; i++) {
-//            Genemies.get(i).getController().jumpOrcGreen(platforms.get(2));
-//        }
-//        for (int i = t+5; i < t+10; i++) {
-//            Renemies.get(i).getController().jumpOrcRed(platforms.get(2));
-//        }
+        int t = 2;
+        for (int i = 0; i < t; i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(0));
+        }
+        for (int i = 0; i < t; i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(0));
+        }
+        for (int i = t; i < t+5; i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(1));
+        }
+        for (int i = t; i < t+5; i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(1));
+        }
+        for (int i = t+5; i < t+10; i++) {
+            Genemies.get(i).getController().jumpOrcGreen(platforms.get(2));
+        }
+        for (int i = t+5; i < t+10; i++) {
+            Renemies.get(i).getController().jumpOrcRed(platforms.get(2));
+        }
 
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(400), (e)->{
-            System.out.println("move Boss");
+            //System.out.println("move Boss");
             Genemies.get(Genemies.size() - 1).getController().moveForward();
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -687,14 +687,11 @@ public class GameController extends GameObjects implements Initializable  {
                                     DisplayGameOver(e1);
                                 } catch (IOException exc) {
                                     exc.printStackTrace();
+                                    jump.stop();
+                                    inBtw.stop();
+                                    timeline.stop();
                                 }
-                                //displayGameOver
                             }
-//                            try {
-//                                DisplaySaveMe(e1);
-//                            } catch (IOException exc) {
-//                                exc.printStackTrace();
-//                            }
                         }
                         finally {
                             jump.stop();
@@ -754,14 +751,11 @@ public class GameController extends GameObjects implements Initializable  {
                                 DisplayGameOver(e1);
                             } catch (IOException exc) {
                                 exc.printStackTrace();
+                                jump.stop();
+                                inBtw.stop();
+                                timeline.stop();
                             }
-                            //displayGameOver
                         }
-//                        try {
-//                            DisplaySaveMe(e1);
-//                        } catch (IOException exc) {
-//                            exc.printStackTrace();
-//                        }
                     }
                     finally {
                         jump.stop();
@@ -809,14 +803,12 @@ public class GameController extends GameObjects implements Initializable  {
                                 DisplayGameOver(e1);
                             } catch (IOException exc) {
                                 exc.printStackTrace();
+                                jump.stop();
+                                inBtw.stop();
+                                timeline.stop();
                             }
-                            //displayGameOver
+
                         }
-//                        try {
-//                            DisplaySaveMe(e1);
-//                        } catch (IOException exc) {
-//                            exc.printStackTrace();
-//                        }
                     }
                     finally {
                         jump.stop();
@@ -901,11 +893,6 @@ public class GameController extends GameObjects implements Initializable  {
             }
             catch (GameLoseException ex) {
                 System.out.println(ex.getMessage());
-//                try {
-//                    DisplaySaveMe(e1);
-//                } catch (IOException exc) {
-//                    exc.printStackTrace();
-//                }
                 if(!flagSave) {
                     saveMe.setLayoutY(0);
                     flagSave = true;
@@ -916,6 +903,9 @@ public class GameController extends GameObjects implements Initializable  {
                         DisplayGameOver(e1);
                     } catch (IOException exc) {
                         exc.printStackTrace();
+                        jump.stop();
+                        inBtw.stop();
+                        timeline.stop();
                     }
                     //displayGameOver
                 }
@@ -955,15 +945,15 @@ public class GameController extends GameObjects implements Initializable  {
             System.out.println("land Boss");
             Genemies.get(Genemies.size()-1).getController().land();
         }
-        if(score >= 99){
-            System.out.println("move Boss22");
+        if(score == 99){
+            System.out.println("move Boss");
             timeline.play();
             //Genemies.get(Genemies.size() - 1).getController().moveForward(platforms.get(platforms.size()-1),finalPlat);
         }
         if(score >= 112){
             //display win
             try {
-                DisplayGameOver(e1);
+                DisplayGameWon(e1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -1273,6 +1263,7 @@ public class GameController extends GameObjects implements Initializable  {
         stage.setScene(scene);
         stage.show();
     }
+
     public void Spend(ActionEvent event) throws IOException, InsufficientCoinsException {
         saveMe.setLayoutY(700);
         heroAll.setTranslateY(0);

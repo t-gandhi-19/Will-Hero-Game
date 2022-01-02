@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import java.io.Serializable;
 
 
-public class PlatformController implements Serializable {
+public class PlatformController {
 
     @FXML
     private Pane Mrock1;
